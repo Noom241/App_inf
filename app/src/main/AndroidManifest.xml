@@ -15,6 +15,9 @@
         android:theme="@style/Theme.App_inf"
         tools:targetApi="31">
         <activity
+            android:name=".AlumnosActivity"
+            android:exported="false" />
+        <activity
             android:name=".AsesoresAdapter"
             android:exported="false" />
         <activity
