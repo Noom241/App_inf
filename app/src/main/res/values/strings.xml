@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">App_inf</string>
+    <string name="alumnos">Alumnos</string>
+    <string name="asesores">Asesores</string>
+    <string name="asistencia">Asistencia</string>
+    <string name="informe">Informe</string>
+    <string name="buscar">Buscar</string>
+    <string name="asesores_">Asesores</string>
+    <string name="add_Asesor">Añadir</string>
+    <string name="edit_asesor">Editar</string>
+    <string name="delete_Asesor">Eliminar</string>
+    <string name="buscar_asesor">Buscar</string>
+    <string name="disponibilidad_asesores">Lunes,Martes,Miércoles</string>
+    <string name="Nombre_Asesor">Juan Perez</string>
+    <string name="telefono_asesor">923655999</string>
+    <string name="universidad_asesor">Universidad ABC</string>
+</resources>
