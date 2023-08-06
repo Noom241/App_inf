@@ -64,7 +64,6 @@ class AlumnosActivity : ComponentActivity() {
             autoCompleteTextView.setAdapter(adapter)
         }
     }
-
     private fun mostrarDialogoConfirmacion(nombreAlumno: String) {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Confirmar borrado")
@@ -80,14 +79,20 @@ class AlumnosActivity : ComponentActivity() {
         MySQLConnection.borrarAlumnoEnSegundoPlano(nombreAlumno, object : MySQLConnection.OnAlumnoBorradoListener {
             override fun onAlumnoBorrado(borradoExitoso: Boolean) {
                 if (borradoExitoso) {
-                    // El alumno se borró correctamente, realiza cualquier acción necesaria
+                    mostrarMensaje("Alumno eliminado correctamente")
+                    // Aquí puedes realizar cualquier acción necesaria después de la eliminación exitosa
                 } else {
-                    // Hubo un error al borrar el alumno, muestra un mensaje de error al usuario
+                    mostrarMensaje("Error al eliminar el alumno")
                 }
             }
         })
     }
 
-
-
+    private fun mostrarMensaje(mensaje: String) {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Mensaje")
+        builder.setMessage(mensaje)
+        builder.setPositiveButton("OK", null)
+        builder.show()
+    }
 }
