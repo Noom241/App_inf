@@ -83,4 +83,16 @@
     <string name="lbl_modalidad_alumno">Presencial</string>
     <string name="lbl_paquete">Paquete A</string>
     <string name="lbl_Telefono_alumno">111-222-3333</string>
+    <string name="nombre_add_alumno">Nombre</string>
+    <string name="apoderado_add_alumno">Apoderado</string>
+    <string name="telf_apod_add_alumno">Teléfono Apoderado</string>
+    <string name="colegio_add_alumno">Colegio</string>
+    <string name="modalidad_add_alumno">Modalidad</string>
+    <string name="paquete_add_alumno">Paquete</string>
+    <string name="horario_add_alumno">Horario</string>
+    <string name="siguiente_add_alumno"><![CDATA[siguiente >]]></string>
+    <string name="rd_nombre_alumno">Escribe el nombre del alumno</string>
+    <string name="rd_apod_alumno">Escribe el nombre del apoderado</string>
+    <string name="rd_telf_alumno">Escribe el teléfono del apoderado</string>
+    <string name="rd_colegio_alumno">Escribe el colegio del alumno</string>
 </resources>
