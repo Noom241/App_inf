@@ -1,6 +1,5 @@
 package com.example.app_inf.Activities
 
-import MySQLConnection
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
@@ -11,7 +10,6 @@ import android.widget.TextView
 import androidx.activity.ComponentActivity
 import com.example.app_inf.FetchAsesorDataTask
 import com.example.app_inf.R
-import java.sql.SQLException
 
 class AsesoresActivity : ComponentActivity() {
 
@@ -47,25 +45,7 @@ class AsesoresActivity : ComponentActivity() {
         AsyncTask<Void, Void, List<String>>() {
 
         override fun doInBackground(vararg params: Void?): List<String> {
-            val names = ArrayList<String>()
-            try {
-                val connection = MySQLConnection.getConnection()
-                val query = "SELECT Nombre FROM Profesores" // Updated table name
-                val statement = connection.prepareStatement(query)
-                val resultSet = statement.executeQuery()
-
-                while (resultSet.next()) {
-                    val name = resultSet.getString("Nombre")
-                    names.add(name)
-                }
-
-                resultSet.close()
-                statement.close()
-                connection.close()
-            } catch (e: SQLException) {
-                e.printStackTrace()
-            }
-            return names
+            return MySQLConnection.obtenerNombresDeProfesores()
         }
 
         override fun onPostExecute(names: List<String>) {
