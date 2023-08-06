@@ -142,7 +142,6 @@
         android:rotationY="0"
 
         android:textSize="14sp"
-        android:visibility="visible"
 
         app:layout_constraintBottom_toTopOf="@id/guideline_alumno_4"
         app:layout_constraintEnd_toEndOf="parent"
@@ -216,7 +215,7 @@
         tools:ignore="VisualLintBounds">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="400dp"
+            android:layout_width="360dp"
             android:layout_height="30dp"
             android:textColorHint="#546E7A"
             tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
@@ -259,12 +258,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.91" />
-
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="top" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_alumno_7"
