@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AgregarAsesorActivity">
+
+    <TextView
+        android:id="@+id/add_nombre_asesor"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:text="Nombre:"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toTopOf="@id/add_telefono_asesor"
+        app:layout_constraintEnd_toStartOf="@id/rd_nombre_asesor"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.201" />
+
+    <EditText
+        android:id="@+id/rd_nombre_asesor"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:text="Escribe el nombre del asesor"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@id/rd_telefono_asesor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toEndOf="@id/add_nombre_asesor"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.18" />
+
+    <EditText
+        android:id="@+id/rd_telefono_asesor"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:text="Escribe el teléfono del asesor"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@id/rd_univ_asesor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toEndOf="@id/add_telefono_asesor"
+        app:layout_constraintTop_toBottomOf="@id/rd_nombre_asesor"
+        app:layout_constraintVertical_bias="0.09" />
+
+    <TextView
+        android:id="@+id/add_telefono_asesor"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:text="Teléfono:"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toTopOf="@id/add_univ_asesor"
+        app:layout_constraintEnd_toStartOf="@id/rd_telefono_asesor"
+        app:layout_constraintHorizontal_bias="0.22"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/add_nombre_asesor"
+        app:layout_constraintVertical_bias="0.134" />
+
+    <EditText
+        android:id="@+id/rd_univ_asesor"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="0dp"
+        android:text="Escribe la universidad del asesor"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/rd_horario_asesor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.659"
+        app:layout_constraintStart_toEndOf="@id/add_univ_asesor"
+        app:layout_constraintTop_toBottomOf="@id/rd_telefono_asesor"
+        app:layout_constraintVertical_bias="0.371">
+
+    <EditText
+        android:id="@+id/rd_horario_asesor"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="0dp"
+        android:text="Escribe el horario del asesor"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@id/guideline6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.65"
+        app:layout_constraintStart_toEndOf="@id/add_horario_asesor"
+        app:layout_constraintTop_toBottomOf="@id/rd_univ_asesor">
+
+    <TextView
+        android:id="@+id/add_univ_asesor"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:text="Universidad:"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toTopOf="@id/add_horario_asesor"
+        app:layout_constraintEnd_toStartOf="@id/rd_univ_asesor"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/add_telefono_asesor" />
+
+    <TextView
+        android:id="@+id/add_horario_asesor"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:text="Horario"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toTopOf="@id/guideline6"
+        app:layout_constraintEnd_toStartOf="@id/rd_horario_asesor"
+        app:layout_constraintHorizontal_bias="0.334"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/add_univ_asesor" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="301dp" />
+
+    <Button
+        android:id="@+id/btn_add_Asesor2"
+        android:layout_width="131dp"
+        android:layout_height="54dp"
+        android:text="Añadir"
+        app:layout_constraintTop_toBottomOf="@id/guideline6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_cancel_asesor"
+        tools:layout_editor_absoluteX="162dp"
+        tools:layout_editor_absoluteY="309dp" />
+
+    <Button
+        android:id="@+id/btn_cancel_asesor"
+        android:layout_width="143dp"
+        android:layout_height="56dp"
+        android:text="Cancelar"
+        app:layout_constraintTop_toBottomOf="@id/guideline6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_add_Asesor2"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteX="396dp"
+        tools:layout_editor_absoluteY="309dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
