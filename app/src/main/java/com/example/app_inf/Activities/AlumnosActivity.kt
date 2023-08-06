@@ -39,7 +39,7 @@ class AlumnosActivity : ComponentActivity() {
 
         val btnDeleteAlumno = findViewById<Button>(R.id.btn_delete_Alumno)
         btnDeleteAlumno.setOnClickListener {
-            //val autoCompleteTextView = findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView2)
+            val autoCompleteTextView = findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView2)
             mostrarDialogoConfirmacion(autoCompleteTextView.text.toString())
         }
         // Ejecutar la tarea de obtener nombres de alumnos en segundo plano
