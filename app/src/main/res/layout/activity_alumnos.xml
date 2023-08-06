@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AlumnosActivity">
+    tools:context=".Activities.AlumnosActivity">
 
     <AutoCompleteTextView
         android:id="@+id/autoCompleteTextView2"

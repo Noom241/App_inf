@@ -1,13 +1,13 @@
-package com.example.app_inf
+package com.example.app_inf.Activities
 
 import MySQLConnection
 import android.os.AsyncTask
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.app_inf.R
 import java.sql.SQLException
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout

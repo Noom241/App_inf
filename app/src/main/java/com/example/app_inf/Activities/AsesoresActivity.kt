@@ -1,4 +1,4 @@
-package com.example.app_inf
+package com.example.app_inf.Activities
 
 import MySQLConnection
 import android.content.Intent
@@ -9,6 +9,8 @@ import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.ComponentActivity
+import com.example.app_inf.FetchAsesorDataTask
+import com.example.app_inf.R
 import java.sql.SQLException
 
 class AsesoresActivity : ComponentActivity() {
