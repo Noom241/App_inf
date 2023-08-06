@@ -9,22 +9,22 @@
         android:id="@+id/guideline1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.15" />
+        app:layout_constraintGuide_percent="0.15"
+        android:orientation="horizontal"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.85" />
+        app:layout_constraintGuide_percent="0.85"
+        android:orientation="horizontal"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.2" />
+        app:layout_constraintGuide_percent="0.2"
+        android:orientation="vertical"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"
@@ -37,14 +37,14 @@
         android:id="@+id/guideline5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.95" />
+        app:layout_constraintGuide_percent="0.95"
+        android:orientation="vertical"/>
 
     <Button
         android:id="@+id/btn_add_Asesor"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:text="@string/add_Asesor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lbl_add_asesor"
         app:layout_constraintBottom_toTopOf="@id/btn_edit_Asesor"
         app:layout_constraintEnd_toEndOf="@id/guideline3"
         app:layout_constraintHorizontal_bias="0.0"
@@ -54,23 +54,23 @@
 
     <Button
         android:id="@+id/btn_edit_Asesor"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/edit_asesor"
         app:layout_constraintBottom_toTopOf="@id/btn_delete_Asesor"
         app:layout_constraintEnd_toEndOf="@id/guideline3"
-
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/guideline4"
         app:layout_constraintTop_toBottomOf="@id/btn_add_Asesor" />
 
     <Button
         android:id="@+id/btn_delete_Asesor"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/delete_Asesor"
         app:layout_constraintBottom_toBottomOf="@id/guideline2"
         app:layout_constraintEnd_toEndOf="@id/guideline3"
-
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/guideline4"
         app:layout_constraintTop_toBottomOf="@id/btn_edit_Asesor" />
 
@@ -78,47 +78,41 @@
         android:id="@+id/txt_nombre_asesor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
+        android:layout_marginTop="108dp"
+        android:layout_marginEnd="111dp"
         android:text="@string/Nombre_Asesor"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/txt_tabla_nombre_asesor"
-        app:layout_constraintVertical_bias="0.13" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txt_telefono_Asesor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="29dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="109dp"
         android:text="@string/telefono_asesor"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintEnd_toStartOf="@+id/guideline5"
-        app:layout_constraintHorizontal_bias="0.124"
-        app:layout_constraintStart_toEndOf="@+id/txt_nombre_asesor"
-        app:layout_constraintTop_toBottomOf="@+id/txt_tabla_telf_asesor"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_nombre_asesor" />
 
     <TextView
         android:id="@+id/txt_horario_Asesor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="29dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="76dp"
         android:text="@string/disponibilidad_asesores"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintStart_toEndOf="@+id/txt_universidad_asesor"
-        app:layout_constraintTop_toBottomOf="@+id/txt_tabla_horario_asesor"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/txt_universidad_asesor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="29dp"
+        android:layout_marginEnd="84dp"
+        android:layout_marginBottom="24dp"
         android:text="@string/universidad_asesor"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintStart_toEndOf="@+id/txt_telefono_Asesor"
-        app:layout_constraintTop_toBottomOf="@+id/txt_tabla_univ_asesor"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintBottom_toTopOf="@+id/txt_horario_Asesor"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <AutoCompleteTextView
         android:id="@+id/autoCompleteTextView"
@@ -136,54 +130,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0"
         tools:ignore="VisualLintTextFieldSize" />
-
-    <TextView
-        android:id="@+id/txt_tabla_nombre_asesor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/nombre_table_asesores"
-        app:layout_constraintBottom_toBottomOf="@id/guideline2"
-        app:layout_constraintEnd_toStartOf="@id/txt_tabla_telf_asesor"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toTopOf="@+id/guideline1"
-        app:layout_constraintVertical_bias="0.008" />
-
-    <TextView
-        android:id="@+id/txt_tabla_telf_asesor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/telf_table_asesores"
-        app:layout_constraintBottom_toBottomOf="@id/guideline2"
-        app:layout_constraintEnd_toStartOf="@id/txt_tabla_univ_asesor"
-        app:layout_constraintStart_toEndOf="@+id/txt_tabla_nombre_asesor"
-        app:layout_constraintTop_toTopOf="@+id/guideline1"
-        app:layout_constraintVertical_bias="0.008" />
-
-    <TextView
-        android:id="@+id/txt_tabla_univ_asesor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/univ_table_asesores"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintEnd_toStartOf="@+id/txt_tabla_horario_asesor"
-        app:layout_constraintStart_toEndOf="@+id/txt_tabla_telf_asesor"
-        app:layout_constraintTop_toTopOf="@+id/guideline1"
-        app:layout_constraintVertical_bias="0.008" />
-
-    <TextView
-        android:id="@+id/txt_tabla_horario_asesor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/horario_table_asesores"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintEnd_toStartOf="@+id/guideline5"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/txt_tabla_univ_asesor"
-        app:layout_constraintTop_toTopOf="@+id/guideline1"
-        app:layout_constraintVertical_bias="0.008" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
