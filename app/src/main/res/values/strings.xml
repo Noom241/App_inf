@@ -91,4 +91,8 @@
     <string name="paquete_add_alumno">Paquete</string>
     <string name="horario_add_alumno">Horario</string>
     <string name="siguiente_add_alumno"><![CDATA[siguiente >]]></string>
+    <string name="rd_nombre_alumno">Escribe el nombre del alumno</string>
+    <string name="rd_apod_alumno">Escribe el nombre del apoderado</string>
+    <string name="rd_telf_alumno">Escribe el teléfono del apoderado</string>
+    <string name="rd_colegio_alumno">Escribe el colegio del alumno</string>
 </resources>

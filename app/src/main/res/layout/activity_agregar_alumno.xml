@@ -15,7 +15,8 @@
         app:layout_constraintBottom_toBottomOf="@id/txt_add_apoderado"
         app:layout_constraintEnd_toEndOf="@+id/guideline_alumno_3"
         app:layout_constraintStart_toStartOf="@+id/guideline_alumno_2"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/guideline_alumno_5"
+        app:layout_constraintVertical_bias="0.3" />
 
     <TextView
         android:id="@+id/txt_add_apoderado"
@@ -82,6 +83,7 @@
         app:layout_constraintStart_toStartOf="@+id/guideline_alumno_2"
         app:layout_constraintTop_toBottomOf="@id/txt_add_pack" />
 
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_alumno_1"
         android:layout_width="wrap_content"
@@ -101,7 +103,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="197dp" />
+        app:layout_constraintGuide_end="486dp"
+        tools:ignore="VisualLintBounds" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_alumno_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.53" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_alumno_5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="13dp" />
 
     <Button
         android:id="@+id/btn_next_alumno1"
@@ -110,7 +127,104 @@
         android:text="@string/siguiente_add_alumno"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline_alumno_1" />
+        app:layout_constraintTop_toTopOf="@+id/guideline_alumno_1"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/rd_colegio_alumno"
+        android:layout_width="400dp"
+        android:layout_height="30dp"
+        android:hint="@string/rd_colegio_alumno"
+        android:rotation="0"
+        android:rotationX="0"
+        android:rotationY="0"
+
+        android:textSize="14sp"
+        android:visibility="visible"
+
+        app:layout_constraintBottom_toTopOf="@id/guideline_alumno_4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline_alumno_3"
+        app:layout_constraintTop_toBottomOf="@id/rd_telf_alumno"
+        tools:ignore="VisualLintBounds">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="400dp"
+            android:layout_height="30dp"
+            android:textColorHint="#546E7A"
+            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/rd_apod_alumno"
+        android:layout_width="400dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="0dp"
+        android:hint="@string/rd_apod_alumno"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@id/rd_telf_alumno"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline_alumno_3"
+        app:layout_constraintTop_toBottomOf="@id/rd_nombre_alumno"
+        tools:ignore="VisualLintBounds">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="400dp"
+            android:layout_height="30dp"
+            android:textColorHint="#546E7A"
+            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/rd_telf_alumno"
+        android:layout_width="400dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="0dp"
+        android:hint="@string/rd_telf_alumno"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@id/rd_colegio_alumno"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline_alumno_3"
+        app:layout_constraintTop_toBottomOf="@id/rd_apod_alumno"
+        tools:ignore="VisualLintBounds"
+
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="400dp"
+            android:layout_height="30dp"
+            android:textColorHint="#546E7A"
+            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/rd_nombre_alumno"
+        android:layout_width="400dp"
+        android:layout_height="30dp"
+        android:hint="@string/rd_nombre_alumno"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@id/rd_apod_alumno"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline_alumno_3"
+        app:layout_constraintTop_toTopOf="@id/guideline_alumno_5"
+        app:layout_constraintVertical_bias="0.39"
+
+        tools:ignore="VisualLintBounds">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="400dp"
+            android:layout_height="30dp"
+            android:textColorHint="#546E7A"
+            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
