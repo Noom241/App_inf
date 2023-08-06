@@ -14,4 +14,10 @@
     <string name="Nombre_Asesor">Juan Perez</string>
     <string name="telefono_asesor">923655999</string>
     <string name="universidad_asesor">Universidad ABC</string>
+    <string name="nombres_asesor">Nombres</string>
+    <string name="apellidos_add_asesor">Apellidos</string>
+    <string name="telefono_add_asesor">Telefono</string>
+    <string name="universidad_add_asesor">Universidad</string>
+    <string name="horario_add_asesor">Horario</string>
+    <string name="add_btn_add_asesor">Añadir</string>
 </resources>

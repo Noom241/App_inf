@@ -1,10 +1,12 @@
 package com.example.app_inf
 
 import MySQLConnection
+import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.Button
 import android.widget.TextView
 import androidx.activity.ComponentActivity
 import java.sql.SQLException
@@ -20,10 +22,16 @@ class AsesoresActivity : ComponentActivity() {
         val txtTelefonoAsesor = findViewById<TextView>(R.id.txt_telefono_Asesor)
         val txtHorarioAsesor = findViewById<TextView>(R.id.txt_horario_Asesor)
         val txtUniversidadAsesor = findViewById<TextView>(R.id.txt_universidad_asesor)
+        val btnAddAsesor = findViewById<Button>(R.id.btn_Add_Asesor)
 
         autoCompleteTextView.setOnItemClickListener { _, _, position, _ ->
             val selectedName = autoCompleteTextView.adapter.getItem(position) as String
-            FetchAsesorDataTask(txtNombreAsesor, txtTelefonoAsesor, txtHorarioAsesor, txtUniversidadAsesor).execute(selectedName)
+            FetchAsesorDataTask(
+                txtNombreAsesor,
+                txtTelefonoAsesor,
+                txtHorarioAsesor,
+                txtUniversidadAsesor
+            ).execute(selectedName)
         }
 
         // Ejecutar la tarea de obtener nombres de asesores en segundo plano
@@ -32,6 +40,11 @@ class AsesoresActivity : ComponentActivity() {
         autoCompleteTextView.setOnClickListener {
             autoCompleteTextView.showDropDown()
         }
+        btnAddAsesor.setOnClickListener {
+            val intent = Intent(this, add_Activity::class.java)
+            startActivity(intent)
+        }
+
     }
 
     private inner class FetchNamesTask(private val autoCompleteTextView: AutoCompleteTextView) :

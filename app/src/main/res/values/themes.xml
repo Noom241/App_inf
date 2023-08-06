@@ -2,4 +2,7 @@
 <resources>
 
     <style name="Theme.App_inf" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Apptheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+
+    </style>
 </resources>

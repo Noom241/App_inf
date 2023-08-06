@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         val btnAsesores = findViewById<Button>(R.id.btnAsesores)
         btnAsesores.setOnClickListener {
-            val intent = Intent(this, AsesoresActivity::class.java)
+            val intent = Intent(this, add_Activity::class.java)
             startActivity(intent)
         }
     }
