@@ -1,10 +1,12 @@
 package com.example.app_inf
 
 import MySQLConnection
+import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.Button
 import android.widget.TextView
 import androidx.activity.ComponentActivity
 import java.sql.SQLException
@@ -20,6 +22,11 @@ class AsesoresActivity : ComponentActivity() {
         val txtTelefonoAsesor = findViewById<TextView>(R.id.txt_telefono_Asesor)
         val txtHorarioAsesor = findViewById<TextView>(R.id.txt_horario_Asesor)
         val txtUniversidadAsesor = findViewById<TextView>(R.id.txt_universidad_asesor)
+        val btn_add_Asesor = findViewById<Button>(R.id.btn_add_Asesor)
+        btn_add_Asesor.setOnClickListener {
+            val intent = Intent(this, AgregarAsesorActivity::class.java)
+            startActivity(intent)
+        }
 
         autoCompleteTextView.setOnItemClickListener { _, _, position, _ ->
             val selectedName = autoCompleteTextView.adapter.getItem(position) as String

@@ -27,7 +27,9 @@
             android:theme="@style/Theme.App_inf" />
         <activity
             android:name=".AgregarAsesorActivity"
+            android:screenOrientation="landscape"
             android:exported="false" />
+
         <activity
             android:name=".AgregarAsesorActivy"
             android:exported="false" />

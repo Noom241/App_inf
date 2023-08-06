@@ -7,7 +7,7 @@
     tools:context=".AgregarAsesorActivity">
 
     <TextView
-        android:id="@+id/add_nombre_asesor"
+        android:id="@+id/add_nombre_asesor_"
         android:layout_width="150dp"
         android:layout_height="40dp"
         android:text="@string/nombre_add_lbl"
@@ -28,7 +28,7 @@
         app:layout_constraintBottom_toTopOf="@id/rd_telefono_asesor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toEndOf="@id/add_nombre_asesor"
+        app:layout_constraintStart_toEndOf="@id/add_nombre_asesor_"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.18"
 
@@ -71,7 +71,7 @@
         app:layout_constraintEnd_toStartOf="@id/rd_telefono_asesor"
         app:layout_constraintHorizontal_bias="0.22"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/add_nombre_asesor"
+        app:layout_constraintTop_toBottomOf="@id/add_nombre_asesor_"
         app:layout_constraintVertical_bias="0.134" />
 
     <com.google.android.material.textfield.TextInputLayout
