@@ -6,4 +6,67 @@
     android:layout_height="match_parent"
     tools:context=".Activities.AgregarAlumnoActivity">
 
+
+    <TextView
+        android:id="@+id/txt_add_alumno"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/nombre_add_alumno"
+        tools:layout_editor_absoluteX="67dp"
+        tools:layout_editor_absoluteY="35dp" />
+
+    <TextView
+        android:id="@+id/txt_add_apoderado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/apoderado_add_alumno"
+        tools:layout_editor_absoluteX="67dp"
+        tools:layout_editor_absoluteY="84dp" />
+
+    <TextView
+        android:id="@+id/txt_add_telf_apoderado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/telf_apod_add_alumno"
+        tools:layout_editor_absoluteX="67dp"
+        tools:layout_editor_absoluteY="138dp" />
+
+    <TextView
+        android:id="@+id/txt_add_colegio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="69dp"
+        tools:layout_editor_absoluteY="184dp" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="69dp"
+        tools:layout_editor_absoluteY="228dp" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="69dp"
+        tools:layout_editor_absoluteY="273dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="326dp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        tools:layout_editor_absoluteX="254dp"
+        tools:layout_editor_absoluteY="331dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

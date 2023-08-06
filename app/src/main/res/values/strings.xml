@@ -83,4 +83,7 @@
     <string name="lbl_modalidad_alumno">Presencial</string>
     <string name="lbl_paquete">Paquete A</string>
     <string name="lbl_Telefono_alumno">111-222-3333</string>
+    <string name="nombre_add_alumno">Nombre</string>
+    <string name="apoderado_add_alumno">Apoderado</string>
+    <string name="telf_apod_add_alumno">Teléfono Apoderado</string>
 </resources>
