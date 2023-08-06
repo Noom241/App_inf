@@ -67,4 +67,8 @@
     <string name="rd_telf_asesor">Escribe el teléfono del asesor</string>
     <string name="rd_univ_asesor">Escribe la universidad del asesor</string>
     <string name="rd_name_asesor">Escribe el nombre del asesor</string>
+    <string name="horario_lbl_asesor">Horario</string>
+    <string name="nombre_lbl_asesor">Nombre</string>
+    <string name="telefono_label_asesor">Teléfono</string>
+    <string name="universidad_label_asesor">Universidad</string>
 </resources>

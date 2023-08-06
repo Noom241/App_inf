@@ -6,33 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".AgregarAsesorActivity">
 
-    <TextView
-        android:id="@+id/add_nombre_asesor_"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:text="@string/nombre_add_lbl"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@id/add_telefono_asesor"
-        app:layout_constraintEnd_toStartOf="@id/rd_nombre_asesor"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.201" />
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/rd_nombre_asesor"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:textSize="18sp"
+        android:layout_marginEnd="20dp"
         android:hint="@string/rd_name_asesor"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@id/rd_telefono_asesor"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toEndOf="@id/add_nombre_asesor_"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.18"
 
-        >
+        app:layout_constraintVertical_bias="0.18">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="300dp"
@@ -44,16 +29,14 @@
         android:id="@+id/rd_telefono_asesor"
         android:layout_width="300dp"
         android:layout_height="50dp"
+        android:layout_marginEnd="20dp"
         android:hint="@string/rd_telf_asesor"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@id/rd_univ_asesor"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toEndOf="@id/add_telefono_asesor"
         app:layout_constraintTop_toBottomOf="@id/rd_nombre_asesor"
-        app:layout_constraintVertical_bias="0.09"
 
-        >
+        app:layout_constraintVertical_bias="0.09">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="300dp"
@@ -61,34 +44,18 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/add_telefono_asesor"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:text="@string/telefono_add_lbl"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@id/add_univ_asesor"
-        app:layout_constraintEnd_toStartOf="@id/rd_telefono_asesor"
-        app:layout_constraintHorizontal_bias="0.22"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/add_nombre_asesor_"
-        app:layout_constraintVertical_bias="0.134" />
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/rd_univ_asesor"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginEnd="0dp"
+        android:layout_marginEnd="20dp"
         android:hint="@string/rd_univ_asesor"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/rd_horario_asesor"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.659"
-        app:layout_constraintStart_toEndOf="@id/add_univ_asesor"
         app:layout_constraintTop_toBottomOf="@id/rd_telefono_asesor"
-        app:layout_constraintVertical_bias="0.371"
 
-        >
+        app:layout_constraintVertical_bias="0.371">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="300dp"
@@ -100,46 +67,19 @@
         android:id="@+id/rd_horario_asesor"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginEnd="0dp"
+        android:layout_marginEnd="20dp"
         android:hint="@string/rd_horario_asesor"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@id/guideline6"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.65"
-        app:layout_constraintStart_toEndOf="@id/add_horario_asesor"
-        app:layout_constraintTop_toBottomOf="@id/rd_univ_asesor"
 
-        >
+        app:layout_constraintTop_toBottomOf="@id/rd_univ_asesor">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="300dp"
             android:layout_height="50dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        android:id="@+id/add_univ_asesor"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:text="@string/universidad_add_lbl"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@id/add_horario_asesor"
-        app:layout_constraintEnd_toStartOf="@id/rd_univ_asesor"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/add_telefono_asesor" />
-
-    <TextView
-        android:id="@+id/add_horario_asesor"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:text="@string/horario_add_lbl"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@id/guideline6"
-        app:layout_constraintEnd_toStartOf="@id/rd_horario_asesor"
-        app:layout_constraintHorizontal_bias="0.334"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/add_univ_asesor" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline6"
@@ -171,4 +111,57 @@
         app:layout_constraintEnd_toEndOf="parent"
         tools:layout_editor_absoluteX="396dp"
         tools:layout_editor_absoluteY="309dp" />
+
+    <TextView
+        android:id="@+id/lbl_nombre_Asesor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="32dp"
+        android:scaleX="2"
+        android:scaleY="2"
+        android:text="@string/nombre_lbl_asesor"
+        app:layout_constraintEnd_toStartOf="@+id/rd_nombre_asesor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/lbl_telefono_asesor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="100dp"
+        android:scaleX="2"
+        android:scaleY="2"
+        android:text="@string/telefono_label_asesor"
+        app:layout_constraintEnd_toStartOf="@+id/rd_telefono_asesor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/lbl_universidad_Asesor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="172dp"
+        android:scaleX="2"
+        android:scaleY="2"
+        android:text="@string/universidad_label_asesor"
+        app:layout_constraintEnd_toStartOf="@+id/rd_univ_asesor"
+        app:layout_constraintHorizontal_bias="0.545"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/lbl_horario_Asesor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="248dp"
+        android:scaleX="2"
+        android:scaleY="2"
+        android:text="@string/horario_lbl_asesor"
+        app:layout_constraintEnd_toStartOf="@+id/rd_horario_asesor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
