@@ -1,4 +1,4 @@
-package com.example.app_inf
+package com.example.app_inf.data
 
 import android.widget.TextView
 

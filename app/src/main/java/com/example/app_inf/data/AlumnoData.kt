@@ -1,6 +1,6 @@
-package com.example.app_inf
+package com.example.app_inf.data
 
-class AlumnoData(
+data class AlumnoData(
     val nombre: String,
     val apoderado: String,
     val telefonoApoderado: String,

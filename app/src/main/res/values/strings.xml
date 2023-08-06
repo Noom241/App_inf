@@ -72,4 +72,15 @@
     <string name="telefono_label_asesor">Teléfono</string>
     <string name="universidad_label_asesor">Universidad</string>
     <string name="lbl_add_asesor">Añadir</string>
+    <string name="lunes">Lunes</string>
+    <string name="martes">Martes</string>
+    <string name="miercoles">Miercoles</string>
+    <string name="jueves">Jueves</string>
+    <string name="viernes">Viernes</string>
+    <string name="lbl_nombre_alumno">María López</string>
+    <string name="lbl_colegio_alumno">Colegio X</string>
+    <string name="lbl_horario_alumno">3:00PM - 4:30PM</string>
+    <string name="lbl_modalidad_alumno">Presencial</string>
+    <string name="lbl_paquete">Paquete A</string>
+    <string name="lbl_Telefono_alumno">111-222-3333</string>
 </resources>

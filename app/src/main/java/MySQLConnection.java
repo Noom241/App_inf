@@ -1,6 +1,8 @@
-import com.example.app_inf.AlumnoData;
-import com.example.app_inf.AsesorData;
-import com.example.app_inf.Horario;
+import android.os.AsyncTask;
+
+import com.example.app_inf.data.AlumnoData;
+import com.example.app_inf.data.AsesorData;
+import com.example.app_inf.data.Horario;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -19,24 +21,17 @@ public class MySQLConnection {
 
     private MySQLConnection() {}
 
-    public static synchronized Connection getConnection() {
-        if (connection == null) {
-            String url = "jdbc:mysql://containers-us-west-206.railway.app:7879/railway";
-            String user = "root";
-            String password = "cPVTtNkTyCZrFOnrqk5Q";
+    public static Connection getConnection() throws SQLException {
+        String url = "jdbc:mysql://containers-us-west-206.railway.app:7879/railway";
+        String user = "root";
+        String password = "cPVTtNkTyCZrFOnrqk5Q";
 
-            try {
-                connection = DriverManager.getConnection(url, user, password);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return connection;
+        return DriverManager.getConnection(url, user, password);
     }
 
     public static boolean agregarAlumno(AlumnoData alumno) {
         try (Connection connection = getConnection()) {
-            String insertQuery = "INSERT INTO Estudiantes (Nombre, Apoderado, TelefonoApoderado, Colegio, Modalidad, Horario) VALUES (?, ?, ?, ?, ?, ?)";
+            String insertQuery = "INSERT INTO Estudiantes (Nombre, Apoderado, Telefono_apoderado, Colegio, Modalidad, Horario) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
             preparedStatement.setString(1, alumno.getNombre());
             preparedStatement.setString(2, alumno.getApoderado());
@@ -255,6 +250,156 @@ public class MySQLConnection {
             e.printStackTrace();
         }
         return nombresProfesores;
+    }
+
+    public static boolean agregarAsesor(AsesorData asesor) {
+        try (Connection connection = getConnection()) {
+            String insertQuery = "INSERT INTO Profesores (Nombre, Telefono, Universidad, Horario_disponible) VALUES (?, ?, ?, ?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
+            preparedStatement.setString(1, asesor.getNombre());
+            preparedStatement.setString(2, asesor.getTelefono());
+            preparedStatement.setString(3, asesor.getUniversidad());
+            preparedStatement.setString(4, asesor.getHorario());
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public static AlumnoData obtenerEstudiantePorNombre(String nombre) {
+        Connection connection = null;
+        try {
+            connection = getConnection();
+            String selectQuery = "SELECT * FROM Estudiantes WHERE Nombre = ?";
+            PreparedStatement statement = connection.prepareStatement(selectQuery);
+            statement.setString(1, nombre);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                String apoderado = resultSet.getString("Apoderado");
+                String telefonoApoderado = resultSet.getString("Telefono_apoderado");
+                String colegio = resultSet.getString("Colegio");
+                String modalidad = resultSet.getString("Modalidad");
+                String horario = resultSet.getString("Horario_elegido"); // Cambiar a la columna correcta
+                String paquete = resultSet.getString("Paquete_elegido"); // Agregar columna si es necesario
+                // Obtener días y asesores, reemplazar los nombres de columna adecuados
+                List<String> dias = obtenerDiasDeEstudiante(resultSet.getInt("ID"));
+                Map<String, String> asesores = obtenerAsesoresDeEstudiante(resultSet.getInt("ID"));
+                return new AlumnoData(nombre, apoderado, telefonoApoderado, colegio, modalidad, horario, paquete, dias, asesores);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return null;
+    }
+
+    public static List<String> obtenerNombresDeAlumnos() {
+        List<String> nombresAlumnos = new ArrayList<>();
+        try (Connection connection = getConnection()) {
+            String selectQuery = "SELECT Nombre FROM Estudiantes"; // Cambiar a la tabla correcta si es necesario
+            PreparedStatement statement = connection.prepareStatement(selectQuery);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                String nombre = resultSet.getString("Nombre");
+                nombresAlumnos.add(nombre);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return nombresAlumnos;
+    }
+
+    private static List<String> obtenerDiasDeEstudiante(int idEstudiante) {
+        List<String> dias = new ArrayList<>();
+        try (Connection connection = getConnection()) {
+            String selectQuery = "SELECT Dia FROM DiasEstudiante WHERE ID_estudiante = ?";
+            PreparedStatement statement = connection.prepareStatement(selectQuery);
+            statement.setInt(1, idEstudiante);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                String dia = resultSet.getString("Dia");
+                dias.add(dia);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dias;
+    }
+
+    private static Map<String, String> obtenerAsesoresDeEstudiante(int idEstudiante) {
+        Map<String, String> asesores = new HashMap<>();
+        try (Connection connection = getConnection()) {
+            String selectQuery = "SELECT Nombre, Asesor FROM AsesoresEstudiante WHERE ID_estudiante = ?";
+            PreparedStatement statement = connection.prepareStatement(selectQuery);
+            statement.setInt(1, idEstudiante);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                String nombreAsesor = resultSet.getString("Nombre");
+                String comentario = resultSet.getString("Asesor");
+                asesores.put(nombreAsesor, comentario);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return asesores;
+    }
+
+    public static boolean borrarAsesor(String nombre) {
+        try (Connection connection = getConnection()) {
+            String deleteQuery = "DELETE FROM Profesores WHERE Nombre = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(deleteQuery);
+            preparedStatement.setString(1, nombre);
+            int rowsAffected = preparedStatement.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean borrarAlumno(String nombre) {
+        try (Connection connection = getConnection()) {
+            String deleteQuery = "DELETE FROM Estudiantes WHERE Nombre = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(deleteQuery);
+            preparedStatement.setString(1, nombre);
+            int rowsAffected = preparedStatement.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public static void borrarAlumnoEnSegundoPlano(String nombreAlumno, final OnAlumnoBorradoListener listener) {
+        new AsyncTask<Void, Void, Boolean>() {
+            @Override
+            protected Boolean doInBackground(Void... voids) {
+                try {
+                    return borrarAlumno(nombreAlumno);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return false;
+                }
+            }
+
+            @Override
+            protected void onPostExecute(Boolean borradoExitoso) {
+                if (listener != null) {
+                    listener.onAlumnoBorrado(borradoExitoso);
+                }
+            }
+        }.execute();
+    }
+
+    public interface OnAlumnoBorradoListener {
+        void onAlumnoBorrado(boolean borradoExitoso);
     }
 
 
