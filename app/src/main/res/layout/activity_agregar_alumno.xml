@@ -12,61 +12,105 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/nombre_add_alumno"
-        tools:layout_editor_absoluteX="67dp"
-        tools:layout_editor_absoluteY="35dp" />
+        app:layout_constraintBottom_toBottomOf="@id/txt_add_apoderado"
+        app:layout_constraintEnd_toEndOf="@+id/guideline_alumno_3"
+        app:layout_constraintStart_toStartOf="@+id/guideline_alumno_2"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txt_add_apoderado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/apoderado_add_alumno"
-        tools:layout_editor_absoluteX="67dp"
-        tools:layout_editor_absoluteY="84dp" />
+        app:layout_constraintBottom_toTopOf="@id/txt_add_telf_apoderado"
+        app:layout_constraintEnd_toEndOf="@+id/guideline_alumno_3"
+        app:layout_constraintStart_toStartOf="@+id/guideline_alumno_2"
+        app:layout_constraintTop_toBottomOf="@id/txt_add_alumno"
+        tools:layout_editor_absoluteY="69dp" />
 
     <TextView
         android:id="@+id/txt_add_telf_apoderado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/telf_apod_add_alumno"
-        tools:layout_editor_absoluteX="67dp"
-        tools:layout_editor_absoluteY="138dp" />
+        app:layout_constraintBottom_toTopOf="@id/txt_add_colegio"
+        app:layout_constraintEnd_toEndOf="@+id/guideline_alumno_3"
+        app:layout_constraintStart_toStartOf="@+id/guideline_alumno_2"
+        app:layout_constraintTop_toBottomOf="@id/txt_add_apoderado"
+        tools:layout_editor_absoluteY="109dp" />
 
     <TextView
         android:id="@+id/txt_add_colegio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="69dp"
+        android:text="@string/colegio_add_alumno"
+        app:layout_constraintBottom_toTopOf="@id/txt_add_modalidad"
+        app:layout_constraintEnd_toEndOf="@+id/guideline_alumno_3"
+        app:layout_constraintStart_toStartOf="@+id/guideline_alumno_2"
+        app:layout_constraintTop_toBottomOf="@id/txt_add_telf_apoderado"
+        tools:layout_editor_absoluteY="148dp" />
+
+    <TextView
+        android:id="@+id/txt_add_modalidad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/modalidad_add_alumno"
+        app:layout_constraintBottom_toTopOf="@id/txt_add_pack"
+        app:layout_constraintEnd_toEndOf="@+id/guideline_alumno_3"
+        app:layout_constraintStart_toStartOf="@+id/guideline_alumno_2"
+        app:layout_constraintTop_toBottomOf="@id/txt_add_colegio"
         tools:layout_editor_absoluteY="184dp" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/txt_add_pack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="69dp"
-        tools:layout_editor_absoluteY="228dp" />
+        android:text="@string/paquete_add_alumno"
+        app:layout_constraintBottom_toTopOf="@id/txt_add_horario"
+        app:layout_constraintEnd_toEndOf="@+id/guideline_alumno_3"
+        app:layout_constraintStart_toStartOf="@+id/guideline_alumno_2"
+        app:layout_constraintTop_toBottomOf="@id/txt_add_modalidad"
+        tools:layout_editor_absoluteY="231dp" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/txt_add_horario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="69dp"
-        tools:layout_editor_absoluteY="273dp" />
+        android:text="@string/horario_add_alumno"
+        app:layout_constraintBottom_toTopOf="@id/guideline_alumno_1"
+        app:layout_constraintEnd_toEndOf="@+id/guideline_alumno_3"
+        app:layout_constraintStart_toStartOf="@+id/guideline_alumno_2"
+        app:layout_constraintTop_toBottomOf="@id/txt_add_pack" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
+        android:id="@+id/guideline_alumno_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="326dp" />
 
-    <Button
-        android:id="@+id/button"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_alumno_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="254dp"
-        tools:layout_editor_absoluteY="331dp" />
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="50dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_alumno_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="197dp" />
+
+    <Button
+        android:id="@+id/btn_next_alumno1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/siguiente_add_alumno"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline_alumno_1" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
