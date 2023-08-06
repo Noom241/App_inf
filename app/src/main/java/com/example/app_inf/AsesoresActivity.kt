@@ -48,12 +48,12 @@ class AsesoresActivity : ComponentActivity() {
             val names = ArrayList<String>()
             try {
                 val connection = MySQLConnection.getConnection()
-                val query = "SELECT Nombre FROM asesores"
+                val query = "SELECT Nombre FROM Profesores" // Updated table name
                 val statement = connection.prepareStatement(query)
                 val resultSet = statement.executeQuery()
 
                 while (resultSet.next()) {
-                    val name = resultSet.getString("nombre")
+                    val name = resultSet.getString("Nombre")
                     names.add(name)
                 }
 
@@ -71,4 +71,5 @@ class AsesoresActivity : ComponentActivity() {
             autoCompleteTextView.setAdapter(adapter)
         }
     }
+
 }

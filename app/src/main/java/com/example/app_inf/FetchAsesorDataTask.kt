@@ -22,20 +22,21 @@ class FetchAsesorDataTask(
         txtHorarioAsesor?.text = asesorData.horario
         txtUniversidadAsesor?.text = asesorData.universidad
     }
+
     private fun fetchAsesorData(selectedName: String): AsesorData {
-        val asesorData = AsesorData("", "", "", "") // Inicializa con valores vacíos
+        val asesorData = AsesorData("", "", "", "") // Initialize with empty values
 
         try {
             val connection = MySQLConnection.getConnection()
-            val query = "SELECT * FROM asesores WHERE Nombre = ?"
+            val query = "SELECT * FROM Profesores WHERE Nombre = ?" // Updated table name
             val statement = connection.prepareStatement(query)
             statement.setString(1, selectedName)
             val resultSet = statement.executeQuery()
 
             if (resultSet.next()) {
                 asesorData.nombre = resultSet.getString("Nombre")
-                asesorData.telefono = resultSet.getString("Teléfono")
-                asesorData.horario = resultSet.getString("Horario")
+                asesorData.telefono = resultSet.getString("Telefono")
+                asesorData.horario = resultSet.getString("Horario_disponible")
                 asesorData.universidad = resultSet.getString("Universidad")
             }
 
@@ -48,5 +49,4 @@ class FetchAsesorDataTask(
 
         return asesorData
     }
-
 }
