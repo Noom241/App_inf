@@ -76,10 +76,31 @@ class AlumnosActivity : ComponentActivity() {
     }
 
     private fun borrarAlumno(nombreAlumno: String) {
+        val txtNombreAlumno = findViewById<TextView>(R.id.txt_nombre_alumno)
+        val txtApoderadoAlumno = findViewById<TextView>(R.id.txt_apoderado_alumno)
+        val txtTelefonoApoderado = findViewById<TextView>(R.id.txt_telefono_apoderado)
+        val txtColegioAlumno = findViewById<TextView>(R.id.txt_colegio_alumno)
+        val txtModalidadAlumno = findViewById<TextView>(R.id.txt_modalidad_alumno)
+        val txtHorarioAlumno = findViewById<TextView>(R.id.txt_horario_alumno)
+        val txtPaqueteAlumno = findViewById<TextView>(R.id.txt_paquete_alumno)
         MySQLConnection.borrarAlumnoEnSegundoPlano(nombreAlumno, object : MySQLConnection.OnAlumnoBorradoListener {
             override fun onAlumnoBorrado(borradoExitoso: Boolean) {
                 if (borradoExitoso) {
                     mostrarMensaje("Alumno eliminado correctamente")
+
+                    // Limpiar los campos de texto de los detalles del alumno
+                    txtNombreAlumno.text = ""
+                    txtApoderadoAlumno.text = ""
+                    txtTelefonoApoderado.text = ""
+                    txtColegioAlumno.text = ""
+                    txtModalidadAlumno.text = ""
+                    txtHorarioAlumno.text = ""
+                    txtPaqueteAlumno.text = ""
+
+                    // Actualizar la lista de sugerencias del AutoCompleteTextView
+                    val autoCompleteTextView = findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView2)
+                    FetchNamesTask(autoCompleteTextView).execute()
+
                     // Aquí puedes realizar cualquier acción necesaria después de la eliminación exitosa
                 } else {
                     mostrarMensaje("Error al eliminar el alumno")
@@ -87,6 +108,7 @@ class AlumnosActivity : ComponentActivity() {
             }
         })
     }
+
 
     private fun mostrarMensaje(mensaje: String) {
         val builder = AlertDialog.Builder(this)

@@ -402,5 +402,32 @@ public class MySQLConnection {
         void onAlumnoBorrado(boolean borradoExitoso);
     }
 
+    public static void borrarAsesorEnSegundoPlano(String nombreAsesor, final OnAsesorBorradoListener listener) {
+        new AsyncTask<Void, Void, Boolean>() {
+            @Override
+            protected Boolean doInBackground(Void... voids) {
+                try {
+                    return borrarAsesor(nombreAsesor);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return false;
+                }
+            }
+
+            @Override
+            protected void onPostExecute(Boolean borradoExitoso) {
+                if (listener != null) {
+                    listener.onAsesorBorrado(borradoExitoso);
+                }
+            }
+        }.execute();
+    }
+
+    public interface OnAsesorBorradoListener {
+        void onAsesorBorrado(boolean borradoExitoso);
+    }
+
+
+
 
 }
