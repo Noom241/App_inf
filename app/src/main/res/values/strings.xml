@@ -6,7 +6,7 @@
     <string name="informe">Informe</string>
     <string name="buscar">Buscar</string>
     <string name="asesores_">Asesores</string>
-    <string name="add_Asesor">Añadir</string>
+    <string name="add_button">Añadir</string>
     <string name="edit_asesor">Editar</string>
     <string name="delete_Asesor">Eliminar</string>
     <string name="buscar_asesor">Buscar</string>
@@ -71,4 +71,5 @@
     <string name="nombre_lbl_asesor">Nombre</string>
     <string name="telefono_label_asesor">Teléfono</string>
     <string name="universidad_label_asesor">Universidad</string>
+    <string name="lbl_add_asesor">Añadir</string>
 </resources>

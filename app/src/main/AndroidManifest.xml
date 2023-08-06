@@ -31,13 +31,7 @@
             android:exported="false" />
 
         <activity
-            android:name=".AgregarAsesorActivy"
-            android:exported="false" />
-        <activity
             android:name=".AlumnosActivity"
-            android:exported="false" />
-        <activity
-            android:name=".AsesoresAdapter"
             android:exported="false" />
         <activity
             android:name=".AsesoresActivity"

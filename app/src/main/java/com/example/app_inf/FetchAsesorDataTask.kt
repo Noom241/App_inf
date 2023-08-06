@@ -3,7 +3,6 @@ package com.example.app_inf
 import android.os.AsyncTask
 import android.widget.TextView
 import java.sql.SQLException
-
 class FetchAsesorDataTask(
     private val txtNombreAsesor: TextView?,
     private val txtTelefonoAsesor: TextView?,
@@ -22,6 +21,7 @@ class FetchAsesorDataTask(
         txtHorarioAsesor?.text = asesorData.horario
         txtUniversidadAsesor?.text = asesorData.universidad
     }
+
     private fun fetchAsesorData(selectedName: String): AsesorData {
         val asesorData = AsesorData("", "", "", "") // Inicializa con valores vacíos
 
@@ -34,7 +34,7 @@ class FetchAsesorDataTask(
 
             if (resultSet.next()) {
                 asesorData.nombre = resultSet.getString("Nombre")
-                asesorData.telefono = resultSet.getString("Teléfono")
+                asesorData.telefono = resultSet.getString("Telefono")
                 asesorData.horario = resultSet.getString("Horario")
                 asesorData.universidad = resultSet.getString("Universidad")
             }
@@ -48,5 +48,4 @@ class FetchAsesorDataTask(
 
         return asesorData
     }
-
 }

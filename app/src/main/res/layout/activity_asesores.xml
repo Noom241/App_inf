@@ -44,7 +44,7 @@
         android:id="@+id/btn_add_Asesor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/add_Asesor"
+        android:text="@string/lbl_add_asesor"
         app:layout_constraintBottom_toTopOf="@id/btn_edit_Asesor"
         app:layout_constraintEnd_toEndOf="@id/guideline3"
         app:layout_constraintHorizontal_bias="0.0"
