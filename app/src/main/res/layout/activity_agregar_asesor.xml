@@ -6,33 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".Activities.AgregarAsesorActivity">
 
-    <TextView
-        android:id="@+id/add_nombre_asesor_"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:text="@string/nombre_add_lbl"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@id/add_telefono_asesor"
-        app:layout_constraintEnd_toStartOf="@id/rd_nombre_asesor"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.201" />
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/rd_nombre_asesor"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:textSize="18sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
         android:hint="@string/rd_name_asesor"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@id/rd_telefono_asesor"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toEndOf="@id/add_nombre_asesor_"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.18"
 
-        >
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.18">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="300dp"
@@ -44,102 +30,39 @@
         android:id="@+id/rd_telefono_asesor"
         android:layout_width="300dp"
         android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="20dp"
         android:hint="@string/rd_telf_asesor"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@id/rd_univ_asesor"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toEndOf="@id/add_telefono_asesor"
-        app:layout_constraintTop_toBottomOf="@id/rd_nombre_asesor"
-        app:layout_constraintVertical_bias="0.09"
 
-        >
+        app:layout_constraintTop_toBottomOf="@id/rd_nombre_asesor"
+        app:layout_constraintVertical_bias="0.09">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="300dp"
             android:layout_height="50dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        android:id="@+id/add_telefono_asesor"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:text="@string/telefono_add_lbl"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@id/add_univ_asesor"
-        app:layout_constraintEnd_toStartOf="@id/rd_telefono_asesor"
-        app:layout_constraintHorizontal_bias="0.22"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/add_nombre_asesor_"
-        app:layout_constraintVertical_bias="0.134" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/rd_univ_asesor"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginEnd="0dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="20dp"
         android:hint="@string/rd_univ_asesor"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/rd_horario_asesor"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.659"
-        app:layout_constraintStart_toEndOf="@id/add_univ_asesor"
-        app:layout_constraintTop_toBottomOf="@id/rd_telefono_asesor"
-        app:layout_constraintVertical_bias="0.371"
 
-        >
+        app:layout_constraintTop_toBottomOf="@id/rd_telefono_asesor">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="300dp"
             android:layout_height="50dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/rd_horario_asesor"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="0dp"
-        android:hint="@string/rd_horario_asesor"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@id/guideline6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.65"
-        app:layout_constraintStart_toEndOf="@id/add_horario_asesor"
-        app:layout_constraintTop_toBottomOf="@id/rd_univ_asesor"
-
-        >
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="300dp"
-            android:layout_height="50dp" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        android:id="@+id/add_univ_asesor"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:text="@string/universidad_add_lbl"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@id/add_horario_asesor"
-        app:layout_constraintEnd_toStartOf="@id/rd_univ_asesor"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/add_telefono_asesor" />
-
-    <TextView
-        android:id="@+id/add_horario_asesor"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:text="@string/horario_add_lbl"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@id/guideline6"
-        app:layout_constraintEnd_toStartOf="@id/rd_horario_asesor"
-        app:layout_constraintHorizontal_bias="0.334"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/add_univ_asesor" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline6"
@@ -153,10 +76,10 @@
         android:layout_width="131dp"
         android:layout_height="54dp"
         android:text="@string/btn_add_asesor"
-        app:layout_constraintTop_toBottomOf="@id/guideline6"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btn_cancel_asesor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline6"
         tools:layout_editor_absoluteX="162dp"
         tools:layout_editor_absoluteY="309dp" />
 
@@ -165,10 +88,119 @@
         android:layout_width="143dp"
         android:layout_height="56dp"
         android:text="@string/btn_cancel_asesor"
-        app:layout_constraintTop_toBottomOf="@id/guideline6"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/btn_add_Asesor2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_add_Asesor2"
+        app:layout_constraintTop_toBottomOf="@id/guideline6"
         tools:layout_editor_absoluteX="396dp"
         tools:layout_editor_absoluteY="309dp" />
+
+    <TextView
+        android:id="@+id/lbl_nombre_Asesor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="32dp"
+        android:scaleX="2"
+        android:scaleY="2"
+        android:text="@string/nombre_lbl_asesor"
+        app:layout_constraintEnd_toStartOf="@+id/rd_nombre_asesor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/lbl_telefono_asesor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="100dp"
+        android:scaleX="2"
+        android:scaleY="2"
+        android:text="@string/telefono_label_asesor"
+        app:layout_constraintEnd_toStartOf="@+id/rd_telefono_asesor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/lbl_universidad_Asesor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="172dp"
+        android:scaleX="2"
+        android:scaleY="2"
+        android:text="@string/universidad_label_asesor"
+        app:layout_constraintEnd_toStartOf="@+id/rd_univ_asesor"
+        app:layout_constraintHorizontal_bias="0.545"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/lbl_horario_Asesor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="168dp"
+        android:layout_marginTop="240dp"
+        android:text="@string/horario_lbl_asesor"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <CheckBox
+        android:id="@+id/chk_lunes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="105dp"
+        android:text="@string/lunes"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/chk_martes"
+        app:layout_constraintTop_toBottomOf="@+id/rd_univ_asesor"
+        app:layout_constraintVertical_bias="0.925" />
+
+    <CheckBox
+        android:id="@+id/chk_viernes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="106dp"
+        android:text="@string/viernes"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rd_univ_asesor"
+        app:layout_constraintVertical_bias="0.961" />
+
+    <CheckBox
+        android:id="@+id/chk_jueves"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="105dp"
+        android:text="@string/jueves"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/chk_viernes"
+        app:layout_constraintTop_toBottomOf="@+id/rd_univ_asesor"
+        app:layout_constraintVertical_bias="0.925" />
+
+    <CheckBox
+        android:id="@+id/chk_miercoles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="105dp"
+        android:text="@string/miercoles"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/chk_jueves"
+        app:layout_constraintTop_toBottomOf="@+id/rd_univ_asesor"
+        app:layout_constraintVertical_bias="0.925" />
+
+    <CheckBox
+        android:id="@+id/chk_martes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="104dp"
+        android:text="@string/martes"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/chk_miercoles"
+        app:layout_constraintTop_toBottomOf="@+id/rd_univ_asesor"
+        app:layout_constraintVertical_bias="0.928" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
