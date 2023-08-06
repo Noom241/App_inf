@@ -57,4 +57,14 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="nombre_add_lbl">Nombre:</string>
+    <string name="horario_add_lbl">Horario</string>
+    <string name="telefono_add_lbl">Teléfono:</string>
+    <string name="universidad_add_lbl">Universidad:</string>
+    <string name="btn_add_asesor">Añadir</string>
+    <string name="btn_cancel_asesor">Cancelar</string>
+    <string name="rd_horario_asesor">Escribe el horario del asesor</string>
+    <string name="rd_telf_asesor">Escribe el teléfono del asesor</string>
+    <string name="rd_univ_asesor">Escribe la universidad del asesor</string>
+    <string name="rd_name_asesor">Escribe el nombre del asesor</string>
 </resources>
