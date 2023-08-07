@@ -1,12 +1,9 @@
 package com.example.app_inf.Activities
 
-
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
@@ -14,19 +11,36 @@ import android.widget.Toast
 import com.example.app_inf.R
 
 class PaquetesActivity : AppCompatActivity() {
+
+    private lateinit var spinner1: Spinner
+    private lateinit var spinner2: Spinner
+    private lateinit var spinner3: Spinner
+    private lateinit var spinner4: Spinner
+    private lateinit var variableString: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_paquetes)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
 
+        initializeViews()
+        setupSpinners()
+        setupButtonListeners()
+        setupSpinnerState()
+    }
+
+    private fun initializeViews() {
         val paquete_key = intent.getStringExtra("paquete_key")
+        variableString = paquete_key ?: ""
+
+        spinner1 = findViewById(R.id.spinner_left_top)
+        spinner2 = findViewById(R.id.spinner_right_top)
+        spinner3 = findViewById(R.id.spinner_left_bot)
+        spinner4 = findViewById(R.id.spinner_right_bot)
+    }
+
+    private fun setupSpinners() {
         val diasSemana = arrayOf("Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "-----")
-
-        val spinner1 = findViewById<Spinner>(R.id.spinner_left_top)
-        val spinner2 = findViewById<Spinner>(R.id.spinner_right_top)
-        val spinner3 = findViewById<Spinner>(R.id.spinner_left_bot)
-        val spinner4 = findViewById<Spinner>(R.id.spinner_right_bot)
-
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, diasSemana)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
@@ -34,9 +48,46 @@ class PaquetesActivity : AppCompatActivity() {
         spinner2.adapter = adapter
         spinner3.adapter = adapter
         spinner4.adapter = adapter
+    }
 
-        val variableString = paquete_key  // Cambiar la variable según tus necesidades
+    private fun setupButtonListeners() {
+        val btnBack = findViewById<Button>(R.id.btn_back_alumno1)
+        btnBack.setOnClickListener {
+            val intent = Intent(this, AgregarAlumnoActivity::class.java)
+            startActivity(intent)
+        }
 
+        val btnNext = findViewById<Button>(R.id.btn_next_alumno2)
+        btnNext.setOnClickListener {
+            val spinners = listOf(spinner1, spinner2, spinner3, spinner4)
+            val selectedValues = spinners.map { it.selectedItem.toString() }
+
+            val isValidSelection = when (variableString) {
+                "A" -> selectedValues[0] != "-----" && selectedValues[1] != "-----"
+                "B" -> selectedValues[0] != "-----" && selectedValues[1] != "-----" && selectedValues[2] != "-----"
+                "C" -> selectedValues.none { it == "-----" }
+                else -> false
+            }
+
+            if (isValidSelection) {
+                val nonEmptySelectedValues = selectedValues.filter { it != "-----" }
+                val isNoRepetition = nonEmptySelectedValues.size == nonEmptySelectedValues.toSet().size
+
+                if (isNoRepetition) {
+                    val intent = Intent(this, AsesorAlumnoActivity::class.java)
+                    startActivity(intent)
+                } else {
+                    val errorMessage = "No se pueden repetir días."
+                    Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                val errorMessage = "Selecciona valores válidos."
+                Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun setupSpinnerState() {
         when (variableString) {
             "A" -> {
                 spinner3.isEnabled = false
@@ -44,79 +95,11 @@ class PaquetesActivity : AppCompatActivity() {
                 spinner3.setSelection(5)
                 spinner4.setSelection(5)
             }
-
             "B" -> {
                 spinner4.isEnabled = false
                 spinner4.setSelection(5)
             }
-
-            "C" -> {
-                // No se necesita hacer nada, todos los spinners son habilitados por defecto
-            }
+            // "C" case doesn't require any special setup
         }
-
-        val btn_back_alumno1 = findViewById<Button>(R.id.btn_back_alumno1)
-        btn_back_alumno1.setOnClickListener {
-            val intent = Intent(this, AgregarAlumnoActivity::class.java)
-            startActivity(intent)
-        }
-
-        val btn_next_alumno2 = findViewById<Button>(R.id.btn_next_alumno2)
-        btn_next_alumno2.setOnClickListener {
-            val spinnerValues = mutableMapOf(
-                spinner1.id to spinner1.selectedItem.toString(),
-                spinner2.id to spinner2.selectedItem.toString(),
-                spinner3.id to spinner3.selectedItem.toString(),
-                spinner4.id to spinner4.selectedItem.toString()
-            )
-
-            val nonEmptySpinnerValues = spinnerValues.filter { it.value != "-----" }.values
-
-            val isValid = nonEmptySpinnerValues.size == nonEmptySpinnerValues.toSet().size
-
-            if (isValid) {
-                val variableString = variableString  // Cambiar la variable según tus necesidades
-
-                when (variableString) {
-                    "A" -> {
-                        if (spinner1.selectedItem == "-----" || spinner2.selectedItem == "-----") {
-                            // Mostrar mensaje de error
-                            val errorMessage = "Selecciona valores válidos."
-                            Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
-                        } else {
-                            val intent = Intent(this, AsesorAlumnoActivity::class.java)
-                            startActivity(intent)
-                        }
-                    }
-                    "B" -> {
-                        if (spinner1.selectedItem == "-----" || spinner2.selectedItem == "-----" || spinner3.selectedItem == "-----") {
-                            // Mostrar mensaje de error
-                            val errorMessage = "Selecciona valores válidos."
-                            Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
-                        } else {
-                            val intent = Intent(this, AsesorAlumnoActivity::class.java)
-                            startActivity(intent)
-                        }
-                    }
-                    "C" -> {
-                        if (spinner1.selectedItem == "-----" || spinner2.selectedItem == "-----" ||
-                            spinner3.selectedItem == "-----" || spinner4.selectedItem == "-----") {
-                            // Mostrar mensaje de error
-                            val errorMessage = "Selecciona valores válidos."
-                            Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
-                        } else {
-                            val intent = Intent(this, AsesorAlumnoActivity::class.java)
-                            startActivity(intent)
-                        }
-                    }
-                }
-            } else {
-                // Mostrar mensaje de error general
-                val errorMessage = "No se pueden repetir dias."
-                Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
-            }
-        }
-
-
     }
 }
