@@ -10,7 +10,7 @@
     <string name="edit_asesor">Editar</string>
     <string name="delete_Asesor">Eliminar</string>
     <string name="buscar_asesor">Buscar</string>
-    <string name="disponibilidad_asesores">Lunes,Martes,Miércoles</string>
+    <string name="disponibilidad_asesores">Lunes-Martes-Miércoles-Jueves-Viernes</string>
     <string name="Nombre_Asesor">Juan Perez</string>
     <string name="telefono_asesor">923655999</string>
     <string name="universidad_asesor">Universidad ABC</string>
@@ -95,4 +95,8 @@
     <string name="rd_apod_alumno">Escribe el nombre del apoderado</string>
     <string name="rd_telf_alumno">Escribe el teléfono del apoderado</string>
     <string name="rd_colegio_alumno">Escribe el colegio del alumno</string>
+    <string name="horario_asesores_lbl">Horario :</string>
+    <string name="nombre_asesores_lbl">Nombre :</string>
+    <string name="telf_asesores_lbl">Teléfono :</string>
+    <string name="universidad_asesores_lbl">Universidad :</string>
 </resources>

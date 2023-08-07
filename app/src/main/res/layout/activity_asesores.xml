@@ -9,110 +9,185 @@
         android:id="@+id/guideline1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintGuide_percent="0.15"
-        android:orientation="horizontal"/>
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintGuide_percent="0.85"
-        android:orientation="horizontal"/>
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.9" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintGuide_percent="0.2"
-        android:orientation="vertical"/>
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.17" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.05" />
+        app:layout_constraintGuide_percent="0.02" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintGuide_percent="0.95"
-        android:orientation="vertical"/>
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.4" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="299dp" />
 
     <Button
         android:id="@+id/btn_add_Asesor"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/lbl_add_asesor"
         app:layout_constraintBottom_toTopOf="@id/btn_edit_Asesor"
         app:layout_constraintEnd_toEndOf="@id/guideline3"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/guideline4"
         app:layout_constraintTop_toTopOf="@id/guideline1"
-        app:layout_constraintVertical_chainStyle="spread" />
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintWidth="0dp" />
 
     <Button
         android:id="@+id/btn_edit_Asesor"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/edit_asesor"
         app:layout_constraintBottom_toTopOf="@id/btn_delete_Asesor"
         app:layout_constraintEnd_toEndOf="@id/guideline3"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/guideline4"
-        app:layout_constraintTop_toBottomOf="@id/btn_add_Asesor" />
+        app:layout_constraintTop_toBottomOf="@id/btn_add_Asesor"
+        app:layout_constraintWidth="0dp" />
 
     <Button
         android:id="@+id/btn_delete_Asesor"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/delete_Asesor"
         app:layout_constraintBottom_toBottomOf="@id/guideline2"
         app:layout_constraintEnd_toEndOf="@id/guideline3"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/guideline4"
-        app:layout_constraintTop_toBottomOf="@id/btn_edit_Asesor" />
+        app:layout_constraintTop_toBottomOf="@id/btn_edit_Asesor"
+        app:layout_constraintWidth="0dp" />
+
+    <TextView
+        android:id="@+id/txt_nombre_asesores"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10sp"
+        android:text="@string/nombre_asesores_lbl"
+        android:textSize="22.5sp"
+        app:layout_constraintBottom_toTopOf="@id/txt_telefono_asesores"
+        app:layout_constraintEnd_toStartOf="@id/guideline8"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toTopOf="@+id/guideline1" />
+
+    <TextView
+        android:id="@+id/txt_telefono_asesores"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10sp"
+        android:text="@string/telf_asesores_lbl"
+        android:textSize="22.5sp"
+        app:layout_constraintBottom_toTopOf="@+id/txt_universidad_asesores"
+        app:layout_constraintEnd_toStartOf="@id/guideline8"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/txt_nombre_asesores" />
+
+    <TextView
+        android:id="@+id/txt_universidad_asesores"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10sp"
+        android:text="@string/universidad_asesores_lbl"
+        android:textSize="22.5sp"
+        app:layout_constraintBottom_toTopOf="@+id/txt_horario_asesores"
+        app:layout_constraintEnd_toStartOf="@id/guideline8"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@id/txt_telefono_asesores"
+        tools:ignore="TextSizeCheck" />
+
+    <TextView
+        android:id="@+id/txt_horario_asesores"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10sp"
+        android:text="@string/horario_asesores_lbl"
+        android:textSize="22.5sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/guideline8"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@id/txt_universidad_asesores" />
 
     <TextView
         android:id="@+id/txt_nombre_asesor"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="108dp"
-        android:layout_marginEnd="111dp"
         android:text="@string/Nombre_Asesor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="22.5sp"
+        app:layout_constraintBottom_toTopOf="@id/txt_telefono_Asesor"
+        app:layout_constraintEnd_toEndOf="@id/guideline5"
+        app:layout_constraintStart_toEndOf="@id/guideline8"
+        app:layout_constraintTop_toTopOf="@id/guideline1"
+        app:layout_constraintWidth="0dp" />
 
     <TextView
         android:id="@+id/txt_telefono_Asesor"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="109dp"
         android:text="@string/telefono_asesor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_nombre_asesor" />
+        android:textSize="22.5sp"
+        app:layout_constraintBottom_toTopOf="@id/txt_universidad_asesor"
+        app:layout_constraintEnd_toEndOf="@id/guideline5"
+        app:layout_constraintStart_toEndOf="@id/guideline8"
+        app:layout_constraintTop_toBottomOf="@+id/txt_nombre_asesor"
+        app:layout_constraintWidth="0dp" />
 
     <TextView
         android:id="@+id/txt_horario_Asesor"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="64dp"
-        android:layout_marginBottom="76dp"
+        android:layout_marginBottom="0sp"
         android:text="@string/disponibilidad_asesores"
+        android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="@id/guideline5"
+        app:layout_constraintStart_toEndOf="@id/guideline8"
+        app:layout_constraintTop_toBottomOf="@id/txt_universidad_asesor"
+        app:layout_constraintWidth="0dp"
+        />
 
     <TextView
         android:id="@+id/txt_universidad_asesor"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="84dp"
-        android:layout_marginBottom="24dp"
         android:text="@string/universidad_asesor"
+        android:textSize="22.5sp"
         app:layout_constraintBottom_toTopOf="@+id/txt_horario_Asesor"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="@id/guideline5"
+        app:layout_constraintStart_toEndOf="@id/guideline8"
+        app:layout_constraintTop_toBottomOf="@id/txt_telefono_Asesor"
+        app:layout_constraintWidth="0dp" />
 
     <AutoCompleteTextView
         android:id="@+id/autoCompleteTextView"
