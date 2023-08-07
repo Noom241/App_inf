@@ -89,8 +89,8 @@ class AgregarAlumnoActivity : AppCompatActivity() {
             super.onPostExecute(result)
             if (result) {
                 val intent = Intent(this@AgregarAlumnoActivity, PaquetesActivity::class.java)
-                val alumno = findViewById<EditText>(R.id.rd_nombre_alumno).text.toString()
-                intent.putExtra("alumno_key", alumno)
+                val paquete_key = findViewById<Spinner>(R.id.spn_paquete_alumno).selectedItem.toString()
+                intent.putExtra("paquete_key", paquete_key)
                 startActivity(intent)
             } else {
                 // Mostrar mensaje de error o tomar alguna acción en caso de fallo

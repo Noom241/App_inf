@@ -19,7 +19,7 @@ class PaquetesActivity : AppCompatActivity() {
         setContentView(R.layout.activity_paquetes)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
 
-        val alumnoRecibido = intent.getStringExtra("alumno_key")
+        val paquete_key = intent.getStringExtra("paquete_key")
         val diasSemana = arrayOf("Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "-----")
 
         val spinner1 = findViewById<Spinner>(R.id.spinner_left_top)
@@ -35,7 +35,7 @@ class PaquetesActivity : AppCompatActivity() {
         spinner3.adapter = adapter
         spinner4.adapter = adapter
 
-        val variableString = "A"  // Cambiar la variable según tus necesidades
+        val variableString = paquete_key  // Cambiar la variable según tus necesidades
 
         when (variableString) {
             "A" -> {
