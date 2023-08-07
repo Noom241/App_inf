@@ -7,34 +7,34 @@
     tools:context=".Activities.AsesorAlumnoActivity">
 
     <Spinner
-        android:id="@+id/spinner5"
+        android:id="@+id/asesor_top_l"
         android:layout_width="300dp"
         android:layout_height="70dp"
-        app:layout_constraintBottom_toTopOf="@+id/spinner7"
-        app:layout_constraintEnd_toStartOf="@+id/spinner6"
+        app:layout_constraintBottom_toTopOf="@+id/asesor_bot_l"
+        app:layout_constraintEnd_toStartOf="@+id/asesor_top_r"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/spinner6"
+        android:id="@+id/asesor_top_r"
         android:layout_width="300dp"
         android:layout_height="70dp"
-        app:layout_constraintBottom_toTopOf="@+id/spinner8"
+        app:layout_constraintBottom_toTopOf="@+id/asesor_bot_r"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/spinner5"
+        app:layout_constraintStart_toEndOf="@id/asesor_top_l"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/spinner7"
+        android:id="@+id/asesor_bot_l"
         android:layout_width="300dp"
         android:layout_height="70dp"
         app:layout_constraintBottom_toBottomOf="@id/guideline11"
-        app:layout_constraintEnd_toStartOf="@+id/spinner8"
+        app:layout_constraintEnd_toStartOf="@+id/asesor_bot_r"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/spinner5" />
+        app:layout_constraintTop_toBottomOf="@id/asesor_top_l" />
 
     <Spinner
-        android:id="@+id/spinner8"
+        android:id="@+id/asesor_bot_r"
         android:layout_width="300dp"
         android:layout_height="70dp"
         app:layout_constraintBottom_toBottomOf="@id/guideline11"
@@ -58,4 +58,81 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline11" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/asesor_bot_l"
+        app:layout_constraintTop_toBottomOf="@id/asesor_top_r" />
+
+    <Button
+        android:id="@+id/btn_finalizar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="327dp"
+        android:layout_marginEnd="358dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/btn_cancel_asesor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/day_0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="128dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="279dp"
+        android:layout_marginBottom="15dp"
+        android:scaleX="5"
+        android:scaleY="5"
+        android:text="@string/none_value"
+        android:textColor="#FFFBFE"
+        app:layout_constraintBottom_toTopOf="@+id/asesor_top_l"
+        app:layout_constraintEnd_toStartOf="@+id/day_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/day_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="67dp"
+        android:layout_marginEnd="337dp"
+        android:layout_marginBottom="20dp"
+        android:scaleX="5"
+        android:scaleY="5"
+        android:text="@string/none_value"
+        android:textColor="#FFFBFE"
+        app:layout_constraintBottom_toTopOf="@+id/asesor_bot_l"
+        app:layout_constraintEnd_toStartOf="@+id/day_3"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/day_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="51dp"
+        android:layout_marginEnd="328dp"
+        android:layout_marginBottom="12dp"
+        android:scaleX="5"
+        android:scaleY="5"
+        android:text="@string/none_value"
+        android:textColor="#FFFBFE"
+        app:layout_constraintBottom_toTopOf="@+id/asesor_top_r"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/day_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="331dp"
+        android:layout_marginBottom="18dp"
+        android:scaleX="5"
+        android:scaleY="5"
+        android:text="@string/none_value"
+        android:textColor="#FFFBFE"
+        app:layout_constraintBottom_toTopOf="@+id/asesor_bot_r"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

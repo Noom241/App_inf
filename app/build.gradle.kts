@@ -67,6 +67,10 @@ dependencies {
     implementation(files("libs\\mysql-connector-java-5.1.49.jar"))
     implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
     implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel:2.3.1")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0")
+
     //implementation(project(mapOf("path" to ":app")))
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

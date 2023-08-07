@@ -31,7 +31,7 @@ public class MySQLConnection {
 
     public static boolean agregarAlumno(AlumnoData alumno) {
         try (Connection connection = getConnection()) {
-            String insertQuery = "INSERT INTO Estudiantes (Nombre, Apoderado, Telefono_apoderado, Colegio, Modalidad, Horario) VALUES (?, ?, ?, ?, ?, ?)";
+            String insertQuery = "INSERT INTO Estudiantes (Nombre, Apoderado, Telefono_apoderado, Colegio, Modalidad, Horario_elegido) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
             preparedStatement.setString(1, alumno.getNombre());
             preparedStatement.setString(2, alumno.getApoderado());
@@ -400,6 +400,26 @@ public class MySQLConnection {
 
     public interface OnAlumnoBorradoListener {
         void onAlumnoBorrado(boolean borradoExitoso);
+    }
+
+
+    public static List<String> obtenerProfesoresDisponibles(String dia, int horarioElegido) {
+        List<String> nombresProfesores = new ArrayList<>();
+        try (Connection connection = getConnection()) {
+            String storedProcedureCall = "{ CALL ObtenerProfesoresDisponibles(?, ?) }";
+            try (PreparedStatement statement = connection.prepareCall(storedProcedureCall)) {
+                statement.setString(1, dia);
+                statement.setInt(2, horarioElegido);
+                ResultSet resultSet = statement.executeQuery();
+                while (resultSet.next()) {
+                    String nombreProfesor = resultSet.getString("Nombre");
+                    nombresProfesores.add(nombreProfesor);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return nombresProfesores;
     }
 
 

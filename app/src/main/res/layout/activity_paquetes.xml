@@ -7,40 +7,40 @@
     tools:context=".Activities.PaquetesActivity">
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/spinner_left_top"
         android:layout_width="300dp"
         android:layout_height="70dp"
-        app:layout_constraintBottom_toTopOf="@id/spinner3"
-        app:layout_constraintEnd_toStartOf="@id/spinner2"
+        app:layout_constraintBottom_toTopOf="@id/spinner_left_bot"
+        app:layout_constraintEnd_toStartOf="@id/spinner_right_top"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/spinner2"
+        android:id="@+id/spinner_right_top"
         android:layout_width="300dp"
         android:layout_height="70dp"
-        app:layout_constraintBottom_toTopOf="@id/spinner4"
+        app:layout_constraintBottom_toTopOf="@id/spinner_right_bot"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/spinner"
+        app:layout_constraintStart_toEndOf="@id/spinner_left_top"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/spinner3"
+        android:id="@+id/spinner_left_bot"
         android:layout_width="300dp"
         android:layout_height="70dp"
         app:layout_constraintBottom_toBottomOf="@id/guideline10"
-        app:layout_constraintEnd_toStartOf="@id/spinner4"
+        app:layout_constraintEnd_toStartOf="@id/spinner_right_bot"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/spinner" />
+        app:layout_constraintTop_toBottomOf="@id/spinner_left_top" />
 
     <Spinner
-        android:id="@+id/spinner4"
+        android:id="@+id/spinner_right_bot"
         android:layout_width="300dp"
         android:layout_height="70dp"
         app:layout_constraintBottom_toBottomOf="@id/guideline10"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/spinner3"
-        app:layout_constraintTop_toBottomOf="@id/spinner2" />
+        app:layout_constraintStart_toEndOf="@id/spinner_left_bot"
+        app:layout_constraintTop_toBottomOf="@id/spinner_right_top" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline10"
