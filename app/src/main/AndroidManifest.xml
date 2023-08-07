@@ -15,6 +15,9 @@
         android:theme="@style/Theme.App_inf"
         tools:targetApi="31">
         <activity
+            android:name=".Activities.InformeActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.AsistenciaActivity"
             android:exported="false" />
         <activity

@@ -36,4 +36,59 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.85" />
 
+    <AutoCompleteTextView
+        android:id="@+id/buscar_asistencia_asesor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:hint="@string/buscar_asesor_asistencia"
+        app:layout_constraintBottom_toTopOf="@+id/buscar_asistencia_alumno"
+        app:layout_constraintEnd_toStartOf="@+id/guideline27"
+        app:layout_constraintStart_toStartOf="@+id/guideline24"
+        app:layout_constraintTop_toTopOf="@+id/guideline25"
+        app:layout_constraintWidth="0sp"
+        tools:ignore="LabelFor" />
+
+    <AutoCompleteTextView
+        android:id="@+id/buscar_asistencia_alumno"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:hint="@string/buscar_alumno_asistencia"
+        app:layout_constraintBottom_toTopOf="@id/spn_asistencia"
+        app:layout_constraintEnd_toStartOf="@+id/guideline27"
+        app:layout_constraintStart_toStartOf="@+id/guideline24"
+        app:layout_constraintTop_toBottomOf="@id/buscar_asistencia_asesor"
+        app:layout_constraintWidth="0sp"
+        tools:ignore="LabelFor" />
+
+    <Spinner
+        android:id="@+id/spn_asistencia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline26"
+        app:layout_constraintEnd_toStartOf="@+id/guideline27"
+        app:layout_constraintStart_toStartOf="@+id/guideline24"
+        app:layout_constraintTop_toBottomOf="@+id/buscar_asistencia_alumno"
+        app:layout_constraintWidth="0sp" />
+
+    <Button
+        android:id="@+id/btn_asistencia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="@string/confirm_btn_asistencia"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline24"
+        app:layout_constraintTop_toTopOf="@+id/guideline26" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline27"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

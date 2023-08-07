@@ -89,4 +89,15 @@
     <string name="nombre_edit_asesor_rd">Nombre del asesor</string>
     <string name="telf_edit_asesor_rd">Teléfono del asesor</string>
     <string name="univ_edit_asesor_rd">Universidad del asesor</string>
+    <string name="confirm_btn_asistencia">Confirmar</string>
+    <string name="buscar_asesor_asistencia">Buscar asesor</string>
+    <string name="buscar_alumno_asistencia">Buscar alumno</string>
+    <string name="asesores_txt_informe">Asesores</string>
+    <string name="alumnos_txt_informe">Alumnos</string>
+    <string name="buscar_asesor_informe">Buscar Asesor</string>
+    <string name="buscar_alumno_informe">Buscar Alumno</string>
+    <string name="generar_pdf_asesor">Generar pdf</string>
+    <string name="ver_asistencia_aesor">Ver asistencia</string>
+    <string name="ver_asistencia_alumno">Ver asistencia</string>
+    <string name="generar_pdf_alumno">Generar pdf</string>
 </resources>
