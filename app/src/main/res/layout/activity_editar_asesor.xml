@@ -11,14 +11,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.4" />
+        app:layout_constraintGuide_percent="0.35" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.8" />
+        app:layout_constraintGuide_percent="0.85" />
 
     <TextView
         android:id="@+id/txt_edit_name_asesor"
@@ -28,8 +28,9 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/txt_edit_telf_asesor"
         app:layout_constraintEnd_toStartOf="@+id/guideline13"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/guideline16"
+        app:layout_constraintTop_toTopOf="@id/guideline18" />
 
     <TextView
         android:id="@+id/txt_edit_telf_asesor"
@@ -38,9 +39,10 @@
         android:text="@string/telf_edit_asesor"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@id/txt_edit_univ_asesor"
-        app:layout_constraintTop_toBottomOf="@+id/txt_edit_name_asesor"
         app:layout_constraintEnd_toStartOf="@+id/guideline13"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/guideline16"
+        app:layout_constraintTop_toBottomOf="@+id/txt_edit_name_asesor"
         tools:layout_editor_absoluteY="125dp" />
 
     <TextView
@@ -49,10 +51,11 @@
         android:layout_height="wrap_content"
         android:text="@string/univ_edit_asesor"
         android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@id/txt_edit_telf_asesor"
         app:layout_constraintBottom_toTopOf="@id/txt_edit_horario_asesor"
         app:layout_constraintEnd_toStartOf="@+id/guideline13"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/guideline16"
+        app:layout_constraintTop_toBottomOf="@id/txt_edit_telf_asesor"
         tools:layout_editor_absoluteY="184dp" />
 
     <TextView
@@ -60,10 +63,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/horario_edit_asesor"
-        android:textSize="24sp"
+        android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline14"
         app:layout_constraintEnd_toStartOf="@+id/guideline13"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/guideline16"
         app:layout_constraintTop_toBottomOf="@+id/txt_edit_univ_asesor" />
 
     <Button
@@ -73,59 +77,50 @@
         android:text="@string/actualizar_edit_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline14" />
+        app:layout_constraintTop_toTopOf="@+id/guideline14"
+        app:layout_constraintVertical_bias="0.0" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/rd_edit_nombre_asesor"
-        android:hint="@string/edit_nombre_asesor"
+    <TextView
+        android:id="@+id/txt_edit_nombre_asesor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintWidth="0dp"
+        android:hint="@string/edit_nombre_asesor"
+        android:textSize="24sp"
+        android:layout_marginTop="8sp"
         app:layout_constraintBottom_toTopOf="@id/rd_edit_telefono_asesor"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline13"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="@id/guideline18"
+        app:layout_constraintWidth="0dp" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
+    <TextView
         android:id="@+id/rd_edit_telefono_asesor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintWidth="0dp"
         android:hint="@string/edit_telf_asesor"
+        android:textSize="24sp"
+        android:layout_marginTop="8sp"
         app:layout_constraintBottom_toTopOf="@+id/rd_edit_univ_asesor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline13"
-        app:layout_constraintTop_toBottomOf="@+id/rd_edit_nombre_asesor">
+        app:layout_constraintTop_toBottomOf="@+id/txt_edit_nombre_asesor"
+        app:layout_constraintWidth="0dp" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-             />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
+    <TextView
         android:id="@+id/rd_edit_univ_asesor"
-        android:hint="@string/edit_univ_asesor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintWidth="0dp"
-        app:layout_constraintTop_toBottomOf="@id/rd_edit_telefono_asesor"
+        android:hint="@string/edit_univ_asesor"
+        android:textSize="24sp"
+        android:layout_marginTop="8sp"
         app:layout_constraintBottom_toTopOf="@+id/chk_edit_miercoles"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline13">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
+        app:layout_constraintStart_toStartOf="@+id/guideline13"
+        app:layout_constraintTop_toBottomOf="@id/rd_edit_telefono_asesor"
+        app:layout_constraintWidth="0dp" />
 
     <CheckBox
         android:id="@+id/chk_edit_lunes"
@@ -137,45 +132,86 @@
         app:layout_constraintStart_toStartOf="@+id/guideline13"
         app:layout_constraintTop_toBottomOf="@+id/rd_edit_univ_asesor" />
 
+
     <CheckBox
         android:id="@+id/chk_edit_martes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/martes_chk_edit_asesores"
-        app:layout_constraintStart_toEndOf="@id/chk_edit_lunes"
         app:layout_constraintBottom_toTopOf="@+id/guideline14"
-        app:layout_constraintEnd_toStartOf="@+id/chk_edit_miercoles"
-        app:layout_constraintTop_toBottomOf="@+id/rd_edit_univ_asesor" />
+        app:layout_constraintEnd_toStartOf="@id/chk_edit_miercoles"
+        app:layout_constraintStart_toEndOf="@id/chk_edit_lunes"
+        app:layout_constraintTop_toBottomOf="@+id/rd_edit_univ_asesor"
+        tools:layout_editor_absoluteX="375dp" />
 
     <CheckBox
         android:id="@+id/chk_edit_miercoles"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/chk_edit_martes"
         android:text="@string/mieercoles_chk_edit_asesor"
-        app:layout_constraintBottom_toBottomOf="@id/guideline14"
+        app:layout_constraintBottom_toTopOf="@+id/guideline14"
         app:layout_constraintEnd_toStartOf="@+id/chk_edit_jueves"
-
-
+        app:layout_constraintStart_toEndOf="@+id/chk_edit_martes"
         app:layout_constraintTop_toBottomOf="@id/rd_edit_univ_asesor" />
 
     <CheckBox
         android:id="@+id/chk_edit_jueves"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/rd_edit_univ_asesor"
         android:text="@string/jueves_chk_edit_asesor"
         app:layout_constraintStart_toEndOf="@id/chk_edit_miercoles"
         app:layout_constraintBottom_toTopOf="@+id/guideline14"
-        app:layout_constraintEnd_toStartOf="@+id/chk_edit_viernes"
-        app:layout_constraintTop_toBottomOf="@+id/rd_edit_univ_asesor" />
+        app:layout_constraintEnd_toStartOf="@+id/chk_edit_viernes" />
 
     <CheckBox
         android:id="@+id/chk_edit_viernes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/chk_edit_jueves"
         android:text="@string/viernes_chk_edit_asesor"
+        app:layout_constraintStart_toEndOf="@id/chk_edit_jueves"
         app:layout_constraintBottom_toTopOf="@+id/guideline14"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rd_edit_univ_asesor" />
+
+    <AutoCompleteTextView
+        android:id="@+id/autoCompleteTextView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:text="@string/buscar_edit_asesor"
+        app:layout_constraintBottom_toBottomOf="@id/guideline18"
+        app:layout_constraintEnd_toStartOf="@+id/guideline17"
+        app:layout_constraintStart_toStartOf="@+id/guideline15"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth="0dp"
+        tools:ignore="LabelFor" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.02" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" />
 </androidx.constraintlayout.widget.ConstraintLayout>

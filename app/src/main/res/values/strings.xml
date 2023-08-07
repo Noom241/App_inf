@@ -80,4 +80,5 @@
     <string name="mieercoles_chk_edit_asesor">Miércoles</string>
     <string name="jueves_chk_edit_asesor">Jueves</string>
     <string name="viernes_chk_edit_asesor">Viernes</string>
+    <string name="buscar_edit_asesor">Buscar</string>
 </resources>
