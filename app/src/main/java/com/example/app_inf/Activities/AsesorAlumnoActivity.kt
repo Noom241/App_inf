@@ -16,7 +16,7 @@ class AsesorAlumnoActivity : AppCompatActivity() {
         val horario_hora = intent.getStringExtra("horario_hora")
 
         val sortedValues = sortValues(selected_values)
-        val valoresArray = sortedValues.split(", ")
+        val valoresArray = sortedValues.split(",")
 
         val dayTextViews = arrayOf(
             findViewById<TextView>(R.id.day_0),
@@ -32,7 +32,7 @@ class AsesorAlumnoActivity : AppCompatActivity() {
         //Lista de Asesores dependiendo findViewById<TextView>(R.id.day_x)
 
 
-        
+
 
         val btnFinalizar = findViewById<Button>(R.id.btn_finalizar)
         btnFinalizar.setOnClickListener {
@@ -42,9 +42,21 @@ class AsesorAlumnoActivity : AppCompatActivity() {
     }
 
     private fun sortValues(input: String?): String {
-        val values = input?.split(", ")?.toMutableList() ?: mutableListOf()
+        val dayOrder = mapOf(
+            "Lunes" to 1,
+            "Martes" to 2,
+            "Miércoles" to 3,
+            "Jueves" to 4,
+            "Viernes" to 5,
+            "Sábado" to 6,
+            "Domingo" to 7
+        )
+
+        val values = input?.split(",")?.toMutableList() ?: mutableListOf()
         values.removeAll(listOf("", "-----")) // Remove empty and placeholder values
-        values.sort()
-        return values.joinToString(", ")
+        values.sortWith(compareBy { dayOrder[it] }) // Sort using the custom dayOrder
+
+        return values.joinToString(",")
     }
+
 }

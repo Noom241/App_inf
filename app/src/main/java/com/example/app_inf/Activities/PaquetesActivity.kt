@@ -74,7 +74,7 @@ class PaquetesActivity : AppCompatActivity() {
                 val isNoRepetition = nonEmptySelectedValues.size == nonEmptySelectedValues.toSet().size
 
                 if (isNoRepetition) {
-                    val selectedValuesString = selectedValues.filterNot { it == "-----" }.joinToString(", ")
+                    val selectedValuesString = selectedValues.filterNot { it == "-----" }.joinToString(",")
                     val intent = Intent(this, AsesorAlumnoActivity::class.java)
                     intent.putExtra("horario_hora", intent.getStringExtra("horario_hora"))
                     intent.putExtra("selected_values", selectedValuesString)
