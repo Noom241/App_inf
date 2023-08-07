@@ -72,4 +72,12 @@
     <string name="telf_edit_asesor">Telédono</string>
     <string name="univ_edit_asesor">Universidad</string>
     <string name="horario_edit_asesor">Horario</string>
+    <string name="edit_nombre_asesor">Actualizar Nombre</string>
+    <string name="edit_telf_asesor">Actualizar Teléfono</string>
+    <string name="edit_univ_asesor">Actualizar Universidad</string>
+    <string name="lunes_chk_edit_asesor">Lunes</string>
+    <string name="martes_chk_edit_asesores">Martes</string>
+    <string name="mieercoles_chk_edit_asesor">Miércoles</string>
+    <string name="jueves_chk_edit_asesor">Jueves</string>
+    <string name="viernes_chk_edit_asesor">Viernes</string>
 </resources>

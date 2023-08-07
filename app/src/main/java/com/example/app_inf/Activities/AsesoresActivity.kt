@@ -22,6 +22,11 @@ class AsesoresActivity : ComponentActivity() {
         val txtTelefonoAsesor = findViewById<TextView>(R.id.txt_telefono_Asesor)
         val txtHorarioAsesor = findViewById<TextView>(R.id.txt_horario_Asesor)
         val txtUniversidadAsesor = findViewById<TextView>(R.id.txt_universidad_asesor)
+        val btn_edit_Asesor = findViewById<Button>(R.id.btn_edit_Asesor)
+        btn_edit_Asesor.setOnClickListener {
+            val intent = Intent(this, EditarAsesorActivity::class.java)
+            startActivity(intent)
+        }
         val btn_add_Asesor = findViewById<Button>(R.id.btn_add_Asesor)
         btn_add_Asesor.setOnClickListener {
             val intent = Intent(this, AgregarAsesorActivity::class.java)
