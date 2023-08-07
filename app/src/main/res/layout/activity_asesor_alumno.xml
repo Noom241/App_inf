@@ -20,27 +20,27 @@
         android:layout_width="300dp"
         android:layout_height="70dp"
         app:layout_constraintBottom_toTopOf="@+id/asesor_bot_r"
-        app:layout_constraintStart_toEndOf="@id/asesor_top_l"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/asesor_top_l"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/asesor_bot_l"
         android:layout_width="300dp"
         android:layout_height="70dp"
-app:layout_constraintTop_toBottomOf="@id/asesor_top_l"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/asesor_bot_r"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/asesor_top_l" />
 
     <Spinner
         android:id="@+id/asesor_bot_r"
         android:layout_width="300dp"
         android:layout_height="70dp"
-        app:layout_constraintStart_toEndOf="@id/asesor_bot_l"
-        app:layout_constraintTop_toBottomOf="@id/asesor_top_r"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/asesor_bot_l"
+        app:layout_constraintTop_toBottomOf="@id/asesor_top_r" />
 
     <Button
         android:id="@+id/btn_finalizar"
@@ -58,10 +58,10 @@ app:layout_constraintTop_toBottomOf="@id/asesor_top_l"
         android:id="@+id/day_0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="55dp"
-        android:layout_marginEnd="323dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="128dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="279dp"
+        android:layout_marginBottom="15dp"
         android:scaleX="5"
         android:scaleY="5"
         android:text="@string/none_value"
