@@ -67,4 +67,9 @@
     <string name="btn_back_alumno2"><![CDATA[< Atrás]]></string>
     <string name="btn_add_alumno_finish">Agregar</string>
     <string name="btn_back_alumno"><![CDATA[< Atrás]]></string>
+    <string name="actualizar_edit_btn">Actualizar</string>
+    <string name="nombre_edit_asesor">Nombre</string>
+    <string name="telf_edit_asesor">Telédono</string>
+    <string name="univ_edit_asesor">Universidad</string>
+    <string name="horario_edit_asesor">Horario</string>
 </resources>

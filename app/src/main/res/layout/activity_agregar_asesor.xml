@@ -1,66 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<HorizontalScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activities.AgregarAsesorActivity">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/rd_nombre_asesor"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:hint="@string/rd_name_asesor"
         android:textSize="18sp"
+        app:layout_constraintWidth="0dp"
         app:layout_constraintBottom_toTopOf="@id/rd_telefono_asesor"
         app:layout_constraintEnd_toEndOf="parent"
-
+        app:layout_constraintStart_toStartOf="@+id/guideline12"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.18">
+        >
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="300dp"
-            android:layout_height="50dp" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="#546E7A"
+            tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/rd_telefono_asesor"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:hint="@string/rd_telf_asesor"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@id/rd_univ_asesor"
         app:layout_constraintEnd_toEndOf="parent"
-
+        app:layout_constraintStart_toStartOf="@+id/guideline12"
         app:layout_constraintTop_toBottomOf="@id/rd_nombre_asesor"
-        app:layout_constraintVertical_bias="0.09">
+        app:layout_constraintWidth="0dp" >
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="300dp"
-            android:layout_height="50dp" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="#546E7A"
+            tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/rd_univ_asesor"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:hint="@string/rd_univ_asesor"
+        app:layout_constraintWidth="0dp"
         android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@id/chk_miercoles"
         app:layout_constraintEnd_toEndOf="parent"
-
+        app:layout_constraintStart_toStartOf="@+id/guideline12"
         app:layout_constraintTop_toBottomOf="@id/rd_telefono_asesor">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="300dp"
-            android:layout_height="50dp" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="#546E7A"
+            tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -69,7 +76,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.7751938" />
+        app:layout_constraintGuide_percent="0.8" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.35" />
 
     <Button
         android:id="@+id/btn_add_Asesor2"
@@ -77,34 +91,18 @@
         android:layout_height="54dp"
         android:text="@string/btn_add_asesor"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btn_cancel_asesor"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline6"
-        tools:layout_editor_absoluteX="162dp"
-        tools:layout_editor_absoluteY="309dp" />
-
-    <Button
-        android:id="@+id/btn_cancel_asesor"
-        android:layout_width="143dp"
-        android:layout_height="56dp"
-        android:text="@string/btn_cancel_asesor"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/btn_add_Asesor2"
-        app:layout_constraintTop_toBottomOf="@id/guideline6"
-        tools:layout_editor_absoluteX="396dp"
-        tools:layout_editor_absoluteY="309dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline6" />
 
     <TextView
         android:id="@+id/lbl_nombre_Asesor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="32dp"
-        android:scaleX="2"
-        android:scaleY="2"
         android:text="@string/nombre_lbl_asesor"
-        app:layout_constraintEnd_toStartOf="@+id/rd_nombre_asesor"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/lbl_telefono_asesor"
+        app:layout_constraintEnd_toStartOf="@+id/guideline12"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -112,95 +110,89 @@
         android:id="@+id/lbl_telefono_asesor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="100dp"
-        android:scaleX="2"
-        android:scaleY="2"
         android:text="@string/telefono_label_asesor"
-        app:layout_constraintEnd_toStartOf="@+id/rd_telefono_asesor"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/lbl_universidad_Asesor"
+        app:layout_constraintEnd_toStartOf="@+id/guideline12"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/lbl_nombre_Asesor" />
 
     <TextView
         android:id="@+id/lbl_universidad_Asesor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="172dp"
-        android:scaleX="2"
-        android:scaleY="2"
         android:text="@string/universidad_label_asesor"
-        app:layout_constraintEnd_toStartOf="@+id/rd_univ_asesor"
-        app:layout_constraintHorizontal_bias="0.545"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/lbl_horario_Asesor"
+        app:layout_constraintEnd_toStartOf="@+id/guideline12"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/lbl_telefono_asesor" />
 
     <TextView
         android:id="@+id/lbl_horario_Asesor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="168dp"
-        android:layout_marginTop="240dp"
         android:text="@string/horario_lbl_asesor"
         android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline6"
+        app:layout_constraintEnd_toStartOf="@+id/guideline12"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/lbl_universidad_Asesor" />
 
     <CheckBox
         android:id="@+id/chk_lunes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="105dp"
         android:text="@string/lunes"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/guideline6"
         app:layout_constraintEnd_toStartOf="@+id/chk_martes"
+        app:layout_constraintStart_toStartOf="@+id/guideline12"
         app:layout_constraintTop_toBottomOf="@+id/rd_univ_asesor"
-        app:layout_constraintVertical_bias="0.925" />
+        />
 
     <CheckBox
         android:id="@+id/chk_viernes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="106dp"
         android:text="@string/viernes"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/guideline6"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/chk_jueves"
         app:layout_constraintTop_toBottomOf="@+id/rd_univ_asesor"
-        app:layout_constraintVertical_bias="0.961" />
+        app:layout_constraintVertical_bias="0.516" />
 
     <CheckBox
         android:id="@+id/chk_jueves"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="105dp"
         android:text="@string/jueves"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/chk_miercoles"
+        app:layout_constraintBottom_toBottomOf="@id/guideline6"
         app:layout_constraintEnd_toStartOf="@+id/chk_viernes"
         app:layout_constraintTop_toBottomOf="@+id/rd_univ_asesor"
-        app:layout_constraintVertical_bias="0.925" />
+        />
 
     <CheckBox
         android:id="@+id/chk_miercoles"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="105dp"
         android:text="@string/miercoles"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/chk_martes"
+        app:layout_constraintBottom_toBottomOf="@id/guideline6"
         app:layout_constraintEnd_toStartOf="@+id/chk_jueves"
         app:layout_constraintTop_toBottomOf="@+id/rd_univ_asesor"
-        app:layout_constraintVertical_bias="0.925" />
+        />
 
     <CheckBox
         android:id="@+id/chk_martes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="104dp"
         android:text="@string/martes"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/chk_lunes"
+        app:layout_constraintBottom_toBottomOf="@id/guideline6"
         app:layout_constraintEnd_toStartOf="@+id/chk_miercoles"
         app:layout_constraintTop_toBottomOf="@+id/rd_univ_asesor"
-        app:layout_constraintVertical_bias="0.928" />
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</HorizontalScrollView>
