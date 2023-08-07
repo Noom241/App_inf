@@ -403,4 +403,24 @@ public class MySQLConnection {
     }
 
 
+    public static List<String> obtenerProfesoresDisponibles(String dia, int horarioElegido) {
+        List<String> nombresProfesores = new ArrayList<>();
+        try (Connection connection = getConnection()) {
+            String storedProcedureCall = "{ CALL ObtenerProfesoresDisponibles(?, ?) }";
+            try (PreparedStatement statement = connection.prepareCall(storedProcedureCall)) {
+                statement.setString(1, dia);
+                statement.setInt(2, horarioElegido);
+                ResultSet resultSet = statement.executeQuery();
+                while (resultSet.next()) {
+                    String nombreProfesor = resultSet.getString("Nombre");
+                    nombresProfesores.add(nombreProfesor);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return nombresProfesores;
+    }
+
+
 }
