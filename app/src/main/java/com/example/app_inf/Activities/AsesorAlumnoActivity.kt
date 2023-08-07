@@ -2,20 +2,24 @@ package com.example.app_inf.Activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.TextView
-import android.widget.Toast
 import com.example.app_inf.R
+import MySQLConnection
+import MySQLConnection.obtenerProfesoresDisponibles
+import android.os.AsyncTask
+import android.widget.Button
 
 class AsesorAlumnoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_asesor_alumno)
 
-        val selected_values = intent.getStringExtra("selected_values")
-        val horario_hora = intent.getStringExtra("horario_hora")
+        val selectedValues = intent.getStringExtra("selected_values")
+        val horarioHora = intent.getStringExtra("horario_hora").toString()
 
-        val sortedValues = sortValues(selected_values)
+        val sortedValues = sortValues(selectedValues)
         val valoresArray = sortedValues.split(",")
 
         val dayTextViews = arrayOf(
@@ -25,19 +29,48 @@ class AsesorAlumnoActivity : AppCompatActivity() {
             findViewById<TextView>(R.id.day_3)
         )
 
-        for (i in dayTextViews.indices) {
-            dayTextViews[i].text = if (valoresArray.size > i) valoresArray[i] else "-----"
+        dayTextViews.forEachIndexed { i, textView ->
+            textView.text = valoresArray.getOrNull(i) ?: "-----"
         }
 
-        //Lista de Asesores dependiendo findViewById<TextView>(R.id.day_x)
+        val diaTextViews = arrayOf(
+            findViewById<Spinner>(R.id.asesor_top_l),
+            findViewById<Spinner>(R.id.asesor_top_r),
+            findViewById<Spinner>(R.id.asesor_bot_l),
+            findViewById<Spinner>(R.id.asesor_bot_r)
+        )
 
-
-
+        diaTextViews.forEachIndexed { i, spinner ->
+            val dia = dayTextViews[i].text.toString()
+            FetchProfesoresTask(dia, horarioHora, spinner).execute()
+        }
 
         val btnFinalizar = findViewById<Button>(R.id.btn_finalizar)
         btnFinalizar.setOnClickListener {
-            val toastMessage = sortedValues
-            Toast.makeText(this, toastMessage, Toast.LENGTH_SHORT).show()
+            // Agregar aquí el código para manejar el evento del botón
+        }
+    }
+
+    private inner class FetchProfesoresTask(
+        private val dia: String,
+        private val horarioHora: String?,
+        private val spinner: Spinner
+    ) : AsyncTask<Void, Void, List<String>>() {
+
+        override fun doInBackground(vararg params: Void): List<String> {
+            val horarioInt = horarioHora?.toIntOrNull() ?: 0
+            return obtenerProfesoresDisponibles(dia, horarioInt)
+        }
+
+        override fun onPostExecute(result: List<String>) {
+            super.onPostExecute(result)
+            val adapter = ArrayAdapter(
+                this@AsesorAlumnoActivity,
+                android.R.layout.simple_spinner_item,
+                result
+            )
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinner.adapter = adapter
         }
     }
 
@@ -52,11 +85,11 @@ class AsesorAlumnoActivity : AppCompatActivity() {
             "Domingo" to 7
         )
 
-        val values = input?.split(",")?.toMutableList() ?: mutableListOf()
-        values.removeAll(listOf("", "-----")) // Remove empty and placeholder values
-        values.sortWith(compareBy { dayOrder[it] }) // Sort using the custom dayOrder
-
-        return values.joinToString(",")
+        return input
+            ?.split(",")
+            ?.filterNot { it.isEmpty() || it == "-----" }
+            ?.sortedBy { dayOrder[it] }
+            ?.joinToString(",")
+            ?: ""
     }
-
 }
