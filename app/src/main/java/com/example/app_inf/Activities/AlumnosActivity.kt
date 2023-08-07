@@ -26,6 +26,11 @@ class AlumnosActivity : ComponentActivity() {
         val txtModalidadAlumno = findViewById<TextView>(R.id.txt_modalidad_alumno)
         val txtHorarioAlumno = findViewById<TextView>(R.id.txt_horario_alumno)
         val txtPaqueteAlumno = findViewById<TextView>(R.id.txt_paquete_alumno)
+        val btn_edit_Alumno = findViewById<Button>(R.id.btn_edit_Alumno)
+        btn_edit_Alumno.setOnClickListener {
+            val intent = Intent(this, EditarAlumnoActivity::class.java)
+            startActivity(intent)
+        }
         val btn_add_Alumno = findViewById<Button>(R.id.btn_add_Alumno)
         btn_add_Alumno.setOnClickListener {
             val intent = Intent(this, AgregarAlumnoActivity::class.java)

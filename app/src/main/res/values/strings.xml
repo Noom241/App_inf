@@ -81,4 +81,12 @@
     <string name="jueves_chk_edit_asesor">Jueves</string>
     <string name="viernes_chk_edit_asesor">Viernes</string>
     <string name="buscar_edit_asesor">Buscar</string>
+    <string name="buscar_edit_alumno">Buscar</string>
+    <string name="nombre_edit_alumno">Nombre del alumno</string>
+    <string name="apoderado_edit_alumno">Nombre del Apoderado</string>
+    <string name="telf_edit_alumno">Teléfono del Apoderado</string>
+    <string name="colegio_edit_alumno">Colegio del alumno</string>
+    <string name="nombre_edit_asesor_rd">Nombre del asesor</string>
+    <string name="telf_edit_asesor_rd">Teléfono del asesor</string>
+    <string name="univ_edit_asesor_rd">Universidad del asesor</string>
 </resources>

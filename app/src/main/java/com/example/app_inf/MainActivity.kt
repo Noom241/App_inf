@@ -8,6 +8,7 @@ import android.widget.Button
 import androidx.activity.ComponentActivity
 import com.example.app_inf.Activities.AlumnosActivity
 import com.example.app_inf.Activities.AsesoresActivity
+import com.example.app_inf.Activities.AsistenciaActivity
 
 class MainActivity : ComponentActivity() {
 
@@ -16,6 +17,11 @@ class MainActivity : ComponentActivity() {
         setContentView(R.layout.main_activity)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         val btnAsesores = findViewById<Button>(R.id.btnAsesores)
+        val btnAsistencia = findViewById<Button>(R.id.btnAsistencia)
+        btnAsistencia.setOnClickListener {
+            val intent = Intent(this, AsistenciaActivity::class.java)
+            startActivity(intent)
+        }
         val btnAlumnos = findViewById<Button>(R.id.btnAlumnos)
         btnAsesores.setOnClickListener {
             val intent = Intent(this, AsesoresActivity::class.java)

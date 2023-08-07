@@ -6,4 +6,118 @@
     android:layout_height="match_parent"
     tools:context=".Activities.EditarAlumnoActivity">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.02" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.98" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <AutoCompleteTextView
+        android:id="@+id/autoCompleteTextView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:text="@string/buscar_edit_alumno"
+        app:layout_constraintBottom_toTopOf="@+id/guideline21"
+        app:layout_constraintEnd_toStartOf="@+id/guideline20"
+        app:layout_constraintStart_toStartOf="@+id/guideline19"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth="0dp"
+        tools:ignore="LabelFor,VisualLintTextFieldSize" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <TextView
+        android:id="@+id/txt_edit_nombre_alumno"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/nombre_edit_alumno"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@+id/txt_edit_apoderado"
+        app:layout_constraintEnd_toStartOf="@+id/guideline22"
+        app:layout_constraintStart_toStartOf="@+id/guideline19"
+        app:layout_constraintTop_toTopOf="@+id/guideline21" />
+
+    <TextView
+        android:id="@+id/txt_edit_apoderado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/apoderado_edit_alumno"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@id/txt_edit_telf_apod"
+        app:layout_constraintEnd_toStartOf="@+id/guideline22"
+        app:layout_constraintStart_toStartOf="@+id/guideline19"
+        app:layout_constraintTop_toBottomOf="@id/txt_edit_nombre_alumno"
+        />
+
+    <TextView
+        android:id="@+id/txt_edit_telf_apod"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/telf_edit_alumno"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@id/txt_edit_colegio_alumno"
+        app:layout_constraintEnd_toStartOf="@+id/guideline22"
+        app:layout_constraintStart_toStartOf="@+id/guideline19"
+        app:layout_constraintTop_toBottomOf="@+id/txt_edit_apoderado" />
+
+    <TextView
+        android:id="@+id/txt_edit_colegio_alumno"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/colegio_edit_alumno"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="@id/guideline23"
+        app:layout_constraintEnd_toStartOf="@+id/guideline22"
+        app:layout_constraintStart_toStartOf="@+id/guideline19"
+        app:layout_constraintTop_toBottomOf="@+id/txt_edit_telf_apod" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.85" />
+
+    <Spinner
+        android:id="@+id/spinner9"
+        android:layout_width="310dp"
+        android:layout_height="60dp"
+        tools:layout_editor_absoluteX="428dp"
+        tools:layout_editor_absoluteY="88dp" />
+
+    <Spinner
+        android:id="@+id/spinner10"
+        android:layout_width="330dp"
+        android:layout_height="60dp"
+        tools:layout_editor_absoluteX="408dp"
+        tools:layout_editor_absoluteY="177dp" />
+
+    <Spinner
+        android:id="@+id/spinner11"
+        android:layout_width="286dp"
+        android:layout_height="56dp"
+        tools:layout_editor_absoluteX="442dp"
+        tools:layout_editor_absoluteY="268dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
