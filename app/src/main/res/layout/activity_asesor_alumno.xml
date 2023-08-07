@@ -20,25 +20,52 @@
         android:layout_width="300dp"
         android:layout_height="70dp"
         app:layout_constraintBottom_toTopOf="@+id/spinner8"
-        app:layout_constraintStart_toEndOf="@id/spinner5"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/spinner5"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/spinner7"
         android:layout_width="300dp"
         android:layout_height="70dp"
-app:layout_constraintTop_toBottomOf="@id/spinner5"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/guideline11"
         app:layout_constraintEnd_toStartOf="@+id/spinner8"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spinner5" />
 
     <Spinner
         android:id="@+id/spinner8"
         android:layout_width="300dp"
         android:layout_height="70dp"
+        app:layout_constraintBottom_toBottomOf="@id/guideline11"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/spinner7"
-        app:layout_constraintTop_toBottomOf="@id/spinner6"
+        app:layout_constraintTop_toBottomOf="@id/spinner6" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.8" />
+
+    <Button
+        android:id="@+id/btn_back_alumno2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_back_alumno2"
+        app:layout_constraintEnd_toStartOf="@id/btn_Agregar"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline11" />
+
+    <Button
+        android:id="@+id/btn_Agregar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_add_alumno_finish"
+        app:layout_constraintStart_toEndOf="@id/btn_back_alumno2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline11" />
 </androidx.constraintlayout.widget.ConstraintLayout>

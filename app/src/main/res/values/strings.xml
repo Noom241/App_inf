@@ -64,4 +64,7 @@
     <string name="universidad_asesores_lbl">Universidad :</string>
     <string name="back_add_alumno"><![CDATA[< Atrás]]></string>
     <string name="next_add_alumno"><![CDATA[Siguiente >]]></string>
+    <string name="btn_back_alumno2"><![CDATA[< Atrás]]></string>
+    <string name="btn_add_alumno_finish">Agregar</string>
+    <string name="btn_back_alumno"><![CDATA[< Atrás]]></string>
 </resources>
