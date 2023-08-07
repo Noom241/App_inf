@@ -37,6 +37,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.05" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
@@ -56,12 +57,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/siguiente_add_alumno"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_back_alumno"
-        app:layout_constraintTop_toTopOf="@id/guideline_alumno_1"
-
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline_alumno_1" />
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -173,16 +173,6 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline7"
         app:layout_constraintStart_toStartOf="@+id/guideline_alumno_3"
         app:layout_constraintTop_toBottomOf="@id/spn_paquete_alumno" />
-
-    <Button
-        android:id="@+id/btn_back_alumno"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_back_alumno"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btn_next_alumno1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/guideline_alumno_1" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

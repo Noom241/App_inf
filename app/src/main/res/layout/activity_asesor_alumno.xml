@@ -50,22 +50,12 @@
         app:layout_constraintGuide_percent="0.8" />
 
     <Button
-        android:id="@+id/btn_back_alumno2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_back_alumno2"
-        app:layout_constraintEnd_toStartOf="@id/btn_Agregar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline11" />
-
-    <Button
         android:id="@+id/btn_Agregar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/btn_add_alumno_finish"
-        app:layout_constraintStart_toEndOf="@id/btn_back_alumno2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline11" />
 </androidx.constraintlayout.widget.ConstraintLayout>

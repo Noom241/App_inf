@@ -12,16 +12,11 @@ class AgregarAlumnoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_agregar_alumno)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
-        val btn_back_alumno = findViewById<Button>(R.id.btn_back_alumno)
-        btn_back_alumno.setOnClickListener {
-            val intent = Intent(this, AlumnosActivity::class.java)
-            startActivity(intent)
-        }
+
         val btn_next_alumno_1 = findViewById<Button>(R.id.btn_next_alumno1)
         btn_next_alumno_1.setOnClickListener {
             val intent = Intent(this, PaquetesActivity::class.java)
             startActivity(intent)
         }
-
     }
 }

@@ -12,10 +12,5 @@ class AsesorAlumnoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_asesor_alumno)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
-        val btn_back_alumno2 = findViewById<Button>(R.id.btn_back_alumno2)
-        btn_back_alumno2.setOnClickListener {
-            val intent = Intent(this, PaquetesActivity::class.java)
-            startActivity(intent)
     }
-}
 }
