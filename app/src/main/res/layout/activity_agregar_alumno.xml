@@ -65,7 +65,7 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/rd_colegio_alumno"
+        android:id="@+id/rd_colegio_alumno_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/rd_colegio_alumno"
@@ -73,11 +73,12 @@
         app:layout_constraintBottom_toTopOf="@id/guideline_alumno_1"
         app:layout_constraintEnd_toStartOf="@+id/guideline_alumno_3"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@id/rd_telf_alumno"
+        app:layout_constraintTop_toBottomOf="@id/rd_telf_alumno_layout"
 
         tools:ignore="VisualLintBounds">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/rd_colegio_alumno"
             android:layout_width="300dp"
             android:layout_height="35dp"
             android:textColorHint="#546E7A"
@@ -87,19 +88,21 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/rd_apod_alumno"
+        android:id="@+id/rd_apod_alumno_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
         android:hint="@string/rd_apod_alumno"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@id/rd_telf_alumno"
+        app:layout_constraintBottom_toTopOf="@id/rd_telf_alumno_layout"
         app:layout_constraintEnd_toStartOf="@+id/guideline_alumno_3"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@id/rd_nombre_alumno"
 
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@id/rd_apod_alumno_layout"
         tools:ignore="VisualLintBounds">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/rd_apod_alumno"
             android:layout_width="300dp"
             android:layout_height="35dp"
             android:textColorHint="#546E7A"
@@ -108,19 +111,20 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/rd_telf_alumno"
+        android:id="@+id/rd_telf_alumno_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/rd_telf_alumno"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@id/rd_colegio_alumno"
+        app:layout_constraintBottom_toTopOf="@+id/rd_colegio_alumno_layout"
         app:layout_constraintEnd_toStartOf="@+id/guideline_alumno_3"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@id/rd_apod_alumno"
+        app:layout_constraintTop_toBottomOf="@id/rd_apod_alumno_layout"
 
         >
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/rd_telf_alumno"
             android:layout_width="300dp"
             android:layout_height="35dp"
             android:textColorHint="#546E7A"
@@ -129,17 +133,18 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/rd_nombre_alumno"
+        android:id="@+id/rd_nombre_alumno_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/rd_nombre_alumno"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@id/rd_apod_alumno"
+        app:layout_constraintBottom_toTopOf="@id/rd_apod_alumno_layout"
         app:layout_constraintEnd_toStartOf="@+id/guideline_alumno_3"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="@+id/guideline_alumno_5">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/rd_nombre_alumno"
             android:layout_width="300dp"
             android:layout_height="35dp"
             android:textColorHint="#546E7A"

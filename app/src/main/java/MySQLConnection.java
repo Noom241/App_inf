@@ -31,7 +31,7 @@ public class MySQLConnection {
 
     public static boolean agregarAlumno(AlumnoData alumno) {
         try (Connection connection = getConnection()) {
-            String insertQuery = "INSERT INTO Estudiantes (Nombre, Apoderado, Telefono_apoderado, Colegio, Modalidad, Horario) VALUES (?, ?, ?, ?, ?, ?)";
+            String insertQuery = "INSERT INTO Estudiantes (Nombre, Apoderado, Telefono_apoderado, Colegio, Modalidad, Horario_elegido) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
             preparedStatement.setString(1, alumno.getNombre());
             preparedStatement.setString(2, alumno.getApoderado());
