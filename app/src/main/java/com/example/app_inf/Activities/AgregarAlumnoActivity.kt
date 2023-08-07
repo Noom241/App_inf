@@ -90,7 +90,9 @@ class AgregarAlumnoActivity : AppCompatActivity() {
             if (result) {
                 val intent = Intent(this@AgregarAlumnoActivity, PaquetesActivity::class.java)
                 val paquete_key = findViewById<Spinner>(R.id.spn_paquete_alumno).selectedItem.toString()
+                val horario_hora = findViewById<Spinner>(R.id.spn_horario_alumno).selectedItem.toString()
                 intent.putExtra("paquete_key", paquete_key)
+                intent.putExtra("horario_hora", horario_hora)
                 startActivity(intent)
             } else {
                 // Mostrar mensaje de error o tomar alguna acción en caso de fallo
