@@ -10,8 +10,11 @@ import MySQLConnection
 import MySQLConnection.obtenerProfesoresDisponibles
 import android.os.AsyncTask
 import android.widget.Button
+import androidx.activity.viewModels
+import com.example.app_inf.ViewModel.AsesorAlumnoViewModel
 
 class AsesorAlumnoActivity : AppCompatActivity() {
+    private val viewModel: AsesorAlumnoViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_asesor_alumno)
