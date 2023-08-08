@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout 
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         tools:ignore="MissingConstraints">
+
+        <!-- Agrega la vista para la línea verde encima de monthNameTextView -->
+        <View
+            android:id="@+id/greenLineView"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/holo_green_dark"
+            app:layout_constraintTop_toBottomOf="@id/monthNameTextView"/>
 
         <TextView
             android:id="@+id/monthNameTextView"
@@ -30,6 +41,13 @@
             android:layout_marginBottom="8dp"
             android:layout_gravity="center_horizontal"
             android:layout_weight="1"/>
+        <View
+            android:id="@+id/redLineView"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/holo_red_dark"
+            app:layout_constraintTop_toBottomOf="@id/daysGridLayout"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
