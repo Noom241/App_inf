@@ -51,11 +51,12 @@ class PaquetesActivity : AppCompatActivity() {
     }
 
     private fun setupButtonListeners() {
+        /*
         val btnBack = findViewById<Button>(R.id.btn_back_alumno1)
         btnBack.setOnClickListener {
             val intent = Intent(this, AgregarAlumnoActivity::class.java)
             startActivity(intent)
-        }
+        }*/
 
         val btnNext = findViewById<Button>(R.id.btn_next_alumno2)
         btnNext.setOnClickListener {
