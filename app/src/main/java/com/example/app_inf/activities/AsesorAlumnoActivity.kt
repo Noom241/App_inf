@@ -1,14 +1,11 @@
-package com.example.app_inf.Activities
+package com.example.app_inf.activities
 
-import android.content.Intent
-import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
 import com.example.app_inf.R
-import MySQLConnection
 import MySQLConnection.obtenerProfesoresDisponibles
 import android.os.AsyncTask
 import android.widget.Button

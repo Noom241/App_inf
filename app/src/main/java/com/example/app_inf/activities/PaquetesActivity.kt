@@ -1,4 +1,4 @@
-package com.example.app_inf.Activities
+package com.example.app_inf.activities
 
 import android.content.Intent
 import android.content.pm.ActivityInfo

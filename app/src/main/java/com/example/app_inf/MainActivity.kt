@@ -6,10 +6,10 @@ import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.widget.Button
 import androidx.activity.ComponentActivity
-import com.example.app_inf.Activities.AlumnosActivity
-import com.example.app_inf.Activities.AsesoresActivity
-import com.example.app_inf.Activities.AsistenciaActivity
-import com.example.app_inf.Activities.InformeActivity
+import com.example.app_inf.activities.AlumnosActivity
+import com.example.app_inf.activities.AsesoresActivity
+import com.example.app_inf.activities.AsistenciaActivity
+import com.example.app_inf.activities.InformeActivity
 
 class MainActivity : ComponentActivity() {
 

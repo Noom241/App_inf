@@ -29,37 +29,37 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.InformeActivity"
+            android:name=".activities.InformeActivity"
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".Activities.AsistenciaActivity"
+            android:name=".activities.AsistenciaActivity"
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".Activities.AsesorAlumnoActivity"
+            android:name=".activities.AsesorAlumnoActivity"
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".Activities.PaquetesActivity"
+            android:name=".activities.PaquetesActivity"
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".Activities.EditarAlumnoActivity"
+            android:name=".activities.EditarAlumnoActivity"
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".Activities.AgregarAlumnoActivity"
+            android:name=".activities.AgregarAlumnoActivity"
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".Activities.EditarAsesorActivity"
+            android:name=".activities.EditarAsesorActivity"
             android:exported="false"
             android:label="@string/title_activity_editar_asesor"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.App_inf" />
         <activity
-            android:name=".Activities.AgregarAsesorActivity"
+            android:name=".activities.AgregarAsesorActivity"
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
@@ -67,7 +67,7 @@
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".Activities.AlumnosActivity"
+            android:name=".activities.AlumnosActivity"
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
@@ -75,7 +75,7 @@
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".Activities.AsesoresActivity"
+            android:name=".activities.AsesoresActivity"
             android:exported="true"
             android:screenOrientation="landscape" />
         <activity

@@ -17,7 +17,6 @@
             android:id="@+id/greenLineView"
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:layout_marginTop="8dp"
             android:background="@android:color/holo_green_dark"
             app:layout_constraintTop_toBottomOf="@id/monthNameTextView"/>
 
@@ -37,15 +36,12 @@
             android:layout_height="wrap_content"
             android:columnCount="7"
             android:rowCount="6"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
             android:layout_gravity="center_horizontal"
             android:layout_weight="1"/>
         <View
             android:id="@+id/redLineView"
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:layout_marginTop="8dp"
             android:background="@android:color/holo_red_dark"
             app:layout_constraintTop_toBottomOf="@id/daysGridLayout"/>
     </LinearLayout>

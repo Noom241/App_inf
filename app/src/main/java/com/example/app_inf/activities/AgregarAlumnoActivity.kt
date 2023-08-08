@@ -1,4 +1,4 @@
-package com.example.app_inf.Activities
+package com.example.app_inf.activities
 
 import android.content.Intent
 import android.content.pm.ActivityInfo
@@ -9,7 +9,6 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
-import com.example.app_inf.Activities.PaquetesActivity
 import com.example.app_inf.R
 import com.example.app_inf.data.AlumnoData
 import java.sql.SQLException

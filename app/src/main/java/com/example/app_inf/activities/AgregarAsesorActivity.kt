@@ -1,4 +1,4 @@
-package com.example.app_inf.Activities
+package com.example.app_inf.activities
 
 import android.os.AsyncTask
 import android.os.Bundle
@@ -12,7 +12,6 @@ import com.example.app_inf.data.AsesorData
 import java.sql.SQLException
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
-import java.util.Date
 
 class AgregarAsesorActivity : AppCompatActivity() {
 
