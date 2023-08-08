@@ -79,6 +79,7 @@ class PaquetesActivity : AppCompatActivity() {
                     val intent = Intent(this, AsesorAlumnoActivity::class.java)
                     intent.putExtra("horario_hora", intent.getStringExtra("horario_hora"))
                     intent.putExtra("selected_values", selectedValuesString)
+                    intent.putExtra("paquete_key", variableString)
                     startActivity(intent)
                 } else {
                     val errorMessage = "No se pueden repetir días."

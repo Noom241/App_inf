@@ -17,9 +17,16 @@ import com.example.app_inf.ViewModel.AsesorAlumnoViewModel
 
 class AsesorAlumnoActivity : AppCompatActivity() {
     private val viewModel: AsesorAlumnoViewModel by viewModels()
+    private lateinit var day_0: Spinner
+    private lateinit var day_1: Spinner
+    private lateinit var day_2: Spinner
+    private lateinit var day_3: Spinner
+    private lateinit var variableString: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_asesor_alumno)
+        initializeViews()
+        setupSpinnerState(variableString)
 
         val selectedValues = intent.getStringExtra("selected_values")
         val horarioHora = intent.getStringExtra("horario_hora").toString()
@@ -96,5 +103,29 @@ class AsesorAlumnoActivity : AppCompatActivity() {
             ?.sortedBy { dayOrder[it] }
             ?.joinToString(",")
             ?: ""
+    }
+    private fun setupSpinnerState(input: String?) {
+        when (input) {
+            "A" -> {
+                day_2.isEnabled = false
+                day_3.isEnabled = false
+                //day_2.setSelection(5)
+                //day_3.setSelection(5)
+            }
+            "B" -> {
+                day_3.isEnabled = false
+                //spinner4.setSelection(5)
+            }
+            // "C" case doesn't require any special setup
+        }
+    }
+    private fun initializeViews() {
+        val paquete_key = intent.getStringExtra("paquete_key")
+        variableString = paquete_key ?: ""
+
+        day_0 = findViewById(R.id.asesor_top_l)
+        day_1 = findViewById(R.id.asesor_top_r)
+        day_2 = findViewById(R.id.asesor_bot_l)
+        day_3 = findViewById(R.id.asesor_bot_r)
     }
 }
