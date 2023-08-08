@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
@@ -17,19 +18,38 @@ class CalendarioActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calendario)
 
-        val recyclerView: RecyclerView = findViewById(R.id.monthRecyclerView)
         val monthNames = resources.getStringArray(R.array.month_names)
 
-
-        setupMonthRecyclerView(recyclerView, monthNames)
+        setupMonthContainer(R.id.row1, 0, monthNames)
+        setupMonthContainer(R.id.row2, 3, monthNames)
+        setupMonthContainer(R.id.row3, 6, monthNames)
+        setupMonthContainer(R.id.row4, 9, monthNames)
+        setupMonthContainer(R.id.row5, 0, monthNames)
+        setupMonthContainer(R.id.row6, 3, monthNames)
+        setupMonthContainer(R.id.row7, 6, monthNames)
+        setupMonthContainer(R.id.row8, 9, monthNames)
+        setupMonthContainer(R.id.row9, 0, monthNames)
+        setupMonthContainer(R.id.row10, 3, monthNames)
+        setupMonthContainer(R.id.row11, 6, monthNames)
+        setupMonthContainer(R.id.row12, 9, monthNames)
     }
-    private fun setupMonthRecyclerView(recyclerView: RecyclerView, monthNames: Array<String>) {
-        recyclerView.apply {
-            layoutManager = GridLayoutManager(this@CalendarioActivity, 3)
-            adapter = MonthAdapter(monthNames)
+
+    private fun setupMonthContainer(containerId: Int, startIndex: Int, monthNames: Array<String>) {
+        val container: LinearLayout = findViewById(containerId)
+        for (i in startIndex until startIndex + 3) {
+            val monthIndex = i % 12
+            val monthName = monthNames[monthIndex]
+            val monthView = LayoutInflater.from(this).inflate(R.layout.item_month, container, false)
+            container.addView(monthView)
+            val monthViewHolder = MonthAdapter.MonthViewHolder(monthView)
+            monthViewHolder.bind(monthName, monthIndex + 1)
         }
     }
 }
+
+// Rest of the code remains the same
+
+
 
 class MonthAdapter(private val monthNames: Array<String>) :
     RecyclerView.Adapter<MonthAdapter.MonthViewHolder>() {
@@ -41,11 +61,12 @@ class MonthAdapter(private val monthNames: Array<String>) :
     }
 
     override fun onBindViewHolder(holder: MonthViewHolder, position: Int) {
-        val monthName = monthNames[position]
-        holder.bind(monthName, position + 1)
+        val monthIndex = position % 12
+        val monthName = monthNames[monthIndex]
+        holder.bind(monthName, monthIndex + 1)
     }
 
-    override fun getItemCount(): Int = monthNames.size
+    override fun getItemCount(): Int = monthNames.size * 4 // 4 containers with 3 months each
 
     class MonthViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val daysGridLayout: ViewGroup = itemView.findViewById(R.id.daysGridLayout)
