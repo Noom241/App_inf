@@ -58,7 +58,7 @@ class MonthAdapter(private val monthNames: Array<String>) :
                 val calendar = Calendar.getInstance()
                 val currentYear = calendar.get(Calendar.YEAR)
                 val daysInMonth = getDaysInMonth(currentYear, monthNumber)
-                val dayOfWeekFirstDay = getDayOfWeek(currentYear, monthNumber, 1)
+                val dayOfWeekFirstDay = getDayOfWeek(currentYear, monthNumber)
 
                 populateCalendarGrid(daysGridLayout, dayOfWeekFirstDay, daysInMonth)
             }
@@ -80,11 +80,12 @@ class MonthAdapter(private val monthNames: Array<String>) :
             }
         }
 
-        private fun getDayOfWeek(year: Int, month: Int, day: Int): Int {
+        private fun getDayOfWeek(year: Int, month: Int): Int {
             val calendar = Calendar.getInstance()
-            calendar.set(year, month - 1, day)
+            calendar.set(year, month - 1, 1) // Establece el primer día del mes
             return (calendar.get(Calendar.DAY_OF_WEEK) + 5) % 7 // Ajustar para que el domingo sea 0
         }
+
 
 
 
