@@ -42,7 +42,7 @@ class AsesorAlumnoActivity : AppCompatActivity() {
         )
 
         dayTextViews.forEachIndexed { i, textView ->
-            textView.text = valoresArray.getOrNull(i) ?: "-----"
+            textView.text = valoresArray.getOrNull(i) ?: ""
         }
 
         val diaTextViews = arrayOf(
