@@ -19,6 +19,9 @@ class CalendarioActivity : AppCompatActivity() {
         val recyclerView: RecyclerView = findViewById(R.id.monthRecyclerView)
         val monthNames = resources.getStringArray(R.array.month_names)
 
+        setupMonthRecyclerView(recyclerView, monthNames)
+    }
+    private fun setupMonthRecyclerView(recyclerView: RecyclerView, monthNames: Array<String>) {
         recyclerView.apply {
             layoutManager = GridLayoutManager(this@CalendarioActivity, 3)
             adapter = MonthAdapter(monthNames)
@@ -30,7 +33,8 @@ class MonthAdapter(private val monthNames: Array<String>) :
     RecyclerView.Adapter<MonthAdapter.MonthViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MonthViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_month, parent, false)
+        val itemView = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_month, parent, false)
         return MonthViewHolder(itemView)
     }
 
@@ -43,22 +47,24 @@ class MonthAdapter(private val monthNames: Array<String>) :
 
     class MonthViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val daysGridLayout: ViewGroup = itemView.findViewById(R.id.daysGridLayout)
+        private val dayHeaders = itemView.resources.getStringArray(R.array.day_headers)
         fun bind(monthName: String, monthNumber: Int) {
             itemView.apply {
                 findViewById<TextView>(R.id.monthNameTextView).text = monthName
 
-                daysGridLayout.removeAllViews() // Clear any existing views
-                val dayHeaders = resources.getStringArray(R.array.day_headers)
-
-                for (header in dayHeaders) {
-                    val headerView = createHeaderView(header)
-                    daysGridLayout.addView(headerView)
-                }
-
+                setupDayHeaders()
                 val daysInMonth = getDaysInMonth(2023, monthNumber)
                 val dayOfWeekFirstDay = getDayOfWeek(2023, monthNumber, 1)
 
                 populateCalendarGrid(daysGridLayout, dayOfWeekFirstDay, daysInMonth)
+            }
+        }
+
+        private fun setupDayHeaders() {
+            daysGridLayout.removeAllViews()
+            for (header in dayHeaders) {
+                val headerView = createHeaderView(header)
+                daysGridLayout.addView(headerView)
             }
         }
 
