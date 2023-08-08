@@ -15,6 +15,9 @@
         android:theme="@style/Theme.App_inf"
         tools:targetApi="31">
         <activity
+            android:name=".Activities.CalendarioActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.InformeActivity"
             android:exported="false"
             android:screenOrientation="landscape" />
@@ -42,8 +45,8 @@
             android:name=".Activities.EditarAsesorActivity"
             android:exported="false"
             android:label="@string/title_activity_editar_asesor"
-            android:theme="@style/Theme.App_inf"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.App_inf" />
         <activity
             android:name=".Activities.AgregarAsesorActivity"
             android:exported="false"
