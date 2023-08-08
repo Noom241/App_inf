@@ -1,11 +1,9 @@
 package com.example.app_inf.Activities
-import android.graphics.Color
+
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.GridLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
@@ -18,11 +16,13 @@ class CalendarioActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calendario)
 
-        val recyclerView = findViewById<RecyclerView>(R.id.monthRecyclerView)
-        val monthNames = arrayOf("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre")
+        val recyclerView: RecyclerView = findViewById(R.id.monthRecyclerView)
+        val monthNames = resources.getStringArray(R.array.month_names)
 
-        recyclerView.layoutManager = GridLayoutManager(this, 4) // 4 columnas para los meses
-        recyclerView.adapter = MonthAdapter(monthNames)
+        recyclerView.apply {
+            layoutManager = GridLayoutManager(this@CalendarioActivity, 4)
+            adapter = MonthAdapter(monthNames)
+        }
     }
 }
 
@@ -39,48 +39,26 @@ class MonthAdapter(private val monthNames: Array<String>) :
         holder.bind(monthName, position + 1)
     }
 
-    override fun getItemCount(): Int {
-        return monthNames.size
-    }
+    override fun getItemCount(): Int = monthNames.size
 
     class MonthViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(monthName: String, monthNumber: Int) {
-            val monthNameTextView = itemView.findViewById<TextView>(R.id.monthNameTextView)
-            monthNameTextView.text = monthName
+            itemView.apply {
+                findViewById<TextView>(R.id.monthNameTextView).text = monthName
 
-            val daysGridLayout = itemView.findViewById<GridLayout>(R.id.daysGridLayout)
-            val dayHeaders = arrayOf("Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom") // Cambio aquí
+                val daysGridLayout = findViewById<ViewGroup>(R.id.daysGridLayout)
+                val dayHeaders = resources.getStringArray(R.array.day_headers)
 
-            for (header in dayHeaders) {
-                val headerView = TextView(itemView.context)
-                headerView.text = header
-                headerView.gravity = Gravity.CENTER
-                daysGridLayout.addView(headerView)
-            }
-
-            val daysInMonth = getDaysInMonth(2023, monthNumber)
-            val dayOfWeekFirstDay = getDayOfWeek(2023, monthNumber, 1)
-
-            var dayCounter = 1
-            for (row in 0 until 5) {
-                for (col in 0 until 7) {
-                    if ((row == 0 && col < dayOfWeekFirstDay) || dayCounter > daysInMonth) {
-                        daysGridLayout.addView(TextView(itemView.context)) // Agregar celdas vacías
-                    } else {
-                        val dayView = TextView(itemView.context)
-                        dayView.text = dayCounter.toString()
-                        dayView.gravity = Gravity.CENTER
-                        daysGridLayout.addView(dayView)
-                        dayCounter++
-                    }
+                for (header in dayHeaders) {
+                    val headerView = createHeaderView(header)
+                    daysGridLayout.addView(headerView)
                 }
-            }
-        }
 
-        private fun getDayOfWeek(year: Int, month: Int, day: Int): Int {
-            val calendar = Calendar.getInstance()
-            calendar.set(year, month - 1, day)
-            return (calendar.get(Calendar.DAY_OF_WEEK) + 5) % 7 // Ajustar para que el domingo sea 0
+                val daysInMonth = getDaysInMonth(2023, monthNumber)
+                val dayOfWeekFirstDay = getDayOfWeek(2023, monthNumber, 1)
+
+                populateCalendarGrid(daysGridLayout, dayOfWeekFirstDay, daysInMonth)
+            }
         }
 
         private fun getDaysInMonth(year: Int, month: Int): Int {
@@ -90,8 +68,46 @@ class MonthAdapter(private val monthNames: Array<String>) :
                 else -> 31
             }
         }
+
+        private fun getDayOfWeek(year: Int, month: Int, day: Int): Int {
+            val calendar = Calendar.getInstance()
+            calendar.set(year, month - 1, day)
+            return (calendar.get(Calendar.DAY_OF_WEEK) + 5) % 7 // Ajustar para que el domingo sea 0
+        }
+
+
+
+        private fun createHeaderView(headerText: String): TextView {
+            return TextView(itemView.context).apply {
+                text = headerText
+                gravity = View.TEXT_ALIGNMENT_CENTER
+            }
+        }
+
+        private fun populateCalendarGrid(daysGridLayout: ViewGroup, startDayOfWeek: Int, daysInMonth: Int) {
+            val emptyCellCount = (startDayOfWeek + 6) % 7
+            val totalCells = 35 // 5 rows of 7 days
+
+            for (day in 1..totalCells) {
+                val dayView = createDayView(day, emptyCellCount, daysInMonth)
+                daysGridLayout.addView(dayView)
+            }
+        }
+
+        private fun createDayView(day: Int, emptyCellCount: Int, daysInMonth: Int): TextView {
+            val dayView = TextView(itemView.context).apply {
+                gravity = View.TEXT_ALIGNMENT_CENTER
+            }
+
+            if (day <= emptyCellCount || day > daysInMonth + emptyCellCount) {
+                dayView.text = ""
+            } else {
+                dayView.text = (day - emptyCellCount).toString()
+            }
+
+            return dayView
+        }
+
+        // Rest of the code remains the same
     }
 }
-
-
-
