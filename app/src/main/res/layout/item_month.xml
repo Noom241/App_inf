@@ -25,7 +25,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:columnCount="7"
-            android:rowCount="6"/>
+            android:rowCount="6"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

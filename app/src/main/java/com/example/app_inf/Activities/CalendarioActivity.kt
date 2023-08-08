@@ -20,7 +20,7 @@ class CalendarioActivity : AppCompatActivity() {
         val monthNames = resources.getStringArray(R.array.month_names)
 
         recyclerView.apply {
-            layoutManager = GridLayoutManager(this@CalendarioActivity, 4)
+            layoutManager = GridLayoutManager(this@CalendarioActivity, 3)
             adapter = MonthAdapter(monthNames)
         }
     }
@@ -42,11 +42,12 @@ class MonthAdapter(private val monthNames: Array<String>) :
     override fun getItemCount(): Int = monthNames.size
 
     class MonthViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val daysGridLayout: ViewGroup = itemView.findViewById(R.id.daysGridLayout)
         fun bind(monthName: String, monthNumber: Int) {
             itemView.apply {
                 findViewById<TextView>(R.id.monthNameTextView).text = monthName
 
-                val daysGridLayout = findViewById<ViewGroup>(R.id.daysGridLayout)
+                daysGridLayout.removeAllViews() // Clear any existing views
                 val dayHeaders = resources.getStringArray(R.array.day_headers)
 
                 for (header in dayHeaders) {
@@ -86,7 +87,7 @@ class MonthAdapter(private val monthNames: Array<String>) :
 
         private fun populateCalendarGrid(daysGridLayout: ViewGroup, startDayOfWeek: Int, daysInMonth: Int) {
             val emptyCellCount = (startDayOfWeek + 6) % 7
-            val totalCells = 35 // 5 rows of 7 days
+            val totalCells = 42 // 5 rows of 7 days
 
             for (day in 1..totalCells) {
                 val dayView = createDayView(day, emptyCellCount, daysInMonth)
