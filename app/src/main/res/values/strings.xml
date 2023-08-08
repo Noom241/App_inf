@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Refuerzo Mejora</string>
+    <string name="app_name">Refuerzo Mejoraf</string>
     <string name="alumnos">Alumnos</string>
     <string name="asesores">Asesores</string>
     <string name="asistencia">Asistencia</string>
@@ -25,7 +25,7 @@
     <string name="telefono_add_lbl">Teléfono:</string>
     <string name="universidad_add_lbl">Universidad:</string>
     <string name="btn_add_asesor">Añadir</string>
-    <string name="btn_cancel_asesor">Cancelar</string>
+    <string name="btn_cancel_asesor">Finalizar</string>
     <string name="rd_horario_asesor">Escribe el horario del asesor</string>
     <string name="rd_telf_asesor">Escribe el teléfono del asesor</string>
     <string name="rd_univ_asesor">Escribe la universidad del asesor</string>
