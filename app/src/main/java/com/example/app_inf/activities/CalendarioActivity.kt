@@ -12,12 +12,14 @@ import com.example.app_inf.R
 import java.util.Calendar
 
 class CalendarioActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calendario)
 
         val recyclerView: RecyclerView = findViewById(R.id.monthRecyclerView)
         val monthNames = resources.getStringArray(R.array.month_names)
+
 
         setupMonthRecyclerView(recyclerView, monthNames)
     }
@@ -53,8 +55,10 @@ class MonthAdapter(private val monthNames: Array<String>) :
                 findViewById<TextView>(R.id.monthNameTextView).text = monthName
 
                 setupDayHeaders()
-                val daysInMonth = getDaysInMonth(2023, monthNumber)
-                val dayOfWeekFirstDay = getDayOfWeek(2023, monthNumber, 1)
+                val calendar = Calendar.getInstance()
+                val currentYear = calendar.get(Calendar.YEAR)
+                val daysInMonth = getDaysInMonth(currentYear, monthNumber)
+                val dayOfWeekFirstDay = getDayOfWeek(currentYear, monthNumber, 1)
 
                 populateCalendarGrid(daysGridLayout, dayOfWeekFirstDay, daysInMonth)
             }
