@@ -3,6 +3,7 @@ package com.example.app_inf.Activities
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.Gravity
+import android.widget.LinearLayout
 import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
@@ -32,6 +33,7 @@ class CalendarioActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calendario)
         val tableLayout = findViewById<TableLayout>(R.id.tl_month)
+        val monthNamesLayout = findViewById<LinearLayout>(R.id.month_names_layout)
 
         // Agregar días de la semana en la primera fila
         val rowDaysOfWeek = TableRow(this)
@@ -40,6 +42,12 @@ class CalendarioActivity : AppCompatActivity() {
             rowDaysOfWeek.addView(textView)
         }
         tableLayout.addView(rowDaysOfWeek)
+
+        val monthNames = arrayOf("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre")
+        for (monthName in monthNames) {
+            val monthTextView = createMonthTextView(monthName)
+            monthNamesLayout.addView(monthTextView)
+        }
 
         val calendar = Calendar.getInstance()
         calendar[Calendar.YEAR] = YEAR
@@ -99,6 +107,15 @@ class CalendarioActivity : AppCompatActivity() {
         return textView
     }
 
+    private fun createMonthTextView(text: String): TextView {
+        val textView = TextView(this)
+        textView.text = text
+        textView.gravity = Gravity.CENTER
+        textView.setBackgroundResource(R.drawable.cell_border)
+        textView.setPadding(8, 416, 8, 416)
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16F)
+        return textView
+    }
 
     private fun markAttendance(tableLayout: TableLayout) {
         for (fecha in fechasPrueba) {
@@ -113,7 +130,6 @@ class CalendarioActivity : AppCompatActivity() {
 
                 if(dayIndex == -1){
                     dayIndex = 6
-
                 }
                 else{
                     dayIndex = 5
@@ -125,5 +141,4 @@ class CalendarioActivity : AppCompatActivity() {
             textView.text = "Asistio"
         }
     }
-
 }
