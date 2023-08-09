@@ -1,0 +1,10 @@
+<!-- res/drawable/cell_border.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#00DA7676" /> <!-- Color de fondo de la celda -->
+    <corners android:radius="0dp" /> <!-- Radio de las esquinas -->
+    <stroke
+        android:color="#EC8989"
+        android:width="1dp">
+
+    </stroke>
+</shape>
