@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -88,10 +89,11 @@ class MonthAdapter(private val monthNames: Array<String>) :
         private fun setupDayHeaders() {
             daysGridLayout.removeAllViews()
             for (header in dayHeaders) {
-                val headerView = createHeaderView(header)
+                val headerView = createHeaderView("  $header  ") // Agregar espacios antes y después del nombre del día
                 daysGridLayout.addView(headerView)
             }
         }
+
 
         private fun getDaysInMonth(year: Int, month: Int): Int {
             return when (month) {
@@ -127,9 +129,14 @@ class MonthAdapter(private val monthNames: Array<String>) :
             }
         }
 
-        private fun createDayView(day: Int, emptyCellCount: Int, daysInMonth: Int): TextView {
+        private fun createDayView(day: Int, emptyCellCount: Int, daysInMonth: Int): FrameLayout {
+            val frameLayout = FrameLayout(itemView.context)
             val dayView = TextView(itemView.context).apply {
                 gravity = View.TEXT_ALIGNMENT_CENTER
+                layoutParams = ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT
+                )
             }
 
             if (day <= emptyCellCount || day > daysInMonth + emptyCellCount) {
@@ -138,8 +145,13 @@ class MonthAdapter(private val monthNames: Array<String>) :
                 dayView.text = (day - emptyCellCount).toString()
             }
 
-            return dayView
+            // Agregar el borde alrededor del valor
+            dayView.setBackgroundResource(R.drawable.day_border)
+            frameLayout.addView(dayView)
+
+            return frameLayout
         }
+
 
         // Rest of the code remains the same
     }

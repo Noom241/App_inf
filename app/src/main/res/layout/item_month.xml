@@ -12,18 +12,16 @@
         android:orientation="vertical"
         tools:ignore="MissingConstraints">
 
-        <!-- Agrega la vista para la línea verde encima de monthNameTextView -->
 
         <TextView
             android:id="@+id/monthNameTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:background="@android:color/darker_gray"
-            android:textColor="@android:color/white"
             android:textSize="18sp"
             android:padding="8dp"
             android:layout_marginBottom="4dp"
+            android:background="@drawable/grid_line"
             android:layout_marginTop="4dp"/>
 
         <GridLayout
@@ -33,6 +31,7 @@
             android:columnCount="7"
             android:rowCount="6"
             android:layout_gravity="center_horizontal"
+            android:background="@drawable/grid_line"
             android:layout_weight="1"/>
 
 
