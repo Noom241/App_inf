@@ -25,7 +25,8 @@ class CalendarioActivity : AppCompatActivity() {
         createDate(2023, 3, 24),
         createDate(2023, 2, 16),
         createDate(2023, 5, 18),
-        createDate(2023, 2, 26)
+        createDate(2023, 2, 26),
+        createDate(2023, 1, 15)
         // Agrega más fechas aquí según necesites
     )
 
@@ -34,8 +35,6 @@ class CalendarioActivity : AppCompatActivity() {
         calendar.set(year, month - 1, day) // Mes se cuenta desde 0 (enero)
         return calendar.time
     }
-
-    // ... Código anterior ...
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,28 +61,23 @@ class CalendarioActivity : AppCompatActivity() {
 
         while (calendar[Calendar.YEAR] <= YEAR) {
             val rowDate = TableRow(this)
+            val rowAsistio = TableRow(this) // Nueva fila para la asistencia
+
             for (i in 0 until DAYS_OF_WEEK.size) {
                 val dayNumber = calendar[Calendar.DAY_OF_MONTH]
                 val dayTextView = createTextView(dayNumber.toString())
+                val asistioTextView = createTextView("") // TextView para la asistencia
                 rowDate.addView(dayTextView)
+                rowAsistio.addView(asistioTextView)
                 calendar.add(Calendar.DAY_OF_MONTH, 1)
             }
             tableLayout.addView(rowDate)
-
-            // Agregar una fila vacía para el estado de asistencia
-            val rowAsistio = TableRow(this)
-            for (i in 0 until DAYS_OF_WEEK.size) {
-                val textView = createTextView("") // Celda vacía
-                rowAsistio.addView(textView)
-            }
-            tableLayout.addView(rowAsistio)
+            tableLayout.addView(rowAsistio) // Agregar fila de asistencia
         }
 
         // Marcar la asistencia
         markAttendance(tableLayout)
     }
-
-// ... Código posterior ...
 
 
     private fun createTextView(text: String): TextView {
@@ -128,7 +122,7 @@ class CalendarioActivity : AppCompatActivity() {
                 }
             }
 
-            val rowAsistio = tableLayout.getChildAt(weekIndex + 1) as TableRow
+            val rowAsistio = tableLayout.getChildAt(weekIndex * 2 + 2) as TableRow
             val textView = rowAsistio.getChildAt(dayIndex) as TextView
             textView.text = "Asistio"
         }
