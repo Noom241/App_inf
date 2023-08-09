@@ -19,14 +19,12 @@ class CalendarioActivity : AppCompatActivity() {
     private val YEAR = 2023
 
     private val fechasPrueba = arrayOf(
-        createDate(2023, 1, 29),
-        createDate(2023, 1, 10),
-        createDate(2023, 1, 15),
-        createDate(2023, 3, 19),
-        createDate(2023, 2, 26)
-
-        // Agrega más fechas aquí según necesites
+        createDate(2023, 2, 1),
+        createDate(2023, 3, 1),
+        createDate(2023, 3, 5),
+        createDate(2023, 3, 12)
     )
+
 
     private fun createDate(year: Int, month: Int, day: Int): Date {
         val calendar = Calendar.getInstance()
@@ -38,14 +36,6 @@ class CalendarioActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calendario)
         val tableLayout = findViewById<TableLayout>(R.id.tl_month)
-
-        // Agregar días de la semana en la primera fila
-        val rowDaysOfWeek = TableRow(this)
-        for (day in DAYS_OF_WEEK) {
-            val textView = createTextView(day)
-            rowDaysOfWeek.addView(textView)
-        }
-        tableLayout.addView(rowDaysOfWeek)
 
         val calendar = Calendar.getInstance()
         calendar[Calendar.YEAR] = YEAR
@@ -63,14 +53,26 @@ class CalendarioActivity : AppCompatActivity() {
             val currentMonth = calendar[Calendar.MONTH]
             if (previousMonth != currentMonth) {
                 tableLayout.addView(createMonthHeader(calendar))
+                val rowDaysOfWeek = TableRow(this)
+                for (day in DAYS_OF_WEEK) {
+                    val textView = createTextView(day)
+                    rowDaysOfWeek.addView(textView)
+                }
+                tableLayout.addView(rowDaysOfWeek)
                 previousMonth = currentMonth
             }
 
             val rowDate = TableRow(this)
+            val daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
             for (i in 0 until DAYS_OF_WEEK.size) {
-                val dayNumber = calendar[Calendar.DAY_OF_MONTH]
-                val dayTextView = createTextView(dayNumber.toString())
-                rowDate.addView(dayTextView)
+                if (calendar.get(Calendar.DAY_OF_MONTH) <= daysInMonth) {
+                    val dayNumber = calendar[Calendar.DAY_OF_MONTH]
+                    val dayTextView = createTextView(dayNumber.toString())
+                    rowDate.addView(dayTextView)
+                } else {
+                    val emptyTextView = createTextView("")
+                    rowDate.addView(emptyTextView)
+                }
                 calendar.add(Calendar.DAY_OF_MONTH, 1)
             }
             tableLayout.addView(rowDate)
@@ -83,9 +85,11 @@ class CalendarioActivity : AppCompatActivity() {
             tableLayout.addView(rowAsistio)
         }
 
+
         // Marcar la asistencia
         markAttendance(tableLayout)
     }
+
 
 
     private fun createMonthHeader(calendar: Calendar): TableRow {
@@ -129,39 +133,29 @@ class CalendarioActivity : AppCompatActivity() {
         for (fecha in fechasPrueba) {
             val calendar = Calendar.getInstance()
             calendar.time = fecha
-            var weekIndex = calendar.get(Calendar.WEEK_OF_YEAR)
-            var dayIndex = calendar.get(Calendar.DAY_OF_WEEK)
-            var cer = 0
+            val weekIndex = calendar.get(Calendar.WEEK_OF_YEAR) - 1
+            val dayIndex = calendar.get(Calendar.DAY_OF_WEEK) - 2
 
-            dayIndex = dayIndex - 2
+            val rowAsistio = tableLayout.getChildAt((weekIndex + 2) * 3 + 2) as? TableRow
 
-            if(dayIndex < 0){
-                weekIndex -= 1
-
-
-                if(dayIndex == -1){
-                    dayIndex = 6
-
-                }
-                else{
-                    dayIndex = 5
-                }
+            if (rowAsistio != null && dayIndex >= 0 && dayIndex < rowAsistio.childCount) {
+                val textView = rowAsistio.getChildAt(dayIndex) as? TextView
+                textView?.text = "Asistio"
             }
-
-            fun calculateValue(input: Int): Int {
-                return when {
-                    input < 0 -> -1
-                    else -> input
-                }
-            }
-
-
-
-
-            val rowAsistio = tableLayout.getChildAt((calendar.get(Calendar.WEEK_OF_YEAR) * 3) + 3   ) as TableRow
-            val textView = rowAsistio.getChildAt(dayIndex) as TextView
-            textView.text = "Asistio"
         }
     }
+
+
+
+
+
+
+
+    private fun firstDayOfMonthOffset(calendar: Calendar): Int {
+        val firstDayOfWeek = calendar[Calendar.DAY_OF_WEEK]
+        return if (firstDayOfWeek == Calendar.SUNDAY) 6 else firstDayOfWeek - 2
+    }
+
+
 
 }
