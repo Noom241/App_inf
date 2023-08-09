@@ -19,6 +19,14 @@ class CalendarioActivity : AppCompatActivity() {
     private val fechasPrueba = arrayOf(
         createDate(2023, 1, 29),
         createDate(2023, 1, 10),
+        createDate(2023, 1, 29),
+        createDate(2023, 1, 10),
+        createDate(2023, 1, 15),
+        createDate(2023, 3, 19),
+        createDate(2023, 3, 24),
+        createDate(2023, 2, 16),
+        createDate(2023, 5, 18),
+        createDate(2023, 2, 26),
         createDate(2023, 1, 15)
         // Agrega más fechas aquí según necesites
     )
@@ -91,10 +99,8 @@ class CalendarioActivity : AppCompatActivity() {
         val paddingValue = resources.getDimensionPixelSize(R.dimen.text_view_padding)
         textView.setPadding(paddingValue, paddingValue, paddingValue, paddingValue)
 
-        val layoutParams = TableRow.LayoutParams(
-            TableRow.LayoutParams.WRAP_CONTENT,
-            TableRow.LayoutParams.WRAP_CONTENT
-        )
+        val layoutParams = TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f)
+
 
         val marginValue = resources.getDimensionPixelSize(R.dimen.text_view_margin)
         layoutParams.setMargins(marginValue, marginValue, marginValue, marginValue)
