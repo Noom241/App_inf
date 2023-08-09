@@ -21,17 +21,17 @@ class CalendarioActivity : AppCompatActivity() {
         val monthNames = resources.getStringArray(R.array.month_names)
 
         setupMonthContainer(R.id.row1, 0, monthNames)
-        setupMonthContainer(R.id.row2, 3, monthNames)
-        setupMonthContainer(R.id.row3, 6, monthNames)
-        setupMonthContainer(R.id.row4, 9, monthNames)
-        setupMonthContainer(R.id.row5, 0, monthNames)
-        setupMonthContainer(R.id.row6, 3, monthNames)
+        setupMonthContainer(R.id.row2, 1, monthNames)
+        setupMonthContainer(R.id.row3, 2, monthNames)
+        setupMonthContainer(R.id.row4, 3, monthNames)
+        setupMonthContainer(R.id.row5, 4, monthNames)
+        setupMonthContainer(R.id.row6, 5, monthNames)
         setupMonthContainer(R.id.row7, 6, monthNames)
-        setupMonthContainer(R.id.row8, 9, monthNames)
-        setupMonthContainer(R.id.row9, 0, monthNames)
-        setupMonthContainer(R.id.row10, 3, monthNames)
-        setupMonthContainer(R.id.row11, 6, monthNames)
-        setupMonthContainer(R.id.row12, 9, monthNames)
+        setupMonthContainer(R.id.row8, 7, monthNames)
+        setupMonthContainer(R.id.row9, 8, monthNames)
+        setupMonthContainer(R.id.row10, 9, monthNames)
+        setupMonthContainer(R.id.row11, 10, monthNames)
+        setupMonthContainer(R.id.row12, 11, monthNames)
     }
 
     private fun setupMonthContainer(containerId: Int, startIndex: Int, monthNames: Array<String>) {
