@@ -43,7 +43,7 @@ class CalendarioActivity : AppCompatActivity() {
             for (i in 0 until DAYS_OF_WEEK.size) {
                 val dayNumber = calendar[Calendar.DAY_OF_MONTH]
                 val dayTextView1 = createTextView(dayNumber.toString())
-                val dayTextView2 = createTextView("---")
+                val dayTextView2 = createTextView("")
                 rowDate1.addView(dayTextView1)
                 rowDate2.addView(dayTextView2)
                 calendar.add(Calendar.DAY_OF_MONTH, 1)
