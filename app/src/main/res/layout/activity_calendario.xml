@@ -20,7 +20,6 @@
             android:id="@+id/tl_month"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
         </TableLayout>
 
     </ScrollView>

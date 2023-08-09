@@ -1,6 +1,7 @@
 package com.example.app_inf.Activities
 
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.Gravity
 import android.widget.TableLayout
 import android.widget.TableRow
@@ -77,17 +78,40 @@ class CalendarioActivity : AppCompatActivity() {
         textView.text = text
         textView.gravity = Gravity.CENTER
         textView.setBackgroundResource(R.drawable.cell_border)
+
+        // Ajustar propiedades aquí
+        val paddingValue = resources.getDimensionPixelSize(R.dimen.text_view_padding)
+        textView.setPadding(paddingValue, paddingValue, paddingValue, paddingValue)
+
+        val layoutParams = TableRow.LayoutParams(
+            TableRow.LayoutParams.WRAP_CONTENT,
+            TableRow.LayoutParams.WRAP_CONTENT
+        )
+
+        val marginValue = resources.getDimensionPixelSize(R.dimen.text_view_margin)
+        layoutParams.setMargins(marginValue, marginValue, marginValue, marginValue)
+
+        val fontSize = resources.getDimensionPixelSize(R.dimen.text_view_font_size).toFloat()
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, fontSize)
+
+        textView.layoutParams = layoutParams
+
         return textView
     }
+
 
     private fun markAttendance(tableLayout: TableLayout) {
         for (fecha in fechasPrueba) {
             val calendar = Calendar.getInstance()
             calendar.time = fecha
-            val weekIndex = calendar.get(Calendar.WEEK_OF_YEAR)
+            var weekIndex = calendar.get(Calendar.WEEK_OF_YEAR)
             var dayIndex = calendar.get(Calendar.DAY_OF_WEEK)
-            if(dayIndex < 2){
-                if(dayIndex == 1){
+
+            dayIndex = dayIndex - 2
+            if(dayIndex < 0){
+                weekIndex -= 1
+
+                if(dayIndex == -1){
                     dayIndex = 6
 
                 }
@@ -95,20 +119,11 @@ class CalendarioActivity : AppCompatActivity() {
                     dayIndex = 5
                 }
             }
-            else{
-                var dayIndex = calendar.get(Calendar.DAY_OF_WEEK) - 1
-            }
 
             val rowAsistio = tableLayout.getChildAt(weekIndex * 2 + 2) as TableRow
             val textView = rowAsistio.getChildAt(dayIndex) as TextView
             textView.text = "Asistio"
         }
     }
-
-
-
-
-
-
 
 }
