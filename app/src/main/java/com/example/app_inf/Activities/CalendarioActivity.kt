@@ -99,7 +99,7 @@ class CalendarioActivity : AppCompatActivity() {
         val paddingValue = resources.getDimensionPixelSize(R.dimen.text_view_padding)
         textView.setPadding(paddingValue, paddingValue, paddingValue, paddingValue)
 
-        val layoutParams = TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f)
+        val layoutParams = TableRow.LayoutParams(200, TableRow.LayoutParams.WRAP_CONTENT, 1f)
 
 
         val marginValue = resources.getDimensionPixelSize(R.dimen.text_view_margin)
