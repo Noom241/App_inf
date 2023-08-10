@@ -35,7 +35,7 @@ class CalendarioActivity : AppCompatActivity() {
         // Agregar días de la semana en la primera fila
         val rowDaysOfWeek = TableRow(this)
         for (day in DAYS_OF_WEEK) {
-            val textView = createTextView(day)
+            val textView = createTextView(day, 200, 80) // Ancho: 80, Alto: 20
             rowDaysOfWeek.addView(textView)
         }
         tableLayout.addView(rowDaysOfWeek)
@@ -54,7 +54,7 @@ class CalendarioActivity : AppCompatActivity() {
             val rowDate = TableRow(this)
             for (i in 0 until DAYS_OF_WEEK.size) {
                 val dayNumber = calendar[Calendar.DAY_OF_MONTH]
-                val dayTextView = createTextView(dayNumber.toString())
+                val dayTextView = createTextView(dayNumber.toString(), 200, 100) // Ancho: 80, Alto: 20
                 rowDate.addView(dayTextView)
                 calendar.add(Calendar.DAY_OF_MONTH, 1)
             }
@@ -62,7 +62,7 @@ class CalendarioActivity : AppCompatActivity() {
 
             val rowAsistio = TableRow(this)
             for (i in 0 until DAYS_OF_WEEK.size) {
-                val textView = createTextView("")
+                val textView = createTextView("", 200, 100) // Ancho: 80, Alto: 20
                 rowAsistio.addView(textView)
             }
             tableLayout.addView(rowAsistio)
@@ -70,13 +70,18 @@ class CalendarioActivity : AppCompatActivity() {
 
         // Marcar la asistencia
         markAttendance(tableLayout)
+
+        // Ajustar el tamaño de las celdas
+        adjustTableCellsSize(tableLayout, 180, 100) // Ancho: 80, Alto: 20
     }
 
-    private fun createTextView(text: String): TextView {
+    private fun createTextView(text: String, width: Int, height: Int): TextView {
         val textView = TextView(this)
         textView.text = text
         textView.gravity = Gravity.CENTER
         textView.setBackgroundResource(R.drawable.cell_border)
+        val layoutParams = TableRow.LayoutParams(width, height) // Tamaño fijo para ancho y alto
+        textView.layoutParams = layoutParams
         return textView
     }
 
@@ -89,14 +94,13 @@ class CalendarioActivity : AppCompatActivity() {
             if(dayIndex < 2){
                 if(dayIndex == 1){
                     dayIndex = 6
-
                 }
                 else{
                     dayIndex = 5
                 }
             }
             else{
-                var dayIndex = calendar.get(Calendar.DAY_OF_WEEK) - 1
+                dayIndex = dayIndex - 1
             }
 
             val rowAsistio = tableLayout.getChildAt(weekIndex * 2 + 2) as TableRow
@@ -105,10 +109,18 @@ class CalendarioActivity : AppCompatActivity() {
         }
     }
 
-
-
-
-
-
-
+    private fun adjustTableCellsSize(tableLayout: TableLayout, width: Int, height: Int) {
+        val columnCount = DAYS_OF_WEEK.size
+        for (i in 0 until tableLayout.childCount) {
+            val tableRow = tableLayout.getChildAt(i) as TableRow
+            for (j in 0 until columnCount) {
+                val cell = tableRow.getChildAt(j)
+                val layoutParams = cell.layoutParams as TableRow.LayoutParams
+                layoutParams.width = width
+                layoutParams.height = height
+                cell.layoutParams = layoutParams
+            }
+        }
+    }
 }
+
