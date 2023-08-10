@@ -80,4 +80,8 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
+    //PDF
+    implementation ("com.itextpdf:itext7-core:7.1.15")
+
+
 }

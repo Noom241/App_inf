@@ -9,7 +9,7 @@ import androidx.activity.ComponentActivity
 import com.example.app_inf.Activities.AlumnosActivity
 import com.example.app_inf.Activities.AsesoresActivity
 import com.example.app_inf.Activities.AsistenciaActivity
-import com.example.app_inf.Activities.CalendarioActivity
+import com.example.app_inf.Activities.InformeActivity
 
 class MainActivity : ComponentActivity() {
 
@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
         val btnInforme = findViewById<Button>(R.id.btnInforme)
 
         btnInforme.setOnClickListener {
-            val intent = Intent(this, CalendarioActivity::class.java)
+            val intent = Intent(this, InformeActivity::class.java)
             startActivity(intent)
         }
 
