@@ -4,6 +4,8 @@ import com.example.app_inf.R
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.Gravity
+import android.view.View
+import android.widget.LinearLayout
 import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
@@ -14,7 +16,6 @@ import java.util.*
 class CalendarioActivity : AppCompatActivity() {
 
     private var selectedYear = 2023
-    private var selectedMonth = Calendar.DECEMBER
     private val fechasPrueba = arrayOf(
         createDate(2023, 12, 17),
         createDate(2023, 12, 18),
@@ -30,18 +31,31 @@ class CalendarioActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calendario)
-        val monthTextView = findViewById<TextView>(R.id.monthTextView)
-        val tableLayout = findViewById<TableLayout>(R.id.tableLayout)
+
+        val container = findViewById<LinearLayout>(R.id.container)
+
+        for (month in Calendar.JANUARY..Calendar.DECEMBER) {
+            val monthView = createMonthView(month)
+            container.addView(monthView)
+        }
+    }
+
+    private fun createMonthView(month: Int): View {
+
+        val monthView = layoutInflater.inflate(R.layout.month_view, null) as LinearLayout
+        val monthTextView = monthView.findViewById<TextView>(R.id.monthTextView)
+        val tableLayout = monthView.findViewById<TableLayout>(R.id.tableLayout)
         val calendar = Calendar.getInstance()
         calendar.set(Calendar.YEAR, selectedYear)
-        calendar.set(Calendar.MONTH, selectedMonth)
+        calendar.set(Calendar.MONTH, month)
         calendar.set(Calendar.DAY_OF_MONTH, 1)
 
 
         val monthName = SimpleDateFormat("MMMM yyyy", Locale.getDefault()).format(calendar.time)
         monthTextView.text = monthName
 
-        val diasSemana = arrayOf("Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo")
+        val diasSemana =
+            arrayOf("Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo")
         val primerDiaSemana = calendar.get(Calendar.DAY_OF_WEEK) - 1
 
         var dia = 1
@@ -49,7 +63,7 @@ class CalendarioActivity : AppCompatActivity() {
 
         val columnWidth = resources.getDimensionPixelSize(R.dimen.cell_width)
 
-            for (i in diasSemana.indices) {
+        for (i in diasSemana.indices) {
             val textView = createTextView(diasSemana[i])
             fila.addView(textView)
         }
@@ -59,7 +73,7 @@ class CalendarioActivity : AppCompatActivity() {
         var pRow = TableRow(this)
 
         // Llenar las celdas vacías y las celdas "P" hasta el primer día de la semana
-        for (i in 1 until primerDiaSemana) {
+        for (i in 1  until primerDiaSemana) {
             val emptyCell = createTextView(" ")
             fila.addView(emptyCell)
 
@@ -67,7 +81,7 @@ class CalendarioActivity : AppCompatActivity() {
             pRow.addView(pCell)
         }
 
-        while (calendar.get(Calendar.MONTH) == selectedMonth) {
+        while (calendar.get(Calendar.MONTH) == month) {
             val textView = TextView(this)
             fila.addView(createTextView(dia.toString()))
 
@@ -99,8 +113,11 @@ class CalendarioActivity : AppCompatActivity() {
             tableLayout.addView(fila)
             tableLayout.addView(pRow)
         }
-        markAttendance(tableLayout, selectedMonth)
+        markAttendance(tableLayout, month)
+        return monthView
     }
+
+
 
     private fun createTextView(text: String): TextView {
         val textView = TextView(this)
@@ -127,11 +144,7 @@ class CalendarioActivity : AppCompatActivity() {
     }
 
 
-    // Método para cambiar el mes seleccionado
-    private fun changeSelectedMonth(newMonth: Int) {
-        selectedMonth = newMonth
-        recreate() // Vuelve a crear la actividad para actualizar el calendario
-    }
+
 
     private fun markAttendance(tableLayout: TableLayout, selectedMonth: Int) {
         val calendar = Calendar.getInstance()
