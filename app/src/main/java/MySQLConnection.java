@@ -4,6 +4,7 @@ import com.example.app_inf.data.AlumnoData;
 import com.example.app_inf.data.AsesorData;
 import com.example.app_inf.data.Horario;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -15,6 +16,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import android.os.AsyncTask;
+
+
+import kotlin.Pair;
 
 public class MySQLConnection {
     private static Connection connection;
@@ -117,24 +122,6 @@ public class MySQLConnection {
             e.printStackTrace();
             return false;
         }
-    }
-
-    public Map<Date, String> generarCalendarioAsistenciaEstudiante(int idEstudiante) {
-        Map<Date, String> calendarioAsistencia = new HashMap<>();
-        try (Connection connection = MySQLConnection.getConnection()) {
-            String selectQuery = "SELECT Fecha, Asistio FROM Asistencia_Estudiantes WHERE ID_estudiante = ?";
-            PreparedStatement statement = connection.prepareStatement(selectQuery);
-            statement.setInt(1, idEstudiante);
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                Date fecha = resultSet.getDate("Fecha");
-                String asistio = resultSet.getString("Asistio");
-                calendarioAsistencia.put(fecha, asistio);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return calendarioAsistencia;
     }
 
     public List<Horario> obtenerHorariosDisponiblesDeAlumno(int idAlumno) {
@@ -421,6 +408,46 @@ public class MySQLConnection {
         }
         return nombresProfesores;
     }
+
+    public static void obtenerAsistenciaDeEstudianteAsync(int idEstudiante, OnAsistenciaObtenidaListener listener) {
+        new AsyncTask<Integer, Void, List<Pair<Date, Boolean>>>() {
+            @Override
+            protected List<Pair<Date, Boolean>> doInBackground(Integer... params) {
+                int idEstudiante = params[0];
+                List<Pair<Date, Boolean>> asistenciaEstudiante = new ArrayList<>();
+
+                try (Connection connection = getConnection()) {
+                    String callProcedure = "{ CALL ObtenerFechasYAsistioPorEstudiante(?) }";
+                    try (CallableStatement statement = connection.prepareCall(callProcedure)) {
+                        statement.setInt(1, idEstudiante);
+                        try (ResultSet resultSet = statement.executeQuery()) {
+                            while (resultSet.next()) {
+                                Date fecha = resultSet.getDate("Fecha");
+                                boolean asistio = resultSet.getBoolean("Asistio");
+                                asistenciaEstudiante.add(new Pair<>(fecha, asistio));
+                            }
+                        }
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
+                return asistenciaEstudiante;
+            }
+
+            @Override
+            protected void onPostExecute(List<Pair<Date, Boolean>> result) {
+                super.onPostExecute(result);
+                listener.onAsistenciaObtenida(result);
+            }
+        }.execute(idEstudiante);
+    }
+
+    public interface OnAsistenciaObtenidaListener {
+        void onAsistenciaObtenida(List<Pair<Date, Boolean>> asistencia);
+    }
+
+
 
 
 }
