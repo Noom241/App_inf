@@ -2,6 +2,7 @@ package com.example.app_inf.Activities
 
 import com.example.app_inf.R
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.Gravity
 import android.widget.TableLayout
 import android.widget.TableRow
@@ -48,13 +49,8 @@ class CalendarioActivity : AppCompatActivity() {
 
         val columnWidth = resources.getDimensionPixelSize(R.dimen.cell_width)
 
-        // Agregar encabezado de días de la semana
-        for (i in diasSemana.indices) {
-            val textView = TextView(this)
-            textView.text = diasSemana[i]
-            textView.gravity = Gravity.CENTER
-            textView.setBackgroundResource(R.drawable.cell_border)
-            textView.width = columnWidth
+            for (i in diasSemana.indices) {
+            val textView = createTextView(diasSemana[i])
             fila.addView(textView)
         }
         tableLayout.addView(fila)
@@ -64,35 +60,19 @@ class CalendarioActivity : AppCompatActivity() {
 
         // Llenar las celdas vacías y las celdas "P" hasta el primer día de la semana
         for (i in 1 until primerDiaSemana) {
-            val emptyCell = TextView(this)
-            emptyCell.text = " "
-            emptyCell.gravity = Gravity.CENTER
-            emptyCell.setBackgroundResource(R.drawable.cell_border)
-            emptyCell.width = columnWidth
+            val emptyCell = createTextView(" ")
             fila.addView(emptyCell)
 
-            val pCell = TextView(this)
-            pCell.text = " "
-            pCell.gravity = Gravity.CENTER
-            pCell.setBackgroundResource(R.drawable.cell_border)
-            pCell.width = columnWidth
+            val pCell = createTextView(" ")
             pRow.addView(pCell)
         }
 
         while (calendar.get(Calendar.MONTH) == selectedMonth) {
             val textView = TextView(this)
-            textView.text = dia.toString()
-            textView.gravity = Gravity.CENTER
-            textView.setBackgroundResource(R.drawable.cell_border)
-            textView.width = columnWidth
-            fila.addView(textView)
+            fila.addView(createTextView(dia.toString()))
 
             val pCell = TextView(this)
-            pCell.text = " "
-            pCell.gravity = Gravity.CENTER
-            pCell.setBackgroundResource(R.drawable.cell_border)
-            pCell.width = columnWidth
-            pRow.addView(pCell)
+            pRow.addView(createTextView(""))
 
             if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) { // Cambia Calendar.SATURDAY a Calendar.SUNDAY
                 tableLayout.addView(fila)
@@ -108,18 +88,11 @@ class CalendarioActivity : AppCompatActivity() {
         // Llenar las celdas vacías restantes en la última fila
         while (fila.childCount < 7) {
             val emptyCell = TextView(this)
-            emptyCell.text = " "
-            emptyCell.gravity = Gravity.CENTER
-            emptyCell.setBackgroundResource(R.drawable.cell_border)
-            emptyCell.width = columnWidth
-            fila.addView(emptyCell)
+
+            fila.addView(createTextView(""))
 
             val pCell = TextView(this)
-            pCell.text = " "
-            pCell.gravity = Gravity.CENTER
-            pCell.setBackgroundResource(R.drawable.cell_border)
-            pCell.width = columnWidth
-            pRow.addView(pCell)
+            pRow.addView(createTextView(""))
         }
 
         if (fila.childCount > 0) {
@@ -129,6 +102,29 @@ class CalendarioActivity : AppCompatActivity() {
         markAttendance(tableLayout, selectedMonth)
     }
 
+    private fun createTextView(text: String): TextView {
+        val textView = TextView(this)
+        textView.text = text
+        textView.gravity = Gravity.CENTER
+        textView.setBackgroundResource(R.drawable.cell_border)
+
+        // Ajustar propiedades aquí
+        val paddingValue = resources.getDimensionPixelSize(R.dimen.text_view_padding)
+        textView.setPadding(paddingValue, paddingValue, paddingValue, paddingValue)
+
+        val layoutParams = TableRow.LayoutParams(220, TableRow.LayoutParams.WRAP_CONTENT, 1f)
+
+
+        val marginValue = resources.getDimensionPixelSize(R.dimen.text_view_margin)
+        layoutParams.setMargins(marginValue, marginValue, marginValue, marginValue)
+
+        val fontSize = resources.getDimensionPixelSize(R.dimen.text_view_font_size).toFloat()
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, fontSize)
+
+        textView.layoutParams = layoutParams
+
+        return textView
+    }
 
 
     // Método para cambiar el mes seleccionado
