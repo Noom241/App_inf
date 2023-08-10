@@ -1,4 +1,5 @@
 package com.example.app_inf.Activities
+
 import com.example.app_inf.R
 import android.os.Bundle
 import android.view.Gravity
@@ -47,8 +48,9 @@ class CalendarioActivity : AppCompatActivity() {
         tableLayout.addView(fila)
 
         fila = TableRow(this)
+        var pRow = TableRow(this)
 
-        // Llenar las celdas vacías hasta el primer día de la semana
+        // Llenar las celdas vacías y las celdas "P" hasta el primer día de la semana
         for (i in 0 until primerDiaSemana) {
             val emptyCell = TextView(this)
             emptyCell.text = " "
@@ -56,6 +58,13 @@ class CalendarioActivity : AppCompatActivity() {
             emptyCell.setBackgroundResource(R.drawable.cell_border)
             emptyCell.width = columnWidth
             fila.addView(emptyCell)
+
+            val pCell = TextView(this)
+            pCell.text = " "
+            pCell.gravity = Gravity.CENTER
+            pCell.setBackgroundResource(R.drawable.cell_border)
+            pCell.width = columnWidth
+            pRow.addView(pCell)
         }
 
         while (calendar.get(Calendar.MONTH) == selectedMonth) {
@@ -66,9 +75,18 @@ class CalendarioActivity : AppCompatActivity() {
             textView.width = columnWidth
             fila.addView(textView)
 
+            val pCell = TextView(this)
+            pCell.text = " "
+            pCell.gravity = Gravity.CENTER
+            pCell.setBackgroundResource(R.drawable.cell_border)
+            pCell.width = columnWidth
+            pRow.addView(pCell)
+
             if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) {
                 tableLayout.addView(fila)
+                tableLayout.addView(pRow)
                 fila = TableRow(this)
+                pRow = TableRow(this)
             }
 
             calendar.add(Calendar.DAY_OF_MONTH, 1)
@@ -83,10 +101,18 @@ class CalendarioActivity : AppCompatActivity() {
             emptyCell.setBackgroundResource(R.drawable.cell_border)
             emptyCell.width = columnWidth
             fila.addView(emptyCell)
+
+            val pCell = TextView(this)
+            pCell.text = " "
+            pCell.gravity = Gravity.CENTER
+            pCell.setBackgroundResource(R.drawable.cell_border)
+            pCell.width = columnWidth
+            pRow.addView(pCell)
         }
 
         if (fila.childCount > 0) {
             tableLayout.addView(fila)
+            tableLayout.addView(pRow)
         }
     }
 
