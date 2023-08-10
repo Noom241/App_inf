@@ -14,6 +14,17 @@ class CalendarioActivity : AppCompatActivity() {
 
     private var selectedYear = 2023
     private var selectedMonth = Calendar.DECEMBER
+    private val fechasPrueba = arrayOf(
+        createDate(2023, 12, 17),
+        createDate(2023, 12, 18),
+        createDate(2023, 12, 15)
+        // Agrega más fechas aquí según necesites
+    )
+    private fun createDate(year: Int, month: Int, day: Int): Date {
+        val calendar = Calendar.getInstance()
+        calendar.set(year, month - 1, day) // Mes se cuenta desde 0 (enero)
+        return calendar.time
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +35,7 @@ class CalendarioActivity : AppCompatActivity() {
         calendar.set(Calendar.YEAR, selectedYear)
         calendar.set(Calendar.MONTH, selectedMonth)
         calendar.set(Calendar.DAY_OF_MONTH, 1)
+
 
         val monthName = SimpleDateFormat("MMMM yyyy", Locale.getDefault()).format(calendar.time)
         monthTextView.text = monthName
@@ -114,12 +126,44 @@ class CalendarioActivity : AppCompatActivity() {
             tableLayout.addView(fila)
             tableLayout.addView(pRow)
         }
+        markAttendance(tableLayout, selectedMonth)
     }
+
+
 
     // Método para cambiar el mes seleccionado
     private fun changeSelectedMonth(newMonth: Int) {
         selectedMonth = newMonth
         recreate() // Vuelve a crear la actividad para actualizar el calendario
     }
+
+    private fun markAttendance(tableLayout: TableLayout, selectedMonth: Int) {
+        val calendar = Calendar.getInstance()
+
+        for (fecha in fechasPrueba) {
+            calendar.time = fecha
+
+            if (calendar.get(Calendar.MONTH) == selectedMonth) {
+                var weekIndex = calendar.get(Calendar.WEEK_OF_MONTH)
+                var dayIndex = calendar.get(Calendar.DAY_OF_WEEK) - 2
+
+                if(dayIndex < 0) {
+                    weekIndex -= 1
+
+                    if (dayIndex == -1) {
+                        dayIndex = 6
+                    }
+                }
+                
+                val rowAsistio = tableLayout.getChildAt(weekIndex * 2) as TableRow
+                val textView = rowAsistio.getChildAt(dayIndex) as TextView
+                textView.text = "Asistio"
+
+            }
+        }
+    }
+
+
+
 }
 //////////
