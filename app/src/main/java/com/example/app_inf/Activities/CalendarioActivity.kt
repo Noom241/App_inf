@@ -1,6 +1,5 @@
 package com.example.app_inf.Activities
 
-import com.example.app_inf.R
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.Gravity
@@ -10,8 +9,11 @@ import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.app_inf.R
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 class CalendarioActivity : AppCompatActivity() {
 
@@ -73,13 +75,25 @@ class CalendarioActivity : AppCompatActivity() {
         var pRow = TableRow(this)
 
         // Llenar las celdas vacías y las celdas "P" hasta el primer día de la semana
-        for (i in 1  until primerDiaSemana) {
-            val emptyCell = createTextView(" ")
-            fila.addView(emptyCell)
+        if(primerDiaSemana == 0){
+            for (i in 1 until 7) {
+                val emptyCell = createTextView(" ")
+                fila.addView(emptyCell)
 
-            val pCell = createTextView(" ")
-            pRow.addView(pCell)
+                val pCell = createTextView(" ")
+                pRow.addView(pCell)
+            }
         }
+        else{
+            for (i in 1 until primerDiaSemana) {
+                val emptyCell = createTextView(" ")
+                fila.addView(emptyCell)
+
+                val pCell = createTextView(" ")
+                pRow.addView(pCell)
+            }
+        }
+
 
         while (calendar.get(Calendar.MONTH) == month) {
             val textView = TextView(this)
@@ -88,7 +102,7 @@ class CalendarioActivity : AppCompatActivity() {
             val pCell = TextView(this)
             pRow.addView(createTextView(""))
 
-            if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) { // Cambia Calendar.SATURDAY a Calendar.SUNDAY
+            if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY && dia != calendar.getActualMaximum(Calendar.DAY_OF_MONTH)) { // Cambia Calendar.SATURDAY a Calendar.SUNDAY
                 tableLayout.addView(fila)
                 tableLayout.addView(pRow)
                 fila = TableRow(this)
@@ -100,7 +114,7 @@ class CalendarioActivity : AppCompatActivity() {
         }
 
         // Llenar las celdas vacías restantes en la última fila
-        while (fila.childCount < 7) {
+        while (fila.childCount < 7 ) {
             val emptyCell = TextView(this)
 
             fila.addView(createTextView(""))
@@ -116,7 +130,6 @@ class CalendarioActivity : AppCompatActivity() {
         markAttendance(tableLayout, month)
         return monthView
     }
-
 
 
     private fun createTextView(text: String): TextView {
