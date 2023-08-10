@@ -28,7 +28,7 @@ class CalendarioActivity : AppCompatActivity() {
         val monthName = SimpleDateFormat("MMMM yyyy", Locale.getDefault()).format(calendar.time)
         monthTextView.text = monthName
 
-        val diasSemana = arrayOf("Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado")
+        val diasSemana = arrayOf("Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo")
         val primerDiaSemana = calendar.get(Calendar.DAY_OF_WEEK) - 1
 
         var dia = 1
@@ -51,7 +51,7 @@ class CalendarioActivity : AppCompatActivity() {
         var pRow = TableRow(this)
 
         // Llenar las celdas vacías y las celdas "P" hasta el primer día de la semana
-        for (i in 0 until primerDiaSemana) {
+        for (i in 1 until primerDiaSemana) {
             val emptyCell = TextView(this)
             emptyCell.text = " "
             emptyCell.gravity = Gravity.CENTER
@@ -82,7 +82,7 @@ class CalendarioActivity : AppCompatActivity() {
             pCell.width = columnWidth
             pRow.addView(pCell)
 
-            if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) {
+            if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) { // Cambia Calendar.SATURDAY a Calendar.SUNDAY
                 tableLayout.addView(fila)
                 tableLayout.addView(pRow)
                 fila = TableRow(this)
@@ -122,3 +122,4 @@ class CalendarioActivity : AppCompatActivity() {
         recreate() // Vuelve a crear la actividad para actualizar el calendario
     }
 }
+//////////
