@@ -233,40 +233,33 @@ class CalendarioActivity : AppCompatActivity() {
         if (calendar.get(Calendar.MONTH) == selectedMonth) {
             var weekIndex = calendar.get(Calendar.WEEK_OF_MONTH)
             var dayIndex = calendar.get(Calendar.DAY_OF_WEEK) - 2
-            if(isFirstDaySunday){
+            if (isFirstDaySunday) {
                 weekIndex++
             }
 
-            if(dayIndex < 0) {
+            if (dayIndex < 0) {
                 weekIndex -= 1
 
                 if (dayIndex == -1) {
                     dayIndex = 6
                 }
-                if(dayIndex == - 2){
+                if (dayIndex == -2) {
                     dayIndex = 5
                 }
 
             }
-            
 
-            val rowAsistio = tableLayout.getChildAt(weekIndex * 2 ) as TableRow
+
+            val rowAsistio = tableLayout.getChildAt(weekIndex * 2) as TableRow
             val textView = rowAsistio.getChildAt(dayIndex) as TextView
-            when {
-                currentDate < fecha -> {
-                    textView.text = "clase"
-                }
-                boolean -> {
-                    textView.text = "Asistio"
-                }
-                else -> {
-                    textView.text = "Falta"
-                }
+            val cellBackgroundColor = when {
+                currentDate < fecha -> R.color.colorPending // Cambiar al recurso deseado para las clases pendientes
+                boolean -> R.color.colorPresent // Cambiar al recurso deseado para la asistencia
+                else -> R.color.colorAbsent // Cambiar al recurso deseado para las faltas
             }
+            textView.setBackgroundResource(cellBackgroundColor)
         }
+
+
     }
-
-
-
 }
-//////////
