@@ -25,23 +25,45 @@ class CalendarioActivity : AppCompatActivity() {
     val idEstudiante = 1 // Reemplaza con el ID del estudiante deseado
 
 
-    private var fechasPrueba = arrayOf(
-        Pair(createDate(2023, 1, 17), true)
-        // Agrega más fechas y valores booleanos aquí según necesites
-    )
+    private var fechasPrueba = mutableListOf<Pair<Date, Boolean>>()
     private fun agregarNuevaFecha(idEstudiante: Int) {
         val nuevaLista = fechasPrueba.toMutableList()
-        nuevaLista.add(Pair(Calendar.getInstance().time, true))
 
-        obtenerAsistenciaDeEstudianteAsync(idEstudiante, object :
-            MySQLConnection.OnAsistenciaObtenidaListener {
+        obtenerAsistenciaDeEstudianteAsync(idEstudiante, object : MySQLConnection.OnAsistenciaObtenidaListener {
             override fun onAsistenciaObtenida(asistencia: List<Pair<Date, Boolean>>) {
-                nuevaLista.addAll(asistencia)
-                fechasPrueba = nuevaLista.toTypedArray()
+                for ((fecha, boolean) in asistencia) {
+                    val calendar = Calendar.getInstance()
+                    calendar.time = fecha
+                    val year = calendar.get(Calendar.YEAR)
+                    val month = calendar.get(Calendar.MONTH) + 1
+                    val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+                    val nuevaFecha = createDate(year, month, day)
+                    nuevaLista.add(Pair(nuevaFecha, boolean))
+                }
+
+                fechasPrueba = nuevaLista // Actualizar la lista con las fechas obtenidas
                 imprimirFechasPrueba()
+
+                // Llamar a markAttendance aquí después de que la lista se haya actualizado
+                markAttendanceForAllMonths()
             }
         })
     }
+
+    private fun markAttendanceForAllMonths() {
+        val container = findViewById<LinearLayout>(R.id.container)
+        for (month in Calendar.JANUARY..Calendar.DECEMBER) {
+            val monthView = container.getChildAt(month) as LinearLayout
+            val tableLayout = monthView.findViewById<TableLayout>(R.id.tableLayout)
+            for ((fecha, boolean) in fechasPrueba) {
+                markAttendance(tableLayout, month, boolean, fecha)
+            }
+        }
+    }
+
+
+
 
     private fun imprimirFechasPrueba() {
         println("Contenido de fechasPrueba:")
@@ -195,16 +217,25 @@ class CalendarioActivity : AppCompatActivity() {
 
 
     private fun markAttendance(tableLayout: TableLayout, selectedMonth: Int, boolean: Boolean, fecha: Date) {
-        println("Gaaaa")
-        imprimirFechasPrueba()
+
         val calendar = Calendar.getInstance()
         val currentDate = Calendar.getInstance().time
-
         calendar.time = fecha
 
+        val firstDayOfMonth = Calendar.getInstance()
+        firstDayOfMonth.time = fecha
+        firstDayOfMonth.set(Calendar.DAY_OF_MONTH, 1)
+        val isFirstDaySunday = firstDayOfMonth.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY
+
+
+
+        println(fecha)
         if (calendar.get(Calendar.MONTH) == selectedMonth) {
             var weekIndex = calendar.get(Calendar.WEEK_OF_MONTH)
             var dayIndex = calendar.get(Calendar.DAY_OF_WEEK) - 2
+            if(isFirstDaySunday){
+                weekIndex++
+            }
 
             if(dayIndex < 0) {
                 weekIndex -= 1
@@ -212,9 +243,14 @@ class CalendarioActivity : AppCompatActivity() {
                 if (dayIndex == -1) {
                     dayIndex = 6
                 }
-            }
+                if(dayIndex == - 2){
+                    dayIndex = 5
+                }
 
-            val rowAsistio = tableLayout.getChildAt(weekIndex * 2 + 2) as TableRow
+            }
+            
+
+            val rowAsistio = tableLayout.getChildAt(weekIndex * 2 ) as TableRow
             val textView = rowAsistio.getChildAt(dayIndex) as TextView
             when {
                 currentDate < fecha -> {
