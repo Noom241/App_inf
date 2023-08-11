@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -106,22 +107,6 @@ public class MySQLConnection {
             e.printStackTrace();
         }
         return horariosDisponibles;
-    }
-
-    public boolean registrarAsistenciaEstudiante(int idEstudiante, int idProfesor, Date fecha, boolean asistio) {
-        try (Connection connection = MySQLConnection.getConnection()) {
-            String insertQuery = "INSERT INTO Asistencia_Estudiantes (ID_estudiante, ID_profesor, Fecha, Asistio) VALUES (?, ?, ?, ?)";
-            PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
-            preparedStatement.setInt(1, idEstudiante);
-            preparedStatement.setInt(2, idProfesor);
-            preparedStatement.setDate(3, new java.sql.Date(fecha.getTime()));
-            preparedStatement.setString(4, asistio ? "Sí" : "No");
-            preparedStatement.executeUpdate();
-            return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
     }
 
     public List<Horario> obtenerHorariosDisponiblesDeAlumno(int idAlumno) {
@@ -410,11 +395,11 @@ public class MySQLConnection {
     }
 
     public static void obtenerAsistenciaDeEstudianteAsync(int idEstudiante, OnAsistenciaObtenidaListener listener) {
-        new AsyncTask<Integer, Void, List<Pair<Date, Boolean>>>() {
+        new AsyncTask<Integer, Void, List<Pair<Date, String>>>() {
             @Override
-            protected List<Pair<Date, Boolean>> doInBackground(Integer... params) {
+            protected List<Pair<Date, String>> doInBackground(Integer... params) {
                 int idEstudiante = params[0];
-                List<Pair<Date, Boolean>> asistenciaEstudiante = new ArrayList<>();
+                List<Pair<Date, String>> asistenciaEstudiante = new ArrayList<>();
 
                 try (Connection connection = getConnection()) {
                     String callProcedure = "{ CALL ObtenerFechasYAsistioPorEstudiante(?) }";
@@ -423,8 +408,8 @@ public class MySQLConnection {
                         try (ResultSet resultSet = statement.executeQuery()) {
                             while (resultSet.next()) {
                                 Date fecha = resultSet.getDate("Fecha");
-                                boolean asistio = resultSet.getBoolean("Asistio");
-                                asistenciaEstudiante.add(new Pair<>(fecha, asistio));
+                                String asistencia = resultSet.getString("Asistio"); // Cambio en la columna
+                                asistenciaEstudiante.add(new Pair<>(fecha, asistencia));
                             }
                         }
                     }
@@ -436,7 +421,7 @@ public class MySQLConnection {
             }
 
             @Override
-            protected void onPostExecute(List<Pair<Date, Boolean>> result) {
+            protected void onPostExecute(List<Pair<Date, String>> result) {
                 super.onPostExecute(result);
                 listener.onAsistenciaObtenida(result);
             }
@@ -444,8 +429,43 @@ public class MySQLConnection {
     }
 
     public interface OnAsistenciaObtenidaListener {
-        void onAsistenciaObtenida(List<Pair<Date, Boolean>> asistencia);
+        void onAsistenciaObtenida(List<Pair<Date, String>> asistencia);
     }
+
+
+    public static int obtenerIDPorNombre(String nombre, String tabla) {
+        try (Connection connection = getConnection()) {
+            String callProcedure = "{ CALL ObtenerIDPorNombre(?, ?, ?) }";
+            try (CallableStatement statement = connection.prepareCall(callProcedure)) {
+                statement.setString(1, nombre);
+                statement.setString(2, tabla);
+                statement.registerOutParameter(3, Types.INTEGER);
+                statement.executeUpdate();
+                return statement.getInt(3);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1; // Manejar el error adecuadamente en tu aplicación
+        }
+    }
+
+    public static boolean registrarAsistenciaEstudiante(Date fecha, int idEstudiante, int idProfesor, String asistio) {
+        try (Connection connection = getConnection()) {
+            String callProcedure = "{ CALL Registrar_Asistencia(?, ?, ?, ?) }";
+            try (CallableStatement statement = connection.prepareCall(callProcedure)) {
+                statement.setDate(1, new java.sql.Date(fecha.getTime()));
+                statement.setInt(2, idEstudiante);
+                statement.setInt(3, idProfesor);
+                statement.setString(4, asistio);
+                statement.executeUpdate();
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 
 
 

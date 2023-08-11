@@ -64,12 +64,13 @@
         app:layout_constraintTop_toTopOf="@+id/guideline34" />
 
     <AutoCompleteTextView
-        android:id="@+id/autoCompleteTextView5"
+        android:id="@+id/AutocompleteAsesores"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30sp"
         android:minHeight="48dp"
-        android:text="@string/buscar_asesor_informe"
+        android:hint="@string/buscar_asesor_asistencia"
+        android:imeOptions="actionDone"
         app:layout_constraintBottom_toTopOf="@+id/btn_asesor_asistencia"
         app:layout_constraintEnd_toStartOf="@+id/guideline28"
         app:layout_constraintHorizontal_bias="0.0"
@@ -79,12 +80,13 @@
         tools:ignore="LabelFor,VisualLintTextFieldSize" />
 
     <AutoCompleteTextView
-        android:id="@+id/autoCompleteTextView6"
+        android:id="@+id/AutocompleteAlumnos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30sp"
         android:minHeight="48dp"
-        android:text="@string/buscar_alumno_informe"
+        android:hint="@string/buscar_alumno_asistencia"
+        android:imeOptions="actionDone"
         app:layout_constraintBottom_toTopOf="@+id/btn_alumno_asistencia"
         app:layout_constraintEnd_toStartOf="@+id/guideline30"
         app:layout_constraintStart_toStartOf="@+id/guideline28"
@@ -100,7 +102,7 @@
         app:layout_constraintBottom_toTopOf="@id/btn_asesor_pdf"
         app:layout_constraintEnd_toStartOf="@+id/guideline28"
         app:layout_constraintStart_toStartOf="@+id/guideline29"
-        app:layout_constraintTop_toBottomOf="@id/autoCompleteTextView5"
+        app:layout_constraintTop_toBottomOf="@id/AutocompleteAsesores"
         tools:ignore="DuplicateSpeakableTextCheck" />
 
     <Button
@@ -119,7 +121,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/ver_asistencia_alumno"
-        app:layout_constraintTop_toBottomOf="@id/autoCompleteTextView6"
+        app:layout_constraintTop_toBottomOf="@id/AutocompleteAlumnos"
         app:layout_constraintBottom_toTopOf="@id/btn_alumno_pdf"
         app:layout_constraintEnd_toStartOf="@+id/guideline30"
         app:layout_constraintStart_toStartOf="@+id/guideline28"

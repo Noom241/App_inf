@@ -8,8 +8,8 @@
 
     <CalendarView
         android:id="@+id/calendarView"
-        android:layout_width="278dp"
-        android:layout_height="228dp"
+        android:layout_width="312dp"
+        android:layout_height="259dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline26"
         app:layout_constraintEnd_toStartOf="@+id/guideline24"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,6 +42,7 @@
         android:layout_height="wrap_content"
         android:minHeight="48dp"
         android:hint="@string/buscar_asesor_asistencia"
+        android:imeOptions="actionDone"
         app:layout_constraintBottom_toTopOf="@+id/buscar_asistencia_alumno"
         app:layout_constraintEnd_toStartOf="@+id/guideline27"
         app:layout_constraintStart_toStartOf="@+id/guideline24"
@@ -49,12 +50,14 @@
         app:layout_constraintWidth="0sp"
         tools:ignore="LabelFor" />
 
+
     <AutoCompleteTextView
         android:id="@+id/buscar_asistencia_alumno"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:minHeight="48dp"
         android:hint="@string/buscar_alumno_asistencia"
+        android:imeOptions="actionDone"
         app:layout_constraintBottom_toTopOf="@id/spn_asistencia"
         app:layout_constraintEnd_toStartOf="@+id/guideline27"
         app:layout_constraintStart_toStartOf="@+id/guideline24"

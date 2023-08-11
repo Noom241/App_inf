@@ -10,4 +10,5 @@
     <color name="colorPending">#EDC471</color>
     <color name="colorPresent">#66BB6A</color>
     <color name="colorAbsent">#EF5350</color>
+    <color name="colorRecuperation">#4A4949</color>
 </resources>

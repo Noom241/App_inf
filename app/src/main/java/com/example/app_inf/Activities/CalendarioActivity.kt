@@ -22,16 +22,16 @@ import android.os.AsyncTask
 
 class CalendarioActivity : AppCompatActivity() {
     private var selectedYear = 2023
-    val idEstudiante = 1 // Reemplaza con el ID del estudiante deseado
+    //val idEstudiante = ((intent.getStringExtra("alumno_id")).toString()).toInt() // Reemplaza con el ID del estudiante deseado
 
 
-    private var fechasPrueba = mutableListOf<Pair<Date, Boolean>>()
+    private var fechasPrueba = mutableListOf<Pair<Date, String>>()
     private fun agregarNuevaFecha(idEstudiante: Int) {
         val nuevaLista = fechasPrueba.toMutableList()
 
         obtenerAsistenciaDeEstudianteAsync(idEstudiante, object : MySQLConnection.OnAsistenciaObtenidaListener {
-            override fun onAsistenciaObtenida(asistencia: List<Pair<Date, Boolean>>) {
-                for ((fecha, boolean) in asistencia) {
+                override fun onAsistenciaObtenida(asistencia: List<Pair<Date, String>>) {
+                for ((fecha, string) in asistencia) { // Cambio en el nombre de la variable boolean a string
                     val calendar = Calendar.getInstance()
                     calendar.time = fecha
                     val year = calendar.get(Calendar.YEAR)
@@ -39,7 +39,7 @@ class CalendarioActivity : AppCompatActivity() {
                     val day = calendar.get(Calendar.DAY_OF_MONTH)
 
                     val nuevaFecha = createDate(year, month, day)
-                    nuevaLista.add(Pair(nuevaFecha, boolean))
+                    nuevaLista.add(Pair(nuevaFecha, string))
                 }
 
                 fechasPrueba = nuevaLista // Actualizar la lista con las fechas obtenidas
@@ -56,8 +56,8 @@ class CalendarioActivity : AppCompatActivity() {
         for (month in Calendar.JANUARY..Calendar.DECEMBER) {
             val monthView = container.getChildAt(month) as LinearLayout
             val tableLayout = monthView.findViewById<TableLayout>(R.id.tableLayout)
-            for ((fecha, boolean) in fechasPrueba) {
-                markAttendance(tableLayout, month, boolean, fecha)
+            for ((fecha, string) in fechasPrueba) {
+                markAttendance(tableLayout, month, string, fecha)
             }
         }
     }
@@ -83,7 +83,7 @@ class CalendarioActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        agregarNuevaFecha(idEstudiante)
+        agregarNuevaFecha((intent.getIntExtra("alumno_id", -1)))
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calendario)
 
@@ -216,7 +216,7 @@ class CalendarioActivity : AppCompatActivity() {
 
 
 
-    private fun markAttendance(tableLayout: TableLayout, selectedMonth: Int, boolean: Boolean, fecha: Date) {
+    private fun markAttendance(tableLayout: TableLayout, selectedMonth: Int, string: String, fecha: Date) {
 
         val calendar = Calendar.getInstance()
         val currentDate = Calendar.getInstance().time
@@ -253,13 +253,15 @@ class CalendarioActivity : AppCompatActivity() {
             val rowAsistio = tableLayout.getChildAt(weekIndex * 2) as TableRow
             val textView = rowAsistio.getChildAt(dayIndex) as TextView
             val cellBackgroundColor = when {
-                currentDate < fecha -> R.color.colorPending // Cambiar al recurso deseado para las clases pendientes
-                boolean -> R.color.colorPresent // Cambiar al recurso deseado para la asistencia
-                else -> R.color.colorAbsent // Cambiar al recurso deseado para las faltas
+                currentDate < fecha -> R.color.colorPending
+                string == "1" -> R.color.colorPresent
+                string == "2" -> R.color.colorRecuperation
+                string == "3" -> R.color.purple_200
+                string == "4" -> R.color.teal_200
+                else -> R.color.colorAbsent
             }
             textView.setBackgroundResource(cellBackgroundColor)
         }
-
 
     }
 }
