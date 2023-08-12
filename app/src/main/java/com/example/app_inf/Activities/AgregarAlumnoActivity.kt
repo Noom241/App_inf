@@ -18,6 +18,8 @@ class AgregarAlumnoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_agregar_alumno)
+        var status = intent.getStringExtra("status_Activity")
+
 
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         val btnNextAlumno1 = findViewById<Button>(R.id.btn_next_alumno1)
@@ -28,7 +30,8 @@ class AgregarAlumnoActivity : AppCompatActivity() {
 
         // Crear ArrayAdapter para los valores de Modalidad Alumno (Presencial/Virtual)
         val modalidadArray = arrayOf("Presencial", "Virtual")
-        val modalidadAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, modalidadArray)
+        val modalidadAdapter =
+            ArrayAdapter(this, android.R.layout.simple_spinner_item, modalidadArray)
         spnModalidadAlumno.adapter = modalidadAdapter
 
         // Crear ArrayAdapter para los valores de Paquete Alumno (A, B, C)
@@ -51,8 +54,6 @@ class AgregarAlumnoActivity : AppCompatActivity() {
             val horario = findViewById<Spinner>(R.id.spn_horario_alumno).selectedItem.toString()
             val paquete = findViewById<Spinner>(R.id.spn_paquete_alumno).selectedItem.toString()
 
-            val diasList = mutableListOf<String>() // Dejando la lista vacía
-            val asesoresMap = mutableMapOf<String, String>() // Dejando el mapa vacío
 
             val alumnoData = AlumnoData(
                 nombre,
@@ -65,38 +66,8 @@ class AgregarAlumnoActivity : AppCompatActivity() {
                 horario_semana = ""
             )
 
-            AgregarAlumnoAsyncTask().execute(alumnoData)
-            //startActivity(intent)
-        }
-    }
-
-    private inner class AgregarAlumnoAsyncTask : AsyncTask<AlumnoData, Void, Boolean>() {
-        override fun doInBackground(vararg params: AlumnoData?): Boolean {
-            val alumno = params[0]
-            return try {
-                if (alumno != null) {
-                    MySQLConnection.agregarAlumno(alumno)
-                } else {
-                    false
-                }
-            } catch (e: SQLException) {
-                e.printStackTrace()
-                false
-            }
-        }
-
-        override fun onPostExecute(result: Boolean) {
-            super.onPostExecute(result)
-            if (result) {
-                val intent = Intent(this@AgregarAlumnoActivity, PaquetesActivity::class.java)
-                val paquete_key = findViewById<Spinner>(R.id.spn_paquete_alumno).selectedItem.toString()
-                val horario_hora = findViewById<Spinner>(R.id.spn_horario_alumno).selectedItem.toString()
-                intent.putExtra("paquete_key", paquete_key)
-                intent.putExtra("horario_hora", horario_hora)
-                startActivity(intent)
-            } else {
-                // Mostrar mensaje de error o tomar alguna acción en caso de fallo
-            }
+            intent.putExtra("alumnoData", alumnoData)
+            startActivity(intent)
         }
     }
 }

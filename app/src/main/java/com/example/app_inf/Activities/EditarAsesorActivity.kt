@@ -133,6 +133,13 @@ class EditarAsesorActivity : AppCompatActivity() {
         }
 
     }
+
+    override fun onResume() {
+        super.onResume()
+        // Llamar a setupAutoCompleteViews() para actualizar la lista de nombres
+        setupAutoCompleteViews()
+    }
+
     // Ejecutar la tarea de obtener nombres de asesores en segundo plano
     private fun setupAutoCompleteViews() {
         // Fetch and set adapters for AutoCompleteTextViews using coroutines
@@ -150,6 +157,11 @@ class EditarAsesorActivity : AppCompatActivity() {
     }
 
     private fun silenceall(){
+        edit_Text_name.isEnabled = false
+        edit_Text_uni.isEnabled = false
+        edit_Text_telf.isEnabled = false
+
+        /*
         edit_Text_name.inputType = InputType.TYPE_NULL
         edit_Text_name.isFocusable = false
         edit_Text_name.isClickable = false
@@ -163,24 +175,31 @@ class EditarAsesorActivity : AppCompatActivity() {
         edit_Text_uni.inputType = InputType.TYPE_NULL
         edit_Text_uni.isFocusable = false
         edit_Text_uni.isClickable = false
-        edit_Text_uni.isLongClickable = false
+        edit_Text_uni.isLongClickable = false*/
     }
 
     private fun unmute() {
+        edit_Text_name.isEnabled = true
+        edit_Text_uni.isEnabled = true
+        edit_Text_telf.isEnabled = true
+        /*
         edit_Text_name.inputType = InputType.TYPE_TEXT_FLAG_MULTI_LINE or InputType.TYPE_CLASS_TEXT
         edit_Text_name.isFocusable = true
         edit_Text_name.isClickable = true
         edit_Text_name.isLongClickable = true
+        edit_Text_name.isEnabled = true
 
         edit_Text_telf.inputType = InputType.TYPE_CLASS_PHONE
         edit_Text_telf.isFocusable = true
         edit_Text_telf.isClickable = true
         edit_Text_telf.isLongClickable = true
+        edit_Text_telf.isEnabled = true
 
         edit_Text_uni.inputType = InputType.TYPE_TEXT_FLAG_MULTI_LINE or InputType.TYPE_CLASS_TEXT
         edit_Text_uni.isFocusable = true
         edit_Text_uni.isClickable = true
         edit_Text_uni.isLongClickable = true
+        edit_Text_uni.isEnabled = true*/
     }
 
     private fun confirm_and_Del(){
@@ -193,6 +212,7 @@ class EditarAsesorActivity : AppCompatActivity() {
         unmute()
         Status_activity = "Añadir"
         confirm_and_Del()
+        void_text()
         autoCompleteTextView.visibility = View.INVISIBLE
     }
 
@@ -224,30 +244,78 @@ class EditarAsesorActivity : AppCompatActivity() {
         }
         val diasSeparadosPorComas = diasSeleccionados.joinToString(", ")
 
-        val new_data = AsesorData(name,telf,diasSeparadosPorComas,uni)
+        val new_data = AsesorData(name,telf,uni,diasSeparadosPorComas)
 
         return(new_data)
     }
 
     private fun confirm_and_add(){
+        // Dentro de la función confirm_and_add()
         GlobalScope.launch(Dispatchers.Main) {
             E_Asesor_ViewModel.agregarAsesor(tomar_Datos_instance())
+
+            // Actualizar la lista de nombres de asesores
+            val nombresProfesores = E_Asesor_ViewModel.obtenerNombresDeProfesores()
+            val adapterProfesores = ArrayAdapter(
+                this@EditarAsesorActivity,
+                android.R.layout.simple_dropdown_item_1line,
+                nombresProfesores
+            )
+            autoCompleteTextView.setAdapter(adapterProfesores)
+
+            // Limpiar y mostrar la vista del AutoCompleteTextView
+            autoCompleteTextView.setText("")
+            autoCompleteTextView.visibility = View.VISIBLE
+
+            // Restaurar la actividad al estado de visualización
+            back()
         }
+
+
     }
 
     private fun confirm_edit(){
 
+        // Dentro de la función confirm_edit()
         GlobalScope.launch(Dispatchers.Main) {
-            E_Asesor_ViewModel.actualizarProfesor(id_actual, tomar_Datos_instance().nombre,tomar_Datos_instance().telefono,tomar_Datos_instance().universidad)
+            E_Asesor_ViewModel.actualizarProfesor(
+                id_actual,
+                tomar_Datos_instance().nombre,
+                tomar_Datos_instance().telefono,
+                tomar_Datos_instance().universidad,
+                tomar_Datos_instance().Horario_semana
+            )
+
+            // Actualizar la lista de nombres de asesores
+            val nombresProfesores = E_Asesor_ViewModel.obtenerNombresDeProfesores()
+            val adapterProfesores = ArrayAdapter(
+                this@EditarAsesorActivity,
+                android.R.layout.simple_dropdown_item_1line,
+                nombresProfesores
+            )
+            autoCompleteTextView.setAdapter(adapterProfesores)
+
+            // Limpiar y mostrar la vista del AutoCompleteTextView
+            autoCompleteTextView.setText("")
+            autoCompleteTextView.visibility = View.VISIBLE
+
+            // Restaurar la actividad al estado de visualización
+            back()
         }
+
 
     }
 
-    private fun back(){
-        silenceall()
+    private fun void_text(){
+        autoCompleteTextView.setText("")
         edit_Text_name.setText("")
         edit_Text_telf.setText("")
         edit_Text_uni.setText("")
+    }
+
+    private fun back(){
+        void_text()
+        silenceall()
         val checkBoxes = listOf(chk_lunes, chk_martes, chk_miercoles, chk_jueves, chk_viernes)
         for (checkBox in checkBoxes) {
             checkBox.isChecked = false

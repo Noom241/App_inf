@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.widget.Button
 import androidx.activity.ComponentActivity
+import com.example.app_inf.Activities.Alumno_interface_v
 import com.example.app_inf.Activities.AlumnosActivity
 import com.example.app_inf.Activities.AsesoresActivity
 import com.example.app_inf.Activities.AsistenciaActivity
@@ -39,7 +40,7 @@ class MainActivity : ComponentActivity() {
         }
 
         btnAlumnos.setOnClickListener {
-            val intent = Intent(this, AlumnosActivity::class.java)
+            val intent = Intent(this, Alumno_interface_v::class.java)
             startActivity(intent)
         }
 

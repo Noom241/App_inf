@@ -8,20 +8,32 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import com.example.app_inf.R
+import com.example.app_inf.ViewModel.AsistenciaViewModel
+import com.example.app_inf.data.AlumnoData
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class PaquetesActivity : AppCompatActivity() {
 
+    private lateinit var Regis_alum_ViewModel: AsistenciaViewModel
     private lateinit var spinner1: Spinner
     private lateinit var spinner2: Spinner
     private lateinit var spinner3: Spinner
     private lateinit var spinner4: Spinner
     private lateinit var variableString: String
+    private lateinit var usuario: AlumnoData
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_paquetes)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+        Regis_alum_ViewModel = ViewModelProvider(this).get(AsistenciaViewModel::class.java)
+
+        val usuario_extra = intent.getSerializableExtra("alumnoData") as? AlumnoData
+        usuario = usuario_extra!!
 
         initializeViews()
         setupSpinners()
@@ -30,8 +42,8 @@ class PaquetesActivity : AppCompatActivity() {
     }
 
     private fun initializeViews() {
-        val paquete_key = intent.getStringExtra("paquete_key")
-        variableString = paquete_key ?: ""
+
+        variableString = usuario.paquete_elegido
 
         spinner1 = findViewById(R.id.spinner_left_top)
         spinner2 = findViewById(R.id.spinner_right_top)
@@ -76,11 +88,13 @@ class PaquetesActivity : AppCompatActivity() {
 
                 if (isNoRepetition) {
                     val selectedValuesString = selectedValues.filterNot { it == "-----" }.joinToString(",")
-                    val intent = Intent(this, AsesorAlumnoActivity::class.java)
-                    intent.putExtra("horario_hora", intent.getStringExtra("horario_hora"))
-                    intent.putExtra("selected_values", selectedValuesString)
-                    intent.putExtra("paquete_key", variableString)
-                    startActivity(intent)
+                    usuario.horario_semana = selectedValuesString
+                    val intent = Intent(this, AlumnosActivity::class.java)
+                    GlobalScope.launch(Dispatchers.Main) {
+                        Regis_alum_ViewModel.agregarAlumno(usuario)
+                        startActivity(intent)
+                    }
+
                 } else {
                     val errorMessage = "No se pueden repetir días."
                     Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()

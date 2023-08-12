@@ -47,9 +47,9 @@ class AsistenciaViewModel : ViewModel() {
         }
     }
 
-    suspend fun actualizarProfesor(id: Int, nombre: String, telefono:String, uni:String){
+    suspend fun actualizarProfesor(id: Int, nombre: String, telefono:String, uni:String, horario_semana:String){
         return withContext(Dispatchers.IO) {
-            MySQLConnection.actualizarProfesor(id, nombre, telefono, uni)
+            MySQLConnection.actualizarProfesor(id, nombre, telefono, uni, horario_semana)
         }
     }
 

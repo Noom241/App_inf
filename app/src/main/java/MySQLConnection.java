@@ -282,15 +282,15 @@ public class MySQLConnection {
             return false;
         }
     }
-
-    public static boolean actualizarProfesor(int profesorID, String nuevoNombre, String nuevoTelefono, String nuevaUniversidad) {
+    public static boolean actualizarProfesor(int profesorID, String nuevoNombre, String nuevoTelefono, String nuevaUniversidad, String nuevoHorarioSemana) {
         try (Connection connection = getConnection()) {
-            String storedProcedureCall = "{ CALL ActualizarProfesor(?, ?, ?, ?) }";
+            String storedProcedureCall = "{ CALL ActualizarProfesor(?, ?, ?, ?, ?) }";
             try (PreparedStatement statement = connection.prepareCall(storedProcedureCall)) {
                 statement.setInt(1, profesorID);
                 statement.setString(2, nuevoNombre);
                 statement.setString(3, nuevoTelefono);
                 statement.setString(4, nuevaUniversidad);
+                statement.setString(5, nuevoHorarioSemana);
                 statement.executeUpdate();
                 return true;
             }
