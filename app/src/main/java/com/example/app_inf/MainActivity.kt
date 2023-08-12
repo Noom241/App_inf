@@ -1,6 +1,7 @@
 package com.example.app_inf
 
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
@@ -13,6 +14,7 @@ import com.example.app_inf.Activities.InformeActivity
 
 class MainActivity : ComponentActivity() {
 
+    @SuppressLint("WrongViewCast")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)

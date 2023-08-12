@@ -1,6 +1,5 @@
 package com.example.app_inf.Activities
 
-
 import MySQLConnection
 import MySQLConnection.obtenerAsistenciaDeEstudianteAsync
 import android.os.Bundle
@@ -17,7 +16,6 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
-import android.os.AsyncTask
 
 
 class CalendarioActivity : AppCompatActivity() {
@@ -61,20 +59,12 @@ class CalendarioActivity : AppCompatActivity() {
             }
         }
     }
-
-
-
-
     private fun imprimirFechasPrueba() {
         println("Contenido de fechasPrueba:")
         for ((fecha, asistio) in fechasPrueba) {
             println("Fecha: $fecha, Asistió: $asistio")
         }
     }
-
-
-
-
 
     private fun createDate(year: Int, month: Int, day: Int): Date {
         val calendar = Calendar.getInstance()
@@ -86,6 +76,8 @@ class CalendarioActivity : AppCompatActivity() {
         agregarNuevaFecha(idEstudiante)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calendario)
+
+
 
         val container = findViewById<LinearLayout>(R.id.container)
 
@@ -188,7 +180,6 @@ class CalendarioActivity : AppCompatActivity() {
         return monthView
     }
 
-
     private fun createTextView(text: String): TextView {
         val textView = TextView(this)
         textView.text = text
@@ -212,9 +203,6 @@ class CalendarioActivity : AppCompatActivity() {
 
         return textView
     }
-
-
-
 
     private fun markAttendance(tableLayout: TableLayout, selectedMonth: Int, boolean: Boolean, fecha: Date) {
 

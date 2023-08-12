@@ -6,12 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".Activities.InformeActivity">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline28"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline32"
+        app:layout_constraintEnd_toStartOf="@+id/guideline30"
+        app:layout_constraintStart_toStartOf="@+id/guideline29"
+        app:layout_constraintTop_toTopOf="@+id/guideline31">
+
+        <LinearLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|center_horizontal"
+            android:orientation="vertical" />
+    </ScrollView>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline29"
@@ -41,100 +50,18 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.9" />
 
-    <TextView
-        android:id="@+id/txt_informe_asesor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/asesores_txt_informe"
-        android:textSize="35sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline31"
-        app:layout_constraintEnd_toStartOf="@+id/guideline28"
-        app:layout_constraintStart_toStartOf="@+id/guideline29"
-        app:layout_constraintTop_toTopOf="@+id/guideline34" />
-
-    <TextView
-        android:id="@+id/txt_informe_alumno"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/alumnos_txt_informe"
-        android:textSize="35sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline31"
-        app:layout_constraintEnd_toStartOf="@+id/guideline30"
-        app:layout_constraintStart_toStartOf="@+id/guideline28"
-        app:layout_constraintTop_toTopOf="@+id/guideline34" />
-
-    <AutoCompleteTextView
-        android:id="@+id/autoCompleteTextView5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30sp"
-        android:minHeight="48dp"
-        android:text="@string/buscar_asesor_informe"
-        app:layout_constraintBottom_toTopOf="@+id/btn_asesor_asistencia"
-        app:layout_constraintEnd_toStartOf="@+id/guideline28"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline29"
-        app:layout_constraintTop_toTopOf="@+id/guideline31"
-        app:layout_constraintWidth="0sp"
-        tools:ignore="LabelFor,VisualLintTextFieldSize" />
-
     <AutoCompleteTextView
         android:id="@+id/autoCompleteTextView6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30sp"
+        android:layout_width="587dp"
+        android:layout_height="43dp"
         android:minHeight="48dp"
         android:text="@string/buscar_alumno_informe"
-        app:layout_constraintBottom_toTopOf="@+id/btn_alumno_asistencia"
-        app:layout_constraintEnd_toStartOf="@+id/guideline30"
-        app:layout_constraintStart_toStartOf="@+id/guideline28"
-        app:layout_constraintTop_toTopOf="@+id/guideline31"
+        app:layout_constraintBottom_toTopOf="@+id/guideline31"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton_download"
+        app:layout_constraintStart_toStartOf="@+id/guideline29"
+        app:layout_constraintTop_toTopOf="@+id/guideline34"
         app:layout_constraintWidth="0sp"
         tools:ignore="LabelFor,VisualLintTextFieldSize" />
-
-    <Button
-        android:id="@+id/btn_asesor_asistencia"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/ver_asistencia_aesor"
-        app:layout_constraintBottom_toTopOf="@id/btn_asesor_pdf"
-        app:layout_constraintEnd_toStartOf="@+id/guideline28"
-        app:layout_constraintStart_toStartOf="@+id/guideline29"
-        app:layout_constraintTop_toBottomOf="@id/autoCompleteTextView5"
-        tools:ignore="DuplicateSpeakableTextCheck" />
-
-    <Button
-        android:id="@+id/btn_asesor_pdf"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/generar_pdf_asesor"
-        app:layout_constraintBottom_toTopOf="@+id/guideline32"
-        app:layout_constraintEnd_toStartOf="@+id/guideline28"
-        app:layout_constraintStart_toStartOf="@+id/guideline29"
-        app:layout_constraintTop_toBottomOf="@+id/btn_asesor_asistencia"
-        tools:ignore="DuplicateSpeakableTextCheck" />
-
-    <Button
-        android:id="@+id/btn_alumno_asistencia"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/ver_asistencia_alumno"
-        app:layout_constraintTop_toBottomOf="@id/autoCompleteTextView6"
-        app:layout_constraintBottom_toTopOf="@id/btn_alumno_pdf"
-        app:layout_constraintEnd_toStartOf="@+id/guideline30"
-        app:layout_constraintStart_toStartOf="@+id/guideline28"
-        />
-
-    <Button
-        android:id="@+id/btn_alumno_pdf"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/generar_pdf_alumno"
-        app:layout_constraintBottom_toTopOf="@+id/guideline32"
-        app:layout_constraintEnd_toStartOf="@+id/guideline30"
-        app:layout_constraintStart_toStartOf="@+id/guideline28"
-        app:layout_constraintTop_toBottomOf="@+id/btn_alumno_asistencia"
-        />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline34"
@@ -142,4 +69,16 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.051679585" />
+
+    <ImageButton
+        android:id="@+id/imageButton_download"
+        android:layout_width="140dp"
+        android:layout_height="50dp"
+        android:backgroundTint="#00FFFFFF"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@+id/guideline31"
+        app:layout_constraintEnd_toStartOf="@+id/guideline30"
+        app:layout_constraintTop_toTopOf="@+id/guideline34"
+        app:srcCompat="@drawable/kisspng_computer_icons_button_portable_network_graphics_sc_ecommerce_download_digital_item_svg_png_icon_free_5b907709460cf2_8286122215361943132869" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
