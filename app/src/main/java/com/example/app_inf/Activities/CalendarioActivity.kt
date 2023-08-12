@@ -2,7 +2,6 @@ package com.example.app_inf.Activities
 
 
 import MySQLConnection
-import MySQLConnection.obtenerAsistenciaDeEstudianteAsync
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.Gravity
@@ -18,38 +17,59 @@ import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 import android.os.AsyncTask
+import androidx.lifecycle.ViewModelProvider
+import com.example.app_inf.ViewModel.AsistenciaViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 class CalendarioActivity : AppCompatActivity() {
+    private lateinit var Calendar_ViewModel: AsistenciaViewModel
     private var selectedYear = 2023
     //val idEstudiante = ((intent.getStringExtra("alumno_id")).toString()).toInt() // Reemplaza con el ID del estudiante deseado
 
 
     private var fechasPrueba = mutableListOf<Pair<Date, String>>()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        agregarNuevaFecha((intent.getIntExtra("alumno_id", -1)))
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_calendario)
+        Calendar_ViewModel = ViewModelProvider(this).get(AsistenciaViewModel::class.java)
+
+
+        val container = findViewById<LinearLayout>(R.id.container)
+
+        for (month in Calendar.JANUARY..Calendar.DECEMBER) {
+            val monthView = createMonthView(month)
+            container.addView(monthView)
+        }
+    }
     private fun agregarNuevaFecha(idEstudiante: Int) {
         val nuevaLista = fechasPrueba.toMutableList()
 
-        obtenerAsistenciaDeEstudianteAsync(idEstudiante, object : MySQLConnection.OnAsistenciaObtenidaListener {
-                override fun onAsistenciaObtenida(asistencia: List<Pair<Date, String>>) {
-                for ((fecha, string) in asistencia) { // Cambio en el nombre de la variable boolean a string
-                    val calendar = Calendar.getInstance()
-                    calendar.time = fecha
-                    val year = calendar.get(Calendar.YEAR)
-                    val month = calendar.get(Calendar.MONTH) + 1
-                    val day = calendar.get(Calendar.DAY_OF_MONTH)
+        GlobalScope.launch(Dispatchers.Main) {
+            for ((fecha, string) in Calendar_ViewModel.obtenerAsistenciaDeEstudiante(idEstudiante)) { // Cambio en el nombre de la variable boolean a string
+                val calendar = Calendar.getInstance()
+                calendar.time = fecha
+                val year = calendar.get(Calendar.YEAR)
+                val month = calendar.get(Calendar.MONTH) + 1
+                val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-                    val nuevaFecha = createDate(year, month, day)
-                    nuevaLista.add(Pair(nuevaFecha, string))
-                }
-
-                fechasPrueba = nuevaLista // Actualizar la lista con las fechas obtenidas
-                imprimirFechasPrueba()
-
-                // Llamar a markAttendance aquí después de que la lista se haya actualizado
-                markAttendanceForAllMonths()
+                val nuevaFecha = createDate(year, month, day)
+                nuevaLista.add(Pair(nuevaFecha, string))
             }
-        })
+
+            fechasPrueba = nuevaLista // Actualizar la lista con las fechas obtenidas
+            imprimirFechasPrueba()
+
+            // Llamar a markAttendance aquí después de que la lista se haya actualizado
+            markAttendanceForAllMonths()
+        }
+
     }
+
 
     private fun markAttendanceForAllMonths() {
         val container = findViewById<LinearLayout>(R.id.container)
@@ -82,18 +102,7 @@ class CalendarioActivity : AppCompatActivity() {
         return calendar.time
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        agregarNuevaFecha((intent.getIntExtra("alumno_id", -1)))
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_calendario)
 
-        val container = findViewById<LinearLayout>(R.id.container)
-
-        for (month in Calendar.JANUARY..Calendar.DECEMBER) {
-            val monthView = createMonthView(month)
-            container.addView(monthView)
-        }
-    }
 
     private fun createMonthView(month: Int): View {
 

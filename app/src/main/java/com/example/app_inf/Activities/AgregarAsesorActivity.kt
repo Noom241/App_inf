@@ -28,6 +28,9 @@ class AgregarAsesorActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_agregar_asesor)
+    }
+}
+        /*
 
         // Obtener referencias a los elementos EditText dentro de TextInputLayout
         val nombreLayout = findViewById<TextInputLayout>(R.id.rd_nombre_asesor)
@@ -110,5 +113,4 @@ class AgregarAsesorActivity : AppCompatActivity() {
         }
     }
 
-    // Resto de tus funciones...
-}
+    // Resto de tus funciones...*/

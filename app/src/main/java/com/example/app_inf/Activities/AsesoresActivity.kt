@@ -32,31 +32,21 @@ class AsesoresActivity : ComponentActivity() {
             val intent = Intent(this, AgregarAsesorActivity::class.java)
             startActivity(intent)
         }
+        /*
 
         autoCompleteTextView.setOnItemClickListener { _, _, position, _ ->
             val selectedName = autoCompleteTextView.adapter.getItem(position) as String
             FetchAsesorDataTask(txtNombreAsesor, txtTelefonoAsesor, txtHorarioAsesor, txtUniversidadAsesor).execute(selectedName)
-        }
+        }*/
 
         // Ejecutar la tarea de obtener nombres de asesores en segundo plano
-        FetchNamesTask(autoCompleteTextView).execute()
+        //FetchNamesTask(autoCompleteTextView).execute()
 
         autoCompleteTextView.setOnClickListener {
             autoCompleteTextView.showDropDown()
         }
     }
 
-    private inner class FetchNamesTask(private val autoCompleteTextView: AutoCompleteTextView) :
-        AsyncTask<Void, Void, List<String>>() {
 
-        override fun doInBackground(vararg params: Void?): List<String> {
-            return MySQLConnection.obtenerNombresDeProfesores()
-        }
-
-        override fun onPostExecute(names: List<String>) {
-            val adapter = ArrayAdapter(this@AsesoresActivity, android.R.layout.simple_dropdown_item_1line, names)
-            autoCompleteTextView.setAdapter(adapter)
-        }
-    }
 
 }

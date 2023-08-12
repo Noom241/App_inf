@@ -10,14 +10,21 @@ import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.ComponentActivity
+import androidx.lifecycle.ViewModelProvider
 import com.example.app_inf.FetchAlumnosDataTask
 import com.example.app_inf.R
+import com.example.app_inf.ViewModel.AsistenciaViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class AlumnosActivity : ComponentActivity() {
+    private lateinit var AlumnosActivity_ViewModel: AsistenciaViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_alumnos)
+        AlumnosActivity_ViewModel = ViewModelProvider(this).get(AsistenciaViewModel::class.java)
 
         val autoCompleteTextView = findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView2)
         val txtNombreAlumno = findViewById<TextView>(R.id.txt_nombre_alumno)
@@ -40,7 +47,17 @@ class AlumnosActivity : ComponentActivity() {
 
         autoCompleteTextView.setOnItemClickListener { _, _, position, _ ->
             val selectedName = autoCompleteTextView.adapter.getItem(position) as String
-            FetchAlumnosDataTask(txtNombreAlumno, txtApoderadoAlumno, txtTelefonoApoderado, txtColegioAlumno, txtModalidadAlumno, txtHorarioAlumno, txtPaqueteAlumno).execute(selectedName)
+            GlobalScope.launch(Dispatchers.Main) {
+                val alumno = AlumnosActivity_ViewModel.obtenerEstudiantePorNombre(selectedName)
+                txtNombreAlumno.text = alumno?.nombre ?: ""
+                txtApoderadoAlumno.text = alumno?.apoderado ?: ""
+                txtTelefonoApoderado.text = alumno?.telefonoApoderado ?: ""
+                txtColegioAlumno.text = alumno?.colegio ?: ""
+                txtModalidadAlumno.text = alumno?.modalidad ?: ""
+                txtHorarioAlumno.text = alumno?.horario.toString()
+                txtPaqueteAlumno.text = alumno?.paquete_elegido ?: ""
+                //agregar txt para dias de semana que tiene clase
+            }
         }
 
         val btnDeleteAlumno = findViewById<Button>(R.id.btn_delete_Alumno)
@@ -75,24 +92,16 @@ class AlumnosActivity : ComponentActivity() {
         builder.setTitle("Confirmar borrado")
         builder.setMessage("¿Seguro que deseas borrar este alumno?")
         builder.setPositiveButton("Sí") { _, _ ->
-            borrarAlumno(nombreAlumno)
+            GlobalScope.launch(Dispatchers.Main) {
+                AlumnosActivity_ViewModel.borrarAlumno(nombreAlumno)
+            }
+
         }
         builder.setNegativeButton("No", null)
         builder.show()
     }
 
-    private fun borrarAlumno(nombreAlumno: String) {
-        MySQLConnection.borrarAlumnoEnSegundoPlano(nombreAlumno, object : MySQLConnection.OnAlumnoBorradoListener {
-            override fun onAlumnoBorrado(borradoExitoso: Boolean) {
-                if (borradoExitoso) {
-                    mostrarMensaje("Alumno eliminado correctamente")
-                    // Aquí puedes realizar cualquier acción necesaria después de la eliminación exitosa
-                } else {
-                    mostrarMensaje("Error al eliminar el alumno")
-                }
-            }
-        })
-    }
+
 
     private fun mostrarMensaje(mensaje: String) {
         val builder = AlertDialog.Builder(this)

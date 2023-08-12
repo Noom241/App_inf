@@ -18,6 +18,7 @@ class AgregarAlumnoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_agregar_alumno)
+
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         val btnNextAlumno1 = findViewById<Button>(R.id.btn_next_alumno1)
         // Obtener referencias a los spinners
@@ -59,10 +60,9 @@ class AgregarAlumnoActivity : AppCompatActivity() {
                 telefonoApoderado,
                 colegio,
                 modalidad,
-                horario,
+                horario.toInt(),
                 paquete,
-                diasList,
-                asesoresMap
+                horario_semana = ""
             )
 
             AgregarAlumnoAsyncTask().execute(alumnoData)

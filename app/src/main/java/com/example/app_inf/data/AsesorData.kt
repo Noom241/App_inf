@@ -5,6 +5,6 @@ import android.widget.TextView
 data class AsesorData(
     var nombre: String,
     var telefono: String,
-    var horario: String,
-    var universidad: String
+    var universidad: String,
+    var Horario_semana: String
 )

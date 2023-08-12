@@ -6,8 +6,7 @@ data class AlumnoData(
     val telefonoApoderado: String,
     val colegio: String,
     val modalidad: String,
-    val horario: String,
-    val paquete: String,
-    val dias: List<String>,
-    val asesores: Map<String, String>
+    val horario: Int,
+    val paquete_elegido: String,
+    val horario_semana: String
 )

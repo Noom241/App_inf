@@ -9,6 +9,7 @@ import androidx.activity.ComponentActivity
 import com.example.app_inf.Activities.AlumnosActivity
 import com.example.app_inf.Activities.AsesoresActivity
 import com.example.app_inf.Activities.AsistenciaActivity
+import com.example.app_inf.Activities.EditarAsesorActivity
 import com.example.app_inf.Activities.InformeActivity
 
 class MainActivity : ComponentActivity() {
@@ -33,7 +34,7 @@ class MainActivity : ComponentActivity() {
         }
 
         btnAsesores.setOnClickListener {
-            val intent = Intent(this, AsesoresActivity::class.java)
+            val intent = Intent(this, EditarAsesorActivity::class.java)
             startActivity(intent)
         }
 
