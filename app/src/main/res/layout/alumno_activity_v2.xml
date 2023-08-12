@@ -12,6 +12,7 @@
         android:id="@+id/search_alum"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:imeOptions="actionDone"
         android:layout_marginBottom="16dp"
         android:completionThreshold="1"
         android:hint="@string/buscar" />
@@ -37,6 +38,7 @@
                     android:hint="Nombre">
 
                     <EditText
+                        android:id="@+id/editTextNombre"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="text" />
@@ -48,6 +50,7 @@
                     android:hint="Teléfono">
 
                     <EditText
+                        android:id="@+id/editTextTelefono"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="text" />
@@ -66,6 +69,7 @@
                     android:hint="Apoderado">
 
                     <EditText
+                        android:id="@+id/editTextApoderado"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="text" />
@@ -77,6 +81,7 @@
                     android:hint="Colegio">
 
                     <EditText
+                        android:id="@+id/editTextColegio"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="text" />
@@ -124,6 +129,7 @@
             android:layout_weight="1">
 
             <CheckBox
+                android:id="@+id/checkbox_lunes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -131,6 +137,7 @@
                 android:text="@string/lunes" />
 
             <CheckBox
+                android:id="@+id/checkbox_martes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -138,6 +145,7 @@
                 android:text="@string/martes" />
 
             <CheckBox
+                android:id="@+id/checkbox_miercoles"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -145,6 +153,7 @@
                 android:text="@string/miercoles" />
 
             <CheckBox
+                android:id="@+id/checkbox_jueves"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -152,6 +161,7 @@
                 android:text="@string/jueves" />
 
             <CheckBox
+                android:id="@+id/checkbox_viernes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -168,6 +178,7 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/button_agregar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
@@ -176,6 +187,7 @@
             android:text="@string/add_button" />
 
         <Button
+            android:id="@+id/button_actualizar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
@@ -184,6 +196,7 @@
             android:text="@string/actualizar_edit_btn" />
 
         <Button
+            android:id="@+id/button_eliminar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"

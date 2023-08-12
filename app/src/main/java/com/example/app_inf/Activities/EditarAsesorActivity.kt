@@ -88,8 +88,6 @@ class EditarAsesorActivity : AppCompatActivity() {
 
                     val diasSeleccionados = asesor_new.Horario_semana.replace(" ", "").split(",")
 
-                    
-
                     chk_lunes.isChecked = diasSeleccionados.contains("Lunes")
                     chk_martes.isChecked = diasSeleccionados.contains("Martes")
                     chk_miercoles.isChecked = diasSeleccionados.contains("Miércoles")

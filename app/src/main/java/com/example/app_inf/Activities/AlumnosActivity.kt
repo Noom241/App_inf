@@ -66,7 +66,6 @@ class AlumnosActivity : ComponentActivity() {
         val btnDeleteAlumno = findViewById<Button>(R.id.btn_delete_Alumno)
         btnDeleteAlumno.setOnClickListener {
             val autoCompleteTextView = findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView2)
-            mostrarDialogoConfirmacion(autoCompleteTextView.text.toString())
         }
         // Ejecutar la tarea de obtener nombres de alumnos en segundo plano
         FetchNamesTask(autoCompleteTextView).execute()
@@ -89,19 +88,6 @@ class AlumnosActivity : ComponentActivity() {
             val adapter = ArrayAdapter(this@AlumnosActivity, android.R.layout.simple_dropdown_item_1line, names)
             autoCompleteTextView.setAdapter(adapter)
         }
-    }
-    private fun mostrarDialogoConfirmacion(nombreAlumno: String) {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("Confirmar borrado")
-        builder.setMessage("¿Seguro que deseas borrar este alumno?")
-        builder.setPositiveButton("Sí") { _, _ ->
-            GlobalScope.launch(Dispatchers.Main) {
-                AlumnosActivity_ViewModel.borrarAlumno(nombreAlumno)
-            }
-
-        }
-        builder.setNegativeButton("No", null)
-        builder.show()
     }
 
 
