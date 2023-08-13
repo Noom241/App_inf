@@ -139,6 +139,8 @@ class InformeActivity : AppCompatActivity() {
 
 
     private fun generateAndDownloadPDF() {
+
+
         // Verificar si se tienen los permisos de escritura en tiempo de ejecución
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
             == PackageManager.PERMISSION_GRANTED) {
@@ -147,13 +149,17 @@ class InformeActivity : AppCompatActivity() {
             createAndSavePDF()
             generateAndDownloadPNG()
         } else {
-            // Permiso no otorgado, solicitar permiso en tiempo de ejecución
-            println("Permission not granted. Requesting permission.")
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                PackageManager.PERMISSION_GRANTED
-            )
+            while(ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED){
+                // Permiso no otorgado, solicitar permiso en tiempo de ejecución
+                println("Permission not granted. Requesting permission.")
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                    PackageManager.PERMISSION_GRANTED
+                )
+            }
+
         }
     }
 
@@ -203,7 +209,7 @@ class InformeActivity : AppCompatActivity() {
     private fun createAndSavePDF() {
         println("Creating PDF.")
 
-        val pdfFileName = "informe.png"
+        val pdfFileName = "informe.pdf"
         val pdfFile = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), pdfFileName)
 
         try {
