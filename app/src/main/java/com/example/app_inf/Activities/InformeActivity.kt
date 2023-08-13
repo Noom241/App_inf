@@ -1,7 +1,7 @@
 package com.example.app_inf.Activities
 
-
 import MySQLConnection.obtenerAsistenciaDeEstudianteAsync
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
@@ -18,6 +18,9 @@ import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import android.Manifest
 import com.example.app_inf.R
 import java.io.File
 import java.io.FileOutputStream
@@ -30,6 +33,10 @@ import java.util.Locale
 class InformeActivity : AppCompatActivity() {
     private var selectedYear = 2023
     private val idEstudiante = 1 // Reemplaza con el ID del estudiante deseado
+
+    private val WRITE_EXTERNAL_STORAGE_PERMISSION_CODE = 123 // Puedes usar cualquier código
+
+    private lateinit var view: View
 
 
     private var fechasPrueba = mutableListOf<Pair<Date, Boolean>>()
@@ -88,9 +95,11 @@ class InformeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_informe)
 
+        view = findViewById(R.id.container)
+
 
         val container = findViewById<LinearLayout>(R.id.container)
-        val view = layoutInflater.inflate(R.layout.activity_informe, null)
+
 
         val width = view.width
         val height = view.height
@@ -118,45 +127,101 @@ class InformeActivity : AppCompatActivity() {
 
         val imageButton_download = findViewById<ImageButton>(R.id.imageButton_download)
 
-        //fin id
         imageButton_download.setOnClickListener {
-            generateAndDownloadPDF  ()
+            generateAndDownloadPDF()
         }
 
         for (month in Calendar.JANUARY..Calendar.DECEMBER) {
             val monthView = createMonthView(month)
             container.addView(monthView)
         }
-
     }
 
+
     private fun generateAndDownloadPDF() {
-        // Crear un bitmap como se explicó anteriormente
-        val bitmap = createBitmap()
+        // Verificar si se tienen los permisos de escritura en tiempo de ejecución
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            == PackageManager.PERMISSION_GRANTED) {
+            // Permiso otorgado, puedes crear y descargar el archivo PDF
+            println("Permission granted. Creating and saving PDF.")
+            createAndSavePDF()
+            generateAndDownloadPNG()
+        } else {
+            // Permiso no otorgado, solicitar permiso en tiempo de ejecución
+            println("Permission not granted. Requesting permission.")
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                PackageManager.PERMISSION_GRANTED
+            )
+        }
+    }
 
-        // Crear un documento PDF
-        val pdfDocument = PdfDocument()
+    private fun generateAndDownloadPNG() {
+        // Verificar si se tienen los permisos de escritura en tiempo de ejecución
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            == PackageManager.PERMISSION_GRANTED) {
+            // Permiso otorgado, puedes crear y descargar el archivo PNG
+            createAndSavePNG()
+        } else {
+            // Permiso no otorgado, solicitar permiso en tiempo de ejecución
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                WRITE_EXTERNAL_STORAGE_PERMISSION_CODE
+            )
+        }
+    }
 
-        // Crear una página en el documento
-        val pageInfo = PdfDocument.PageInfo.Builder(bitmap.width, bitmap.height, 1).create()
-        val page = pdfDocument.startPage(pageInfo)
+    private fun createAndSavePNG() {
+        // Capturar la vista container como un bitmap
+        val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        view.draw(canvas)
 
-        // Dibujar el bitmap en la página
-        val canvas = page.canvas
-        canvas.drawBitmap(bitmap, 0f, 0f, null)
+        // Guardar el bitmap como una imagen PNG en el almacenamiento externo
+        val pngFileName = "informeaaaa.png"
+        val pngFile = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), pngFileName)
 
-        // Finalizar la página
-        pdfDocument.finishPage(page)
+        try {
+            val fileOutputStream = FileOutputStream(pngFile)
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream)
+            fileOutputStream.close()
 
-        // Guardar el archivo PDF en el almacenamiento externo
-        val pdfFileName = "informe.pdf"
+            // Mostrar mensaje de éxito o abrir la imagen PNG
+            // Por ejemplo, puedes abrir la imagen con una aplicación de visor de imágenes
+            // usando una Intención (Intent).
+        } catch (e: IOException) {
+            // Manejar la excepción, mostrar un mensaje de error, etc.
+            e.printStackTrace()
+        }
+    }
+
+
+
+
+    private fun createAndSavePDF() {
+        println("Creating PDF.")
+
+        val pdfFileName = "informe.png"
         val pdfFile = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), pdfFileName)
 
         try {
             val fileOutputStream = FileOutputStream(pdfFile)
+            val pdfDocument = PdfDocument()
+
+            val pageInfo = PdfDocument.PageInfo.Builder(view.width, view.height, 1).create()
+            val page = pdfDocument.startPage(pageInfo)
+
+            val canvas = page.canvas
+            view.draw(canvas)
+
+            pdfDocument.finishPage(page)
             pdfDocument.writeTo(fileOutputStream)
             fileOutputStream.close()
             pdfDocument.close()
+
+            println("PDF created and saved successfully.")
 
             // Mostrar mensaje de éxito o abrir el archivo PDF
             // Por ejemplo, puedes abrir el archivo PDF con un lector de PDFs
@@ -164,8 +229,31 @@ class InformeActivity : AppCompatActivity() {
         } catch (e: IOException) {
             // Manejar la excepción, mostrar un mensaje de error, etc.
             e.printStackTrace()
+            println("Error while creating or saving PDF.")
         }
     }
+
+
+    // Manejar la respuesta de solicitud de permisos
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == WRITE_EXTERNAL_STORAGE_PERMISSION_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permiso otorgado, puedes crear y descargar el archivo PDF
+                println("Permission granted. Creating and saving PDF.")
+                createAndSavePDF()
+            } else {
+                // Permiso no otorgado, maneja esta situación como sea necesario
+                // Por ejemplo, muestra un mensaje al usuario
+                println("Permission not granted. Cannot create PDF.")
+            }
+        }
+    }
+
 
 
     private fun createBitmap():Bitmap {
@@ -307,8 +395,6 @@ class InformeActivity : AppCompatActivity() {
         firstDayOfMonth.set(Calendar.DAY_OF_MONTH, 1)
         val isFirstDaySunday = firstDayOfMonth.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY
 
-
-
         println(fecha)
         if (calendar.get(Calendar.MONTH) == selectedMonth) {
             var weekIndex = calendar.get(Calendar.WEEK_OF_MONTH)
@@ -329,7 +415,6 @@ class InformeActivity : AppCompatActivity() {
 
             }
 
-
             val rowAsistio = tableLayout.getChildAt(weekIndex * 2) as TableRow
             val textView = rowAsistio.getChildAt(dayIndex) as TextView
             val cellBackgroundColor = when {
@@ -339,7 +424,6 @@ class InformeActivity : AppCompatActivity() {
             }
             textView.setBackgroundResource(cellBackgroundColor)
         }
-
 
     }
 }
