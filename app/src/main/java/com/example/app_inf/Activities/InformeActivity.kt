@@ -30,13 +30,18 @@ import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
-class InformeActivity : AppCompatActivity() {
+class InformeActivity : AppCompatActivity(), ActivityCompat.OnRequestPermissionsResultCallback {
     private var selectedYear = 2023
     private val idEstudiante = 1 // Reemplaza con el ID del estudiante deseado
 
     private val WRITE_EXTERNAL_STORAGE_PERMISSION_CODE = 123 // Puedes usar cualquier código
 
     private lateinit var view: View
+
+    companion object {
+        private const val REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION = 1
+    }
+
 
 
     private var fechasPrueba = mutableListOf<Pair<Date, Boolean>>()
@@ -139,29 +144,39 @@ class InformeActivity : AppCompatActivity() {
 
 
     private fun generateAndDownloadPDF() {
-
-
-        // Verificar si se tienen los permisos de escritura en tiempo de ejecución
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
             == PackageManager.PERMISSION_GRANTED) {
-            // Permiso otorgado, puedes crear y descargar el archivo PDF
             println("Permission granted. Creating and saving PDF.")
             createAndSavePDF()
             generateAndDownloadPNG()
         } else {
-            while(ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED){
-                // Permiso no otorgado, solicitar permiso en tiempo de ejecución
-                println("Permission not granted. Requesting permission.")
-                ActivityCompat.requestPermissions(
-                    this,
-                    arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                    PackageManager.PERMISSION_GRANTED
-                )
-            }
-
+            println("Permission not granted. Requesting permission.")
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION
+            )
         }
     }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                println("Permission granted. Creating and saving PDF.")
+                createAndSavePDF()
+                generateAndDownloadPNG()
+            } else {
+                println("Permission denied. Cannot generate and download PDF.")
+                // Puedes mostrar un mensaje al usuario informando que la acción no se puede realizar sin permisos.
+            }
+        }
+    }
+
 
     private fun generateAndDownloadPNG() {
         // Verificar si se tienen los permisos de escritura en tiempo de ejecución
@@ -240,25 +255,6 @@ class InformeActivity : AppCompatActivity() {
     }
 
 
-    // Manejar la respuesta de solicitud de permisos
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == WRITE_EXTERNAL_STORAGE_PERMISSION_CODE) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permiso otorgado, puedes crear y descargar el archivo PDF
-                println("Permission granted. Creating and saving PDF.")
-                createAndSavePDF()
-            } else {
-                // Permiso no otorgado, maneja esta situación como sea necesario
-                // Por ejemplo, muestra un mensaje al usuario
-                println("Permission not granted. Cannot create PDF.")
-            }
-        }
-    }
 
 
 
