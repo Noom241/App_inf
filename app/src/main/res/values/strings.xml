@@ -102,4 +102,5 @@
     <string name="generar_pdf_alumno">Generar pdf</string>
     <string name="none_value">-----</string>
     <string name="alumno_search">Jose Olaya</string>
+    <string name="renew_alumno">Renovar</string>
 </resources>

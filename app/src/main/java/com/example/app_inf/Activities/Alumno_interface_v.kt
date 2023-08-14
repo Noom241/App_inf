@@ -1,6 +1,5 @@
 package com.example.app_inf.Activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -11,6 +10,7 @@ import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Spinner
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.app_inf.R
 import com.example.app_inf.ViewModel.AsistenciaViewModel
@@ -44,6 +44,7 @@ class Alumno_interface_v : AppCompatActivity() {
     private lateinit var buttonAgregar: Button
     private lateinit var buttonActualizar: Button
     private lateinit var buttonEliminar: Button
+    private lateinit var buttonRenovar: Button
 
     private var buttonState = "Preview_alumn" // Variable para almacenar el estado de los botones
 

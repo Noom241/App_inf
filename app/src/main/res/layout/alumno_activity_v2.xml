@@ -107,13 +107,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
 
             <Spinner
                 android:id="@+id/spn_modalidad_alumno_V"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp" />
+                android:layout_marginTop="16dp"
+                style="@style/SpinnerStyle"
+                />
 
             <Spinner
                 android:id="@+id/spn_paquete_alumno_V"
@@ -144,7 +147,8 @@
 
             <CheckBox
                 android:id="@+id/checkbox_lunes"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="16dp"
@@ -153,7 +157,8 @@
 
             <CheckBox
                 android:id="@+id/checkbox_martes"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="16dp"
@@ -162,7 +167,8 @@
 
             <CheckBox
                 android:id="@+id/checkbox_miercoles"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="16dp"
@@ -171,7 +177,8 @@
 
             <CheckBox
                 android:id="@+id/checkbox_jueves"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="16dp"
@@ -180,12 +187,13 @@
 
             <CheckBox
                 android:id="@+id/checkbox_viernes"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="16dp"
                 android:text="@string/viernes"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black" />
 
         </LinearLayout>
     </LinearLayout>
@@ -222,6 +230,13 @@
             android:layout_marginTop="16dp"
             android:layout_weight="1"
             android:text="@string/delete_Asesor" />
+        <Button
+            android:id="@+id/button_renovar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/renew_alumno"
+            android:layout_weight="1"
+            />
     </LinearLayout>
 
 </LinearLayout>
