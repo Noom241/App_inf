@@ -25,15 +25,6 @@ class InformeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_informe)
         informeViewModel = ViewModelProvider(this).get(AsistenciaViewModel::class.java)
 
-        autoCompleteTextView = findViewById(R.id.AutocompleteAlumnos)
-        autoCompleteTextViewAlumnos = findViewById(R.id.AutocompleteAlumnos)
-
-        setupAutoCompleteViews()
-        btn_asesor_pdf()
-        btn_asesor_calendar()
-        btn_alumno_calendar()
-
-        btn_alumno_pdf()
 
 
     }
@@ -51,60 +42,6 @@ class InformeActivity : AppCompatActivity() {
         }
     }
 
-    private fun btn_alumno_calendar() {
-        val btnAlumnoCalendar: Button = findViewById(R.id.btn_alumno_asistencia)
-        btnAlumnoCalendar.setOnClickListener {
-            val stringAlumno = autoCompleteTextViewAlumnos.text.toString()
-            GlobalScope.launch(Dispatchers.Main) {
-                val idAlumno = informeViewModel.obtenerIDPorNombre(stringAlumno, "Estudiantes")
 
-                val intent = Intent(this@InformeActivity, CalendarioActivity::class.java)
-                intent.putExtra("alumno_id", idAlumno)
-                startActivity(intent)
-            }
-        }
-    }
-
-    private fun btn_asesor_pdf() {
-        val btnAsesorPDF: Button = findViewById(R.id.btn_alumno_asistencia)
-        btnAsesorPDF.setOnClickListener {
-            val stringAsesor = autoCompleteTextView.text.toString()
-            GlobalScope.launch(Dispatchers.Main) {
-                val idAsesor = informeViewModel.obtenerIDPorNombre(stringAsesor, "Profesores")
-
-                val intent = Intent(this@InformeActivity, CalendarioActivity::class.java)
-                intent.putExtra("asesor_id", idAsesor)
-                startActivity(intent)
-            }
-        }
-    }
-
-    private fun btn_alumno_pdf() {
-        val btnAlumnoPDF: Button = findViewById(R.id.btn_alumno_pdf)
-        btnAlumnoPDF.setOnClickListener {
-            val stringAlumno = autoCompleteTextViewAlumnos.text.toString()
-            GlobalScope.launch(Dispatchers.Main) {
-                val idAlumno = informeViewModel.obtenerIDPorNombre(stringAlumno, "Estudiantes")
-
-                val intent = Intent(this@InformeActivity, CalendarioActivity::class.java)
-                intent.putExtra("alumno_id", idAlumno)
-                startActivity(intent)
-            }
-        }
-    }
-
-    private fun btn_asesor_calendar() {
-        val btnAsesorCalendar: Button = findViewById(R.id.btn_alumno_asistencia)
-        btnAsesorCalendar.setOnClickListener {
-            val stringAsesor = autoCompleteTextView.text.toString()
-            GlobalScope.launch(Dispatchers.Main) {
-                val idAsesor = informeViewModel.obtenerIDPorNombre(stringAsesor, "Profesores")
-
-                val intent = Intent(this@InformeActivity, CalendarioActivity::class.java)
-                intent.putExtra("asesor_id", idAsesor)
-                startActivity(intent)
-            }
-        }
-    }
 
 }

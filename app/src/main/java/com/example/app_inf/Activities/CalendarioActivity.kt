@@ -1,8 +1,14 @@
 package com.example.app_inf.Activities
 
-
 import MySQLConnection
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.pdf.PdfDocument
 import android.os.Bundle
+import android.os.Environment
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
@@ -11,24 +17,33 @@ import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import android.Manifest
+import android.content.Context
+import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.app_inf.R
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 import android.os.AsyncTask
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import androidx.lifecycle.ViewModelProvider
 import com.example.app_inf.ViewModel.AsistenciaViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-
 class CalendarioActivity : AppCompatActivity() {
     private lateinit var Calendar_ViewModel: AsistenciaViewModel
     private var selectedYear = 2023
-    //val idEstudiante = ((intent.getStringExtra("alumno_id")).toString()).toInt() // Reemplaza con el ID del estudiante deseado
-
+    private lateinit var search_alum_: AutoCompleteTextView
 
     private var fechasPrueba = mutableListOf<Pair<Date, String>>()
 
@@ -36,16 +51,32 @@ class CalendarioActivity : AppCompatActivity() {
         agregarNuevaFecha((intent.getIntExtra("alumno_id", -1)))
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calendario)
+        setupAutoCompleteViews()
         Calendar_ViewModel = ViewModelProvider(this).get(AsistenciaViewModel::class.java)
 
-
-        val container = findViewById<LinearLayout>(R.id.container)
+        val container = findViewById<LinearLayout>(R.id.full_container)
 
         for (month in Calendar.JANUARY..Calendar.DECEMBER) {
             val monthView = createMonthView(month)
             container.addView(monthView)
         }
     }
+
+    private fun setupAutoCompleteViews() {
+        // Fetch and set adapters for AutoCompleteTextViews using coroutines
+        GlobalScope.launch(Dispatchers.Main) {
+            val nombresProfesores = Calendar_ViewModel.obtenerNombresDeAlumnos()
+
+            val adapter_alum = ArrayAdapter(
+                this@CalendarioActivity,
+                android.R.layout.simple_dropdown_item_1line,
+                nombresProfesores
+            )
+            search_alum_.setAdapter(adapter_alum)
+
+        }
+    }
+
     private fun agregarNuevaFecha(idEstudiante: Int) {
         val nuevaLista = fechasPrueba.toMutableList()
 
@@ -272,5 +303,68 @@ class CalendarioActivity : AppCompatActivity() {
             textView.setBackgroundResource(cellBackgroundColor)
         }
 
+    }
+
+
+    private fun generateAndDownloadPDF() {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            val context = this
+            createAndSavePDF(context)
+        } else {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                WRITE_EXTERNAL_STORAGE_PERMISSION_CODE
+            )
+        }
+    }
+
+    private fun createAndSavePDF(context: Context) {
+        println("Creating PDF.")
+
+        val pdfFileName = "informe.pdf"
+        val folderName = "informes"
+
+        val downloadsDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+        val storageDirectory = File(downloadsDirectory, folderName)
+        if (!storageDirectory.exists()) {
+            storageDirectory.mkdirs()
+        }
+
+        val pdfFile = File(storageDirectory, pdfFileName)
+
+        try {
+            val fileOutputStream = FileOutputStream(pdfFile)
+            val pdfDocument = PdfDocument()
+
+            for (month in Calendar.JANUARY..Calendar.DECEMBER) {
+                val monthView = createMonthView(month)
+                val pageInfo = PdfDocument.PageInfo.Builder(monthView.width, monthView.height, 1).create()
+                val page = pdfDocument.startPage(pageInfo)
+                val canvas = page.canvas
+                monthView.draw(canvas)
+                pdfDocument.finishPage(page)
+            }
+
+            pdfDocument.writeTo(fileOutputStream)
+            fileOutputStream.close()
+            pdfDocument.close()
+
+            println("PDF created and saved successfully.")
+
+            // Mostrar mensaje de éxito usando Toast
+            Toast.makeText(context, "PDF creado y guardado exitosamente.", Toast.LENGTH_SHORT).show()
+
+        } catch (e: IOException) {
+            e.printStackTrace()
+            println("Error while creating or saving PDF.")
+
+            // Mostrar mensaje de error usando Toast
+            Toast.makeText(context, "Error al crear o guardar el PDF.", Toast.LENGTH_SHORT).show()
+        }
     }
 }
