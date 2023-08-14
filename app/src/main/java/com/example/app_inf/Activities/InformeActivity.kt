@@ -25,15 +25,16 @@ class InformeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_informe)
         informeViewModel = ViewModelProvider(this).get(AsistenciaViewModel::class.java)
 
-        autoCompleteTextView = findViewById(R.id.AutocompleteAsesores)
+        autoCompleteTextView = findViewById(R.id.AutocompleteAlumnos)
         autoCompleteTextViewAlumnos = findViewById(R.id.AutocompleteAlumnos)
 
         setupAutoCompleteViews()
-
-        btn_alumno_calendar()
         btn_asesor_pdf()
-        btn_alumno_pdf()
         btn_asesor_calendar()
+        btn_alumno_calendar()
+
+        btn_alumno_pdf()
+
 
     }
     private fun setupAutoCompleteViews() {
@@ -65,7 +66,7 @@ class InformeActivity : AppCompatActivity() {
     }
 
     private fun btn_asesor_pdf() {
-        val btnAsesorPDF: Button = findViewById(R.id.btn_asesor_pdf)
+        val btnAsesorPDF: Button = findViewById(R.id.btn_alumno_asistencia)
         btnAsesorPDF.setOnClickListener {
             val stringAsesor = autoCompleteTextView.text.toString()
             GlobalScope.launch(Dispatchers.Main) {
@@ -93,7 +94,7 @@ class InformeActivity : AppCompatActivity() {
     }
 
     private fun btn_asesor_calendar() {
-        val btnAsesorCalendar: Button = findViewById(R.id.btn_asesor_asistencia)
+        val btnAsesorCalendar: Button = findViewById(R.id.btn_alumno_asistencia)
         btnAsesorCalendar.setOnClickListener {
             val stringAsesor = autoCompleteTextView.text.toString()
             GlobalScope.launch(Dispatchers.Main) {
