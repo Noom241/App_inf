@@ -44,7 +44,8 @@
         </activity>
         <activity
             android:name=".Activities.Alumno_interface_v"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="landscape"/>
         <activity
             android:name=".Activities.InformeActivity"
             android:exported="false"
