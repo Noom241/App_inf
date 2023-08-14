@@ -317,6 +317,22 @@ public class MySQLConnection {
             e.printStackTrace();
             return false;
         }
+
+    }
+
+    public static String obtenerNombreEstudiantePorID(int idEstudiante) {
+        try (Connection connection = getConnection()) {
+            String callProcedure = "{ CALL ObtenerNombreEstudiantePorID(?, ?) }";
+            try (CallableStatement statement = connection.prepareCall(callProcedure)) {
+                statement.setInt(1, idEstudiante);
+                statement.registerOutParameter(2, Types.VARCHAR);
+                statement.executeUpdate();
+                return statement.getString(2);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null; // Manejar el error adecuadamente en tu aplicación
+        }
     }
 
 

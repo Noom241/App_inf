@@ -95,6 +95,12 @@ class AsistenciaViewModel : ViewModel() {
         }
     }
 
+    suspend fun obtenerNombreEstudiantePorID(idEstudiante: Int): String? {
+        return withContext(Dispatchers.IO) {
+            MySQLConnection.obtenerNombreEstudiantePorID(idEstudiante)
+        }
+    }
+
 
 
 }
