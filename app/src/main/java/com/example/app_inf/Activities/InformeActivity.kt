@@ -21,6 +21,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import android.Manifest
+import android.content.Context
+import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.app_inf.R
 import java.io.File
 import java.io.FileOutputStream
@@ -95,6 +98,7 @@ class InformeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_informe)
 
+
         view = findViewById(R.id.container)
 
 
@@ -128,7 +132,19 @@ class InformeActivity : AppCompatActivity() {
         val imageButton_download = findViewById<ImageButton>(R.id.imageButton_download)
 
         imageButton_download.setOnClickListener {
-            generateAndDownloadPDF()
+            if (ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                ) == PackageManager.PERMISSION_GRANTED
+            ) {
+                generateAndDownloadPDF()
+            } else {
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                    WRITE_EXTERNAL_STORAGE_PERMISSION_CODE
+                )
+            }
         }
 
         for (month in Calendar.JANUARY..Calendar.DECEMBER) {
@@ -139,30 +155,31 @@ class InformeActivity : AppCompatActivity() {
 
 
     private fun generateAndDownloadPDF() {
-        // Verificar si se tienen los permisos de escritura en tiempo de ejecución
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-            == PackageManager.PERMISSION_GRANTED) {
-            // Permiso otorgado, puedes crear y descargar el archivo PDF
-            println("Permission granted. Creating and saving PDF.")
-            createAndSavePDF()
-            generateAndDownloadPNG()
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+
+            val context = this
+            createAndSavePDF(view, context)
         } else {
-            // Permiso no otorgado, solicitar permiso en tiempo de ejecución
-            println("Permission not granted. Requesting permission.")
             ActivityCompat.requestPermissions(
                 this,
                 arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                PackageManager.PERMISSION_GRANTED
+                WRITE_EXTERNAL_STORAGE_PERMISSION_CODE
             )
         }
     }
+
 
     private fun generateAndDownloadPNG() {
         // Verificar si se tienen los permisos de escritura en tiempo de ejecución
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
             == PackageManager.PERMISSION_GRANTED) {
             // Permiso otorgado, puedes crear y descargar el archivo PNG
-            createAndSavePNG()
+            val context = this
+            createAndSavePDF(view, context)
         } else {
             // Permiso no otorgado, solicitar permiso en tiempo de ejecución
             ActivityCompat.requestPermissions(
@@ -200,11 +217,20 @@ class InformeActivity : AppCompatActivity() {
 
 
 
-    private fun createAndSavePDF() {
+    private fun createAndSavePDF(view: View, context: Context) {
         println("Creating PDF.")
 
-        val pdfFileName = "informe.png"
-        val pdfFile = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), pdfFileName)
+        val pdfFileName = "informe.pdf"
+        val folderName = "informes"
+
+        // Obtener la ruta de la carpeta "Descargas/informes" en el almacenamiento
+        val downloadsDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+        val storageDirectory = File(downloadsDirectory, folderName)
+        if (!storageDirectory.exists()) {
+            storageDirectory.mkdirs()
+        }
+
+        val pdfFile = File(storageDirectory, pdfFileName)
 
         try {
             val fileOutputStream = FileOutputStream(pdfFile)
@@ -223,6 +249,9 @@ class InformeActivity : AppCompatActivity() {
 
             println("PDF created and saved successfully.")
 
+            // Mostrar mensaje de éxito usando Toast
+            Toast.makeText(context, "PDF creado y guardado exitosamente.", Toast.LENGTH_SHORT).show()
+
             // Mostrar mensaje de éxito o abrir el archivo PDF
             // Por ejemplo, puedes abrir el archivo PDF con un lector de PDFs
             // usando una Intención (Intent).
@@ -230,11 +259,18 @@ class InformeActivity : AppCompatActivity() {
             // Manejar la excepción, mostrar un mensaje de error, etc.
             e.printStackTrace()
             println("Error while creating or saving PDF.")
+
+            // Mostrar mensaje de error usando Toast
+            Toast.makeText(context, "Error al crear o guardar el PDF.", Toast.LENGTH_SHORT).show()
         }
     }
 
 
-    // Manejar la respuesta de solicitud de permisos
+
+
+
+
+    // Handle permission request result
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -243,12 +279,13 @@ class InformeActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == WRITE_EXTERNAL_STORAGE_PERMISSION_CODE) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permiso otorgado, puedes crear y descargar el archivo PDF
+                // Permission granted, create and download the PDF
                 println("Permission granted. Creating and saving PDF.")
-                createAndSavePDF()
+                val context = this
+                createAndSavePDF(view, context)
             } else {
-                // Permiso no otorgado, maneja esta situación como sea necesario
-                // Por ejemplo, muestra un mensaje al usuario
+                // Permission not granted, handle this situation as needed
+                // For example, show a message to the user
                 println("Permission not granted. Cannot create PDF.")
             }
         }
