@@ -1,11 +1,6 @@
 package com.example.app_inf.Activities
 
-import MySQLConnection
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
 import android.graphics.pdf.PdfDocument
 import android.os.Bundle
 import android.os.Environment
@@ -22,7 +17,6 @@ import androidx.core.content.ContextCompat
 import android.Manifest
 import android.content.Context
 import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.app_inf.R
 import java.io.File
 import java.io.FileOutputStream
@@ -31,9 +25,10 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
-import android.os.AsyncTask
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.Button
+import android.widget.ImageButton
 import androidx.lifecycle.ViewModelProvider
 import com.example.app_inf.ViewModel.AsistenciaViewModel
 import kotlinx.coroutines.Dispatchers
@@ -44,21 +39,39 @@ class CalendarioActivity : AppCompatActivity() {
     private lateinit var Calendar_ViewModel: AsistenciaViewModel
     private var selectedYear = 2023
     private lateinit var search_alum_: AutoCompleteTextView
+    private lateinit var but_informes: ImageButton
+    private val WRITE_EXTERNAL_STORAGE_PERMISSION_CODE = 123 // Puedes usar cualquier código
 
     private var fechasPrueba = mutableListOf<Pair<Date, String>>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        agregarNuevaFecha((intent.getIntExtra("alumno_id", -1)))
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calendario)
+        search_alum_ = findViewById<AutoCompleteTextView>(R.id.search_alum_)
+        but_informes = findViewById<ImageButton>(R.id.but_informes)
         setupAutoCompleteViews()
         Calendar_ViewModel = ViewModelProvider(this).get(AsistenciaViewModel::class.java)
 
-        val container = findViewById<LinearLayout>(R.id.full_container)
+        val container = findViewById<LinearLayout>(R.id.container)
 
         for (month in Calendar.JANUARY..Calendar.DECEMBER) {
             val monthView = createMonthView(month)
             container.addView(monthView)
+        }
+
+        search_alum_.setOnItemClickListener { _, _, position, _ ->
+            val selectedName = search_alum_.adapter.getItem(position) as String
+
+
+            GlobalScope.launch(Dispatchers.Main) {
+                val alum_id = Calendar_ViewModel.obtenerIDPorNombre(selectedName, "Estudiantes")
+                agregarNuevaFecha(alum_id)
+            }
+        }
+
+        but_informes.setOnClickListener {
+            generateAndDownloadPDF()
         }
     }
 

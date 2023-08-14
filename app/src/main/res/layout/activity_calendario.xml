@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".Activities.CalendarioActivity">
 
+    <ImageButton
+        android:id="@+id/but_informes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="#00FFFFFF"
+        android:contentDescription="Descripción de la imagen"
+        android:src="@drawable/download"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
         android:id="@+id/full_container"
         android:layout_width="wrap_content"
@@ -16,11 +28,21 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="-44dp">
 
-        <AutoCompleteTextView
-            android:id="@+id/search_alum_"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="AutoCompleteTextView" />
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <AutoCompleteTextView
+                android:id="@+id/search_alum_"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="16dp"
+                android:completionThreshold="1"
+                android:hint="@string/buscar"
+                android:imeOptions="actionDone" />
+
+        </LinearLayout>
 
         <ScrollView
             android:id="@+id/scroll_container"
