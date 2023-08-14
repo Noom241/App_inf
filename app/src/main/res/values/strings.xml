@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">Refuerzo Mejoraf</string>
-    <string name="alumnos">Alumnos</string>
-    <string name="asesores">Asesores</string>
-    <string name="asistencia">Asistencia</string>
-    <string name="informe">Informe</string>
+    <string name="app_name">Refuerzo Mejora</string>
+    <string name="alumnos">ALUMNOS</string>
+    <string name="asesores">ASESORES</string>
+    <string name="asistencia">ASISTENCIA</string>
+    <string name="informe">INFORME</string>
     <string name="buscar">Buscar</string>
     <string name="asesores_">Asesores</string>
     <string name="add_button">Añadir</string>

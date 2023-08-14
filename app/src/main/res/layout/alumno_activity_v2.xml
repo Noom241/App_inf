@@ -5,17 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
+    android:padding="10dp"
     tools:context=".Activities.AlumnosActivity">
 
     <AutoCompleteTextView
         android:id="@+id/search_alum"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:imeOptions="actionDone"
         android:layout_marginBottom="16dp"
         android:completionThreshold="1"
-        android:hint="@string/buscar" />
+        android:hint="@string/buscar"
+        android:imeOptions="actionDone"
+        android:minHeight="48dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -100,21 +101,31 @@
                 android:id="@+id/spn_modalidad_alumno_V"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp" />
+                android:layout_marginTop="16dp"
+                android:minHeight="48dp" />
 
             <Spinner
                 android:id="@+id/spn_paquete_alumno_V"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp" />
+                android:layout_marginTop="16dp"
+                android:minHeight="48dp" />
 
             <Spinner
                 android:id="@+id/spn_horario_alumno_V"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp" />
+                android:layout_marginTop="16dp"
+                android:minHeight="48dp" />
 
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@android:drawable/btn_star_big_on" />
 
     </LinearLayout>
 

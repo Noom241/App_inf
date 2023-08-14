@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".Activities.AlumnosActivity">
 
+
     <AutoCompleteTextView
         android:id="@+id/autoCompleteTextView2"
         android:layout_width="270dp"
@@ -128,5 +129,15 @@
         android:text="@string/lbl_nombre_alumno"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_nombre_alumno" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="124dp"
+        android:layout_height="127dp"
+        android:src="@android:drawable/btn_star_big_on"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
