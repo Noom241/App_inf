@@ -16,6 +16,8 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import android.Manifest
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.widget.Toast
 import com.example.app_inf.R
 import java.io.File
@@ -28,6 +30,7 @@ import java.util.Locale
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageButton
 import androidx.lifecycle.ViewModelProvider
 import com.example.app_inf.ViewModel.AsistenciaViewModel
@@ -41,6 +44,9 @@ class CalendarioActivity : AppCompatActivity() {
     private lateinit var search_alum_: AutoCompleteTextView
     private lateinit var but_informes: ImageButton
     private val WRITE_EXTERNAL_STORAGE_PERMISSION_CODE = 123 // Puedes usar cualquier código
+    private lateinit var view: View
+    private var nombre_est: String = "Carlos"
+    private lateinit var alumno_Seleccionado: TextView
 
     private var fechasPrueba = mutableListOf<Pair<Date, String>>()
 
@@ -50,10 +56,12 @@ class CalendarioActivity : AppCompatActivity() {
         setContentView(R.layout.activity_calendario)
         search_alum_ = findViewById<AutoCompleteTextView>(R.id.search_alum_)
         but_informes = findViewById<ImageButton>(R.id.but_informes)
+        alumno_Seleccionado = findViewById<TextView>(R.id.papulince)
         setupAutoCompleteViews()
         Calendar_ViewModel = ViewModelProvider(this).get(AsistenciaViewModel::class.java)
 
         val container = findViewById<LinearLayout>(R.id.container)
+        view = findViewById(R.id.padre)
 
         for (month in Calendar.JANUARY..Calendar.DECEMBER) {
             val monthView = createMonthView(month)
@@ -62,6 +70,9 @@ class CalendarioActivity : AppCompatActivity() {
 
         search_alum_.setOnItemClickListener { _, _, position, _ ->
             val selectedName = search_alum_.adapter.getItem(position) as String
+            nombre_est = selectedName
+            alumno_Seleccionado.text = nombre_est
+
 
 
             GlobalScope.launch(Dispatchers.Main) {
@@ -71,7 +82,63 @@ class CalendarioActivity : AppCompatActivity() {
         }
 
         but_informes.setOnClickListener {
-            generateAndDownloadPDF()
+            if (ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                ) == PackageManager.PERMISSION_GRANTED
+            ) {
+                generateAndDownloadPDF()
+            } else {
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                    WRITE_EXTERNAL_STORAGE_PERMISSION_CODE
+                )
+            }
+        }
+
+        val width = view.width
+        val height = view.height
+        try {
+            // Obtener el valor del ancho (por ejemplo, desde una vista)
+            val width = view.width
+
+            // Obtener el valor del alto (por ejemplo, desde una vista)
+            val height = view.height
+
+            if (width > 0 && height > 0) {
+                val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+                val canvas = Canvas(bitmap)
+                view.draw(canvas)
+                // Resto del código relacionado con el uso del bitmap
+                // Por ejemplo, puedes dibujar en el bitmap, aplicar efectos, etc.
+            } else {
+                // Manejar el caso cuando width o height no sean válidos
+                // Por ejemplo, mostrar un mensaje de error
+            }
+        } catch (e: IllegalArgumentException) {
+            // Manejar la excepción, mostrar un mensaje de error, etc.
+            e.printStackTrace()
+        }
+
+
+    }
+
+    private fun generateAndDownloadPDF() {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+
+            val context = this
+            createAndSavePDF(view, context)
+        } else {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                WRITE_EXTERNAL_STORAGE_PERMISSION_CODE
+            )
         }
     }
 
@@ -319,15 +386,15 @@ class CalendarioActivity : AppCompatActivity() {
     }
 
 
-    private fun generateAndDownloadPDF() {
-        if (ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
+    private fun generateAndDownloadPNG() {
+        // Verificar si se tienen los permisos de escritura en tiempo de ejecución
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            == PackageManager.PERMISSION_GRANTED) {
+            // Permiso otorgado, puedes crear y descargar el archivo PNG
             val context = this
-            createAndSavePDF(context)
+            createAndSavePDF(view, context)
         } else {
+            // Permiso no otorgado, solicitar permiso en tiempo de ejecución
             ActivityCompat.requestPermissions(
                 this,
                 arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
@@ -336,12 +403,13 @@ class CalendarioActivity : AppCompatActivity() {
         }
     }
 
-    private fun createAndSavePDF(context: Context) {
+    private fun createAndSavePDF(view: View, context: Context) {
         println("Creating PDF.")
 
-        val pdfFileName = "informe.pdf"
+        val pdfFileName = "$nombre_est.pdf"
         val folderName = "informes"
 
+        // Obtener la ruta de la carpeta "Descargas/informes" en el almacenamiento
         val downloadsDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
         val storageDirectory = File(downloadsDirectory, folderName)
         if (!storageDirectory.exists()) {
@@ -354,15 +422,13 @@ class CalendarioActivity : AppCompatActivity() {
             val fileOutputStream = FileOutputStream(pdfFile)
             val pdfDocument = PdfDocument()
 
-            for (month in Calendar.JANUARY..Calendar.DECEMBER) {
-                val monthView = createMonthView(month)
-                val pageInfo = PdfDocument.PageInfo.Builder(monthView.width, monthView.height, 1).create()
-                val page = pdfDocument.startPage(pageInfo)
-                val canvas = page.canvas
-                monthView.draw(canvas)
-                pdfDocument.finishPage(page)
-            }
+            val pageInfo = PdfDocument.PageInfo.Builder(view.width, view.height, 1).create()
+            val page = pdfDocument.startPage(pageInfo)
 
+            val canvas = page.canvas
+            view.draw(canvas)
+
+            pdfDocument.finishPage(page)
             pdfDocument.writeTo(fileOutputStream)
             fileOutputStream.close()
             pdfDocument.close()
@@ -372,7 +438,11 @@ class CalendarioActivity : AppCompatActivity() {
             // Mostrar mensaje de éxito usando Toast
             Toast.makeText(context, "PDF creado y guardado exitosamente.", Toast.LENGTH_SHORT).show()
 
+            // Mostrar mensaje de éxito o abrir el archivo PDF
+            // Por ejemplo, puedes abrir el archivo PDF con un lector de PDFs
+            // usando una Intención (Intent).
         } catch (e: IOException) {
+            // Manejar la excepción, mostrar un mensaje de error, etc.
             e.printStackTrace()
             println("Error while creating or saving PDF.")
 
