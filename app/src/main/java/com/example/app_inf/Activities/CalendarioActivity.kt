@@ -375,9 +375,9 @@ class CalendarioActivity : AppCompatActivity() {
             val cellBackgroundColor = when {
                 currentDate < fecha -> R.color.colorPending
                 string == "1" -> R.color.colorPresent
-                string == "2" -> R.color.colorRecuperation
-                string == "3" -> R.color.purple_200
-                string == "4" -> R.color.teal_200
+                string == "R" -> R.color.colorRecuperation
+                string == "2" -> R.color.purple_200
+                string == "3" -> R.color.teal_200
                 else -> R.color.colorAbsent
             }
             textView.setBackgroundResource(cellBackgroundColor)

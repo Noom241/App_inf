@@ -2,11 +2,14 @@ package com.example.app_inf.ViewModel
 
 import MySQLConnection
 import androidx.lifecycle.ViewModel
+import com.example.app_inf.Activities.AsistenciaActivity
 import com.example.app_inf.data.AlumnoData
 import com.example.app_inf.data.AsesorData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.util.Calendar
 import java.util.Date
+
 
 
 class AsistenciaViewModel : ViewModel() {
@@ -98,6 +101,31 @@ class AsistenciaViewModel : ViewModel() {
     suspend fun obtenerNombreEstudiantePorID(idEstudiante: Int): String? {
         return withContext(Dispatchers.IO) {
             MySQLConnection.obtenerNombreEstudiantePorID(idEstudiante)
+        }
+    }
+
+    suspend fun obtenerFechasSiguientesAlumno(idEstudiante: Int): List<Date> {
+        return withContext(Dispatchers.IO) {
+            MySQLConnection.obtenerFechasSiguientesAlumno(idEstudiante)
+        }
+    }
+
+    suspend fun eliminarFechasPosterioresAlumno(idEstudiante: Int): Boolean {
+        return withContext(Dispatchers.IO) {
+            MySQLConnection.eliminarFechasPosterioresAlumno(idEstudiante)
+        }
+    }
+
+
+    suspend fun obtenerUltimoAsistioAntesFecha(idEstudiante: Int): String? {
+        return withContext(Dispatchers.IO) {
+            MySQLConnection.obtenerUltimoAsistioAntesFecha(idEstudiante)
+        }
+    }
+
+    suspend fun agregarFechasAsistenciaSeleccionadas(idEstudiante: Int, asistio: String, fechas: String): Boolean {
+        return withContext(Dispatchers.IO) {
+            MySQLConnection.agregarFechasAsistenciaSeleccionadas(idEstudiante, asistio, fechas)
         }
     }
 

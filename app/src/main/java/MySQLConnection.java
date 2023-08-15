@@ -335,7 +335,65 @@ public class MySQLConnection {
         }
     }
 
+    public static List<Date> obtenerFechasSiguientesAlumno(int idEstudiante) {
+        List<Date> fechasSiguientes = new ArrayList<>();
+        try (Connection connection = getConnection()) {
+            String callProcedure = "{ CALL ObtenerFechasSiguientesAlumno(?) }";
+            CallableStatement statement = connection.prepareCall(callProcedure);
+            statement.setInt(1, idEstudiante);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Date fecha = resultSet.getDate("Fecha");
+                fechasSiguientes.add(fecha);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return fechasSiguientes;
+    }
 
+    public static boolean eliminarFechasPosterioresAlumno(int idEstudiante) {
+        try (Connection connection = getConnection()) {
+            String callProcedure = "{ CALL EliminarFechasPosterioresAlumno(?) }";
+            CallableStatement statement = connection.prepareCall(callProcedure);
+            statement.setInt(1, idEstudiante);
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+    public static String obtenerUltimoAsistioAntesFecha(int idEstudiante) {
+        try (Connection connection = getConnection()) {
+            String callProcedure = "{ CALL ObtenerUltimoAsistioAntesFecha(?, ?) }";
+            CallableStatement statement = connection.prepareCall(callProcedure);
+            statement.setInt(1, idEstudiante);
+            statement.registerOutParameter(2, Types.VARCHAR);
+            statement.executeUpdate();
+            return statement.getString(2);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static boolean agregarFechasAsistenciaSeleccionadas(int idEstudiante, String asistio, String fechas) {
+        try (Connection connection = getConnection()) {
+            String callProcedure = "{ CALL AgregarFechasAsistenciaSeleccionadas(?, ?, ?) }";
+            CallableStatement statement = connection.prepareCall(callProcedure);
+            statement.setInt(1, idEstudiante);
+            statement.setString(2, asistio);
+            statement.setString(3, fechas);
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
 
 

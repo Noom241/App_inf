@@ -18,6 +18,10 @@ import com.example.app_inf.data.AlumnoData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 import kotlin.properties.Delegates
 
 class Alumno_interface_v : AppCompatActivity() {
@@ -112,6 +116,22 @@ class Alumno_interface_v : AppCompatActivity() {
                 GlobalScope.launch(Dispatchers.Main) {
                     // Agregar el nuevo alumno utilizando el ViewModel
                     Alumn_ViewModel.agregarAlumno(createAlumnoDataInstance())
+                    id_actual = Alumn_ViewModel.obtenerIDPorNombre(createAlumnoDataInstance().nombre, "Estudiantes")
+                    var ultimo_asistio = Alumn_ViewModel.obtenerUltimoAsistioAntesFecha(id_actual)
+                        ?.toInt()
+                    if (ultimo_asistio != null) {
+                        if(ultimo_asistio > 2){
+                            ultimo_asistio ++
+                        }
+                        else{
+                            ultimo_asistio = 2
+                        }
+                    }
+                    else{
+                        ultimo_asistio = 2
+                    }
+
+                    Alumn_ViewModel.agregarFechasAsistenciaSeleccionadas(id_actual, ultimo_asistio.toString(),createAlumnoDataInstance().horario_semana)
 
                     // Limpiar campos y cambiar estado de botones
                     clearFields()
@@ -126,6 +146,24 @@ class Alumno_interface_v : AppCompatActivity() {
                     id_actual = Alumn_ViewModel.obtenerIDPorNombre(search_alum.text.toString(), "Estudiantes")
                     val updatedAlumno = createAlumnoDataInstance()
                     Alumn_ViewModel.actualizarAlumno(id_actual, updatedAlumno)
+                    Alumn_ViewModel.eliminarFechasPosterioresAlumno(id_actual)
+                    var ultimo_asistio = (Alumn_ViewModel.obtenerUltimoAsistioAntesFecha(id_actual)
+                        ?.toInt(2))?.plus(1)
+                    //Alumn_ViewModel.agregarFechasAsistenciaSeleccionadas(id_actual, updatedAlumno.horario_semana, ultimo_asistio.toString())
+                    // Otras acciones después de actualizar, si es necesario
+                    clearFields()
+                    changeButtonState()
+                    disble_inputs()
+                }
+            }
+            if (buttonState == "Renovar") {
+
+                GlobalScope.launch(Dispatchers.Main) {
+                    id_actual = Alumn_ViewModel.obtenerIDPorNombre(search_alum.text.toString(), "Estudiantes")
+                    val updatedAlumno = createAlumnoDataInstance()
+                    Alumn_ViewModel.actualizarAlumno(id_actual, updatedAlumno)
+                    Alumn_ViewModel.eliminarFechasPosterioresAlumno(id_actual)
+                    //Alumn_ViewModel.agregarFechasAsistenciaSeleccionadas(id_actual, updatedAlumno.horario_semana, "2")
                     // Otras acciones después de actualizar, si es necesario
                     clearFields()
                     changeButtonState()
@@ -467,6 +505,91 @@ class Alumno_interface_v : AppCompatActivity() {
             }
         }
     }
+
+    fun generateDatesForNext4Weeks_(Int:Int, input: String, string: String) {
+        val stringSinEspacios = input.replace(" ", "")
+        val arrayDias = stringSinEspacios.split(",")
+
+        val today = Calendar.getInstance()
+
+        for (dia in arrayDias) {
+            val dayOfWeek = when (dia.toLowerCase()) {
+                "lunes" -> Calendar.MONDAY
+                "martes" -> Calendar.TUESDAY
+                "miércoles" -> Calendar.WEDNESDAY
+                "jueves" -> Calendar.THURSDAY
+                "viernes" -> Calendar.FRIDAY
+                "sábado" -> Calendar.SATURDAY
+                "domingo" -> Calendar.SUNDAY
+                else -> throw IllegalArgumentException("Día desconocido: $dia")
+            }
+
+            val nextOccurrence = Calendar.getInstance()
+            nextOccurrence.time = today.time
+            nextOccurrence.add(Calendar.DAY_OF_WEEK, (dayOfWeek + 7 - today.get(Calendar.DAY_OF_WEEK)) % 7)
+
+            val dateFormatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            println("Próximas fechas de $dia:")
+            for (i in 0..3) {
+                if (i > 0) {
+                    nextOccurrence.add(Calendar.DAY_OF_WEEK, 7)
+                }
+                GlobalScope.launch(Dispatchers.Main) {
+                    Alumn_ViewModel.registrarAsistencia(Int, 0, nextOccurrence.time, string)
+                }
+                println(dateFormatter.format(nextOccurrence.time))
+            }
+        }
+    }
+
+
+
+
+    fun generateDatesForNext4Weeks(input: String, idEstudiante: Int, asistio: String) {
+        val stringSinEspacios = input.replace(" ", "")
+        val arrayDias = stringSinEspacios.split(",")
+
+        val today = Calendar.getInstance()
+
+        for (dia in arrayDias) {
+            val dayOfWeek = when (dia.toLowerCase()) {
+                "lunes" -> Calendar.MONDAY
+                "martes" -> Calendar.TUESDAY
+                "miercoles" -> Calendar.WEDNESDAY
+                "jueves" -> Calendar.THURSDAY
+                "viernes" -> Calendar.FRIDAY
+                "sábado" -> Calendar.SATURDAY
+                "domingo" -> Calendar.SUNDAY
+                else -> throw IllegalArgumentException("Día desconocido: $dia")
+            }
+
+            val nextOccurrence = Calendar.getInstance()
+            nextOccurrence.time = today.time
+            nextOccurrence.add(Calendar.DAY_OF_WEEK, (dayOfWeek + 7 - today.get(Calendar.DAY_OF_WEEK)) % 7)
+
+            val dateFormatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            println("Próximas fechas de $dia:")
+            for (i in 0..3) {
+                if (i > 0) {
+                    nextOccurrence.add(Calendar.DAY_OF_WEEK, 7)
+                }
+                val fecha = nextOccurrence.time
+                println(dateFormatter.format(fecha))
+                GlobalScope.launch(Dispatchers.Main) {
+                    Alumn_ViewModel.registrarAsistencia(idEstudiante, 6, fecha, asistio)
+                }
+
+            }
+        }
+    }
+
+    private fun createDate(year: Int, month: Int, day: Int): Date {
+        val calendar = Calendar.getInstance()
+        calendar.set(year, month, day)
+        return calendar.time
+    }
+
+
 
 
 }
