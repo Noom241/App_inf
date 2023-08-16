@@ -48,6 +48,7 @@ class Alumno_interface_v : AppCompatActivity() {
     private lateinit var buttonAgregar: Button
     private lateinit var buttonActualizar: Button
     private lateinit var buttonEliminar: Button
+    //private lateinit var buttonRenovar: Button
 
     private var buttonState = "Preview_alumn" // Variable para almacenar el estado de los botones
 
@@ -117,21 +118,9 @@ class Alumno_interface_v : AppCompatActivity() {
                     // Agregar el nuevo alumno utilizando el ViewModel
                     Alumn_ViewModel.agregarAlumno(createAlumnoDataInstance())
                     id_actual = Alumn_ViewModel.obtenerIDPorNombre(createAlumnoDataInstance().nombre, "Estudiantes")
-                    var ultimo_asistio = Alumn_ViewModel.obtenerUltimoAsistioAntesFecha(id_actual)
-                        ?.toInt()
-                    if (ultimo_asistio != null) {
-                        if(ultimo_asistio > 2){
-                            ultimo_asistio ++
-                        }
-                        else{
-                            ultimo_asistio = 2
-                        }
-                    }
-                    else{
-                        ultimo_asistio = 2
-                    }
 
-                    Alumn_ViewModel.agregarFechasAsistenciaSeleccionadas(id_actual, ultimo_asistio.toString(),createAlumnoDataInstance().horario_semana)
+
+                    Alumn_ViewModel.agregarFechasAsistenciaSeleccionadas(id_actual, "2",createAlumnoDataInstance().horario_semana)
 
                     // Limpiar campos y cambiar estado de botones
                     clearFields()
@@ -146,11 +135,6 @@ class Alumno_interface_v : AppCompatActivity() {
                     id_actual = Alumn_ViewModel.obtenerIDPorNombre(search_alum.text.toString(), "Estudiantes")
                     val updatedAlumno = createAlumnoDataInstance()
                     Alumn_ViewModel.actualizarAlumno(id_actual, updatedAlumno)
-                    Alumn_ViewModel.eliminarFechasPosterioresAlumno(id_actual)
-                    var ultimo_asistio = (Alumn_ViewModel.obtenerUltimoAsistioAntesFecha(id_actual)
-                        ?.toInt(2))?.plus(1)
-                    //Alumn_ViewModel.agregarFechasAsistenciaSeleccionadas(id_actual, updatedAlumno.horario_semana, ultimo_asistio.toString())
-                    // Otras acciones después de actualizar, si es necesario
                     clearFields()
                     changeButtonState()
                     disble_inputs()
@@ -162,8 +146,20 @@ class Alumno_interface_v : AppCompatActivity() {
                     id_actual = Alumn_ViewModel.obtenerIDPorNombre(search_alum.text.toString(), "Estudiantes")
                     val updatedAlumno = createAlumnoDataInstance()
                     Alumn_ViewModel.actualizarAlumno(id_actual, updatedAlumno)
-                    Alumn_ViewModel.eliminarFechasPosterioresAlumno(id_actual)
-                    //Alumn_ViewModel.agregarFechasAsistenciaSeleccionadas(id_actual, updatedAlumno.horario_semana, "2")
+                    var ultimo_asistio = Alumn_ViewModel.obtenerUltimoAsistioAntesFecha(id_actual)
+                        ?.toInt()
+                    if (ultimo_asistio != null) {
+                        if(ultimo_asistio > 2){
+                            ultimo_asistio ++
+                        }
+                        else{
+                            ultimo_asistio = 2
+                        }
+                    }
+                    else{
+                        ultimo_asistio = 2
+                    }
+                    Alumn_ViewModel.agregarFechasAsistenciaSeleccionadas(id_actual, updatedAlumno.horario_semana, ultimo_asistio.toString())
                     // Otras acciones después de actualizar, si es necesario
                     clearFields()
                     changeButtonState()
@@ -186,12 +182,24 @@ class Alumno_interface_v : AppCompatActivity() {
             if(buttonState == "Preview_alumn") {
                 // Cambia el estado de los botones
                 changeButtonState()
-                enableInputs()
+                enable_inputs_for_edit()
                 buttonState = "Actualizar"
             }
 
 
         }
+/*
+        buttonRenovar.setOnClickListener {
+
+            if(buttonState == "Preview_alumn") {
+                // Cambia el estado de los botones
+                changeButtonState()
+                enableInputs_for_renovar()
+                buttonState = "Renovar"
+            }
+
+
+        }*/
 
         buttonEliminar.setOnClickListener {
             if (buttonState == "Preview_alumn") {
@@ -265,6 +273,7 @@ class Alumno_interface_v : AppCompatActivity() {
         buttonAgregar = findViewById(R.id.button_agregar)
         buttonActualizar = findViewById(R.id.button_actualizar)
         buttonEliminar = findViewById(R.id.button_eliminar)
+        //buttonRenovar = findViewById(R.id.button_renovar)
 
 
 
@@ -324,6 +333,26 @@ class Alumno_interface_v : AppCompatActivity() {
         modalidadSpinner.isEnabled = true
         horarioSpinner.isEnabled = true
         paqueteSpinner.isEnabled = true
+    }
+    private fun enableInputs_for_renovar() {
+        // Habilitar elementos
+        checkboxLunes.isEnabled = true
+        checkboxMartes.isEnabled = true
+        checkboxMiercoles.isEnabled = true
+        checkboxJueves.isEnabled = true
+        checkboxViernes.isEnabled = true
+
+        modalidadSpinner.isEnabled = true
+        horarioSpinner.isEnabled = true
+        paqueteSpinner.isEnabled = true
+    }
+    private fun enable_inputs_for_edit() {
+        // Habilitar elementos
+        editTextNombre.isEnabled = true
+        editTextTelefono.isEnabled = true
+        editTextApoderado.isEnabled = true
+        editTextColegio.isEnabled = true
+
     }
 
     private fun clearFields() {
@@ -388,12 +417,14 @@ class Alumno_interface_v : AppCompatActivity() {
                 disble_inputs()
                 buttonAgregar.text = "Confirmar"
                 buttonActualizar.visibility = View.GONE
+                //buttonRenovar.visibility = View.GONE
                 buttonEliminar.text = "Cancelar"
 
             }
             else -> {
                 buttonAgregar.text = "Añadir"
                 buttonActualizar.visibility = View.VISIBLE
+                //buttonRenovar.visibility = View.VISIBLE
                 buttonEliminar.text = "Eliminar"
                 buttonState = "Preview_alumn"
             }
